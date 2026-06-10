@@ -94,5 +94,205 @@
     "ref_text": "Làm sao để nói giọng nhẹ nhàng á?  Rất là dễ nhá  Mọi người có để ý là ở các cô gái nhẹ nhàng  thì cơ thể sẽ có một cái độ mềm mại nhất định đúng không?",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_vo": {
+    "name": "Vợ Sam",
+    "desc": "Giọng nữ gia đình trẻ trung, tự nhiên.",
+    "ref_audio": "voices/vi_vo/ref.wav",
+    "ref_text": "Hôm nay anh sẽ giúp các em bóc trần văn hóa công sở Hàn Quốc nha. Nghe xong thì các em sẽ biết tại sao anh nghỉ việc sau đúng 3 tháng.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_duong2": {
+    "name": "Nam Dương 2",
+    "desc": "Giọng nam trầm ấm, rõ ràng, tốc độ vừa phải.",
+    "ref_audio": "voices/vi_duong2/ref.wav",
+    "ref_text": "Có phải bạn đã học tiếng Hàn và luôn ước có một cuốn sách tổng hợp lại tất cả ngữ pháp  để mỗi lần ôn thi không phải mò mẫm trong đồng giáo trình dày cộp,  vướng mất thời gian lại không được.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_grifin": {
+    "name": "Nam Grifin",
+    "desc": "Giọng nam năng động, thích hợp làm video review.",
+    "ref_audio": "voices/vi_grifin/ref.wav",
+    "ref_text": "Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè  Thiếu đi quát mai, có thằng ngu nào chạy sau lưng tao bóng cạn tùm lum nè  Ok, xíu tao gọi lại cho  Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu2_dieu": {
+    "name": "Nữ Điệu (Quảng cáo)",
+    "desc": "Giọng nữ cao, điệu đà, thích hợp đọc quảng cáo.",
+    "ref_audio": "voices/vi_nu2_dieu/ref.wav",
+    "ref_text": "Có ai mê giọng bắc giống như tôi không nhỉ?  Phở vi phong hoàng gia với thịt thật tươi ngon",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu11": {
+    "name": "Nữ 11",
+    "desc": "Giọng nữ miền Bắc ấm áp, truyền cảm.",
+    "ref_audio": "voices/vi_nu11/ref.wav",
+    "ref_text": "Tháng 10 này, mình đi làm đúng 20 ngày mà lương văn phòng vẫn được 14 triệu.  Hãy cùng tổng kết chi tiêu tháng 10 của cô gái trẻ 22 tuổi sống tự lập chi tiêu mọi thứ.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu13": {
+    "name": "Nữ 13",
+    "desc": "Giọng nữ miền Bắc dịu dàng, nhẹ nhàng.",
+    "ref_audio": "voices/vi_nu13/ref.wav",
+    "ref_text": "Phòng của mình sẽ là 5 người bạn cũng học nơi U khác  Còn bình thường thì mình thấy các bạn ở trong Nam sẽ ở khoảng 9 người một phòng  Và đều là sinh viên của U",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu14": {
+    "name": "Nữ 14",
+    "desc": "Giọng nữ miền Bắc trong sáng, hoạt ngôn.",
+    "ref_audio": "voices/vi_nu14/ref.wav",
+    "ref_text": "Hãy subscribe cho kênh Ghiền Mì Gõ Để không bỏ lỡ những video hấp dẫn",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu15": {
+    "name": "Nữ 15",
+    "desc": "Giọng nữ miền Bắc thanh lịch, đĩnh đạc.",
+    "ref_audio": "voices/vi_nu15/ref.wav",
+    "ref_text": "Tổng kết những cuốn tiểu thuyết hay mà mình đọc được trong năm 2025  Mình sẽ bỏ qua những cuốn trinh thám và những cuốn sách đã đọc lại nhắc đến ở video trước",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu4": {
+    "name": "Nữ 4",
+    "desc": "Giọng nữ miền Bắc truyền cảm, kể chuyện hay.",
+    "ref_audio": "voices/vi_nu4/ref.wav",
+    "ref_text": "Giọng Bắc được coi là chuẩn, đó là chuẩn theo giọng của người Hà Nội  Nhưng mọi người cũng biết rồi, họ là những người rất là nghiêm túc, khôn thước và...",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu5": {
+    "name": "Nữ 5",
+    "desc": "Giọng nữ miền Bắc ngọt ngào, ấm áp.",
+    "ref_audio": "voices/vi_nu5/ref.wav",
+    "ref_text": "Có người thì thanh cao, có người thì khi cất giọng nói lên là thấy nó lanh lành, lanh lành như là tiếng thủy tình vỡ vậy",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu7": {
+    "name": "Nữ 7",
+    "desc": "Giọng nữ miền Bắc trẻ trung, tự nhiên.",
+    "ref_audio": "voices/vi_nu7/ref.wav",
+    "ref_text": "Cách để không bị bí idea dù gặp bất kể đề writing nào, dù là các bài writing nhỏ trong các bài kiểm tra trên lớp hay là các bài như writing trong IELTS thì chắc hẳn ít.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu9_thoisu": {
+    "name": "Nữ Thời Sự (Bản tin)",
+    "desc": "Giọng nữ đọc bản tin, thời sự trang trọng, chuyên nghiệp.",
+    "ref_audio": "voices/vi_nu9_thoisu/ref.wav",
+    "ref_text": "Hãy subscribe cho kênh Ghiền Mì Gõ Để không bỏ lỡ những video hấp dẫn",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_gai1": {
+    "name": "Nữ Trẻ 1",
+    "desc": "Giọng nữ trẻ năng động.",
+    "ref_audio": "voices/vi_gai1/ref.wav",
+    "ref_text": "Thế nên là nếu như mà mọi người cần nhu cầu học nguyên một cái combo như vậy thì đặt mua sách ngay dưới đây  Hoặc cứ nhắn cho bên mình, bên mình sẽ tư vấn cho bạn học combo nào là phù hợp he",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_gai2": {
+    "name": "Nữ Trẻ 2",
+    "desc": "Giọng nữ trẻ dễ thương.",
+    "ref_audio": "voices/vi_gai2/ref.wav",
+    "ref_text": "Ai thuộc team học tiếng Hàn mà cứ học được vài hôm là nản  Thuộc từ hôm nay, mai quên sạch, muốn nói mà trong đầu trống trơn  Thì gặp bộ này là chân ái luôn nha  Để không bỏ lỡ những video hấp dẫn",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_gai3": {
+    "name": "Nữ Trẻ 3",
+    "desc": "Giọng nữ trẻ trong trẻo.",
+    "ref_audio": "voices/vi_gai3/ref.wav",
+    "ref_text": "Hola, me llamo Tuha, tengo 25 años y trabajo en el sector del marketing.  Llevo dos meses aprendiendo español de forma autodidacta.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_gai4": {
+    "name": "Nữ Trẻ 4",
+    "desc": "Giọng nữ trẻ ngọt ngào.",
+    "ref_audio": "voices/vi_gai4/ref.wav",
+    "ref_text": "Đừng học thêm một chữ tiếng Hàn nào nữa cho đến khi bạn biết điều này.  Hãy mở sách ra và thử tổng hợp những từ vựng tiếng Hàn có liên quan đến nhau theo chủ đề như thế này.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_tre_con2": {
+    "name": "Bé gái mẫu giọng",
+    "desc": "Giọng bé gái dễ thương, ngây thơ.",
+    "ref_audio": "voices/vi_tre_con2/ref.wav",
+    "ref_text": "Đây là thành quả của con  Sau hơn 3 tháng học chiếc bút ngại ngữ này  Con tự tin hơn với trình độ tiếng Anh của mình  Con biết thêm tiếng Trung",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu16": {
+    "name": "Nữ 16",
+    "desc": "Giọng nữ miền Bắc hoạt bát.",
+    "ref_audio": "voices/vi_nu16/ref.wav",
+    "ref_text": "Giảm ra rất là ok luôn nha  Tiếp theo chúng ta sẽ có một cái cây giàn nền  Đấy là cây số 04 mà mọi người hay hỏi là  Chị ơi cho em xin in tư của cây cọ giàn nền",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu17": {
+    "name": "Nữ 17",
+    "desc": "Giọng nữ miền Bắc ấm áp.",
+    "ref_audio": "voices/vi_nu17/ref.wav",
+    "ref_text": "Từ vị trí bét lớp tới tốt 3 chỉ sau một học kỳ nhờ bớt chăm chỉ một cách máy móc,  tỳ tỳ chiều khống su gây bão khi bật mí vũ khí bí mật của các...",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu19": {
+    "name": "Nữ 19",
+    "desc": "Giọng nữ miền Bắc dịu dàng.",
+    "ref_audio": "voices/vi_nu19/ref.wav",
+    "ref_text": "Cùng là biết nhưng tạo sao biết một người là Kennen chứ không dùng Whitson.  Hãy nhớ mẹo, Kennen là biết một người, địa điểm hoặc thứ gì đó, còn Whitson biết thông tin.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu20": {
+    "name": "Nữ 20",
+    "desc": "Giọng nữ miền Bắc trong trẻo.",
+    "ref_audio": "voices/vi_nu20/ref.wav",
+    "ref_text": "Aten là khi kể chuyện, Raiden là trò chuyện, Sprague đi với ngôn ngữ.  Vậy nên một câu chuyện là đang kể nội dung dài nên phải dùng Atenant.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "en_female_1": {
+    "name": "[English] Nữ 1 (Mạnh mẽ)",
+    "desc": "Giọng nữ tiếng Anh chuẩn, rõ ràng, tốc độ vừa phải.",
+    "ref_audio": "voices/en_female_1/ref.wav",
+    "ref_text": "in being comparatively modern.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "en_female_2": {
+    "name": "[English] Nữ 2 (Tự nhiên)",
+    "desc": "Giọng nữ tiếng Anh chuẩn, tự nhiên.",
+    "ref_audio": "voices/en_female_2/ref.wav",
+    "ref_text": "For although the Chinese took impressions from woodblocks engraved in relief for centuries before the woodcutters of the Netherlands,",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "en_female_3": {
+    "name": "[English] Nữ 3 (Trang trọng)",
+    "desc": "Giọng nữ tiếng Anh chuyên nghiệp, đĩnh đạc.",
+    "ref_audio": "voices/en_female_3/ref.wav",
+    "ref_text": "produced the block books, which were the immediate predecessors of the true printed book,",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "en_female_4": {
+    "name": "[English] Nữ 4 (Kể chuyện)",
+    "desc": "Giọng nữ tiếng Anh ấm áp, truyền cảm.",
+    "ref_audio": "voices/en_female_4/ref.wav",
+    "ref_text": "The invention of movable metal letters in the middle of the 15th century may justly be considered as the invention of the art of printing.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
   }
 }

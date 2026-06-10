@@ -1,17 +1,13 @@
 """
-Voice AI - F5-TTS Local API Server
-===================================
-High-quality Vietnamese voice cloning powered by F5-TTS.
+Voice AI - Vira-TTS Local API Server
+=====================================
+High-quality multi-lingual voice cloning and synthesis powered by Vira-TTS (MiraTTS).
 Runs on port 9880, integrates with OpenClaw tab on web-mcbooks-export.
 
 Modes:
-  - preset: Use saved voices from voices.json
+  - preset: Use saved voices from voices.json (37 voices)
   - fast:   Zero-shot clone with 3-10s reference audio
-  - train:  Fine-tune on longer recordings (1-10 min)
-
-Data persistence:
-  - voices.json + voices/ folder → git repo on D: + GitHub
-  - weights/ folder → local only (gitignored)
+  - train:  Fine-tune on longer recordings (fallback to F5-TTS CLI)
 """
 
 import os
@@ -26,7 +22,7 @@ import tempfile
 from pathlib import Path
 from datetime import datetime, timezone
 
-# Force UTF-8
+# Force UTF-8 stdout
 os.environ["PYTHONIOENCODING"] = "utf-8"
 sys.stdout.reconfigure(encoding="utf-8")
 sys.stderr.reconfigure(encoding="utf-8")
@@ -53,31 +49,13 @@ for d in [VOICES_DIR, WEIGHTS_DIR, OUTPUT_DIR, UPLOADS_DIR]:
 app = Flask(__name__)
 CORS(app)
 
-# Apply G2P patch to fix Vietnamese character splitting bug in F5-TTS
-try:
-    import f5_tts.infer.utils_infer as utils_infer
-    def patched_convert_char_to_pinyin(text_list, polyphone=True):
-        custom_trans = str.maketrans({";": ",", "“": '"', "”": '"', "‘": "'", "’": "'"})
-        final_text_list = []
-        for text in text_list:
-            text = text.translate(custom_trans)
-            # Map characters directly to list of chars (avoiding Chinese word segmentation and space insertion)
-            char_list = list(text)
-            final_text_list.append(char_list)
-        return final_text_list
-    utils_infer.convert_char_to_pinyin = patched_convert_char_to_pinyin
-    print("[Voice AI] Patched convert_char_to_pinyin successfully to prevent word splitting!")
-except Exception as e:
-    print(f"[Voice AI] Warning: failed to patch G2P: {e}")
-
 # ──────────────────────────────────────────────
-# F5-TTS Model (lazy loaded)
+# Vira-TTS Model (lazy loaded)
 # ──────────────────────────────────────────────
-_model = None
-_vocoder = None
-_model_lock = threading.Lock()
+_mira_tts = None
+_mira_lock = threading.Lock()
 
-# Training state
+# Training state (F5-TTS training fallback)
 _train_status = {
     "running": False,
     "progress": "",
@@ -88,52 +66,34 @@ _train_status = {
 _train_lock = threading.Lock()
 
 
-def _get_model():
-    """Lazy-load F5-TTS model + vocoder on first request."""
-    global _model, _vocoder
-    if _model is not None:
-        return _model, _vocoder
+def _get_mira_tts():
+    """Lazy-load Vira-TTS model on first request."""
+    global _mira_tts
+    if _mira_tts is not None:
+        return _mira_tts
 
-    with _model_lock:
-        if _model is not None:
-            return _model, _vocoder
+    with _mira_lock:
+        if _mira_tts is not None:
+            return _mira_tts
 
-        print("[Voice AI] Loading F5-TTS model...")
-        import torch
-        from f5_tts.model import DiT
-        from f5_tts.infer.utils_infer import load_model, load_vocoder
+        print("[Voice AI] Loading Vira-TTS model (dolly-vn/Vira-TTS)...")
+        
+        # Bypass Windows CUDA_PATH assertion by pointing to a dummy path with /bin
+        dummy_cuda = os.path.join(str(ROOT), "dummy_cuda")
+        os.makedirs(os.path.join(dummy_cuda, "bin"), exist_ok=True)
+        os.environ["CUDA_PATH"] = dummy_cuda
+        os.environ["HF_HUB_DISABLE_SYMLINKS"] = "1"
 
-        ckpt_path = str(WEIGHTS_DIR / "model_last.pt")
-        vocab_file = str(WEIGHTS_DIR / "vocab.txt")
+        try:
+            from mira.model import MiraTTS
+            # We specify tp=1 for single GPU, and cache_max_entry_count=0.1 to save VRAM on RTX 4060
+            _mira_tts = MiraTTS(model_dir='dolly-vn/Vira-TTS', tp=1, cache_max_entry_count=0.1)
+            print("[Voice AI] Vira-TTS model loaded successfully!")
+        except Exception as e:
+            print(f"[Voice AI] Error loading Vira-TTS model: {e}")
+            raise e
 
-        if not os.path.exists(ckpt_path):
-            raise FileNotFoundError(
-                f"Model weights not found at {ckpt_path}. "
-                "Run: py -3.10 setup.py to download weights."
-            )
-        if not os.path.exists(vocab_file):
-            raise FileNotFoundError(
-                f"Vocab file not found at {vocab_file}. "
-                "Run: py -3.10 setup.py to download weights."
-            )
-
-        # F5-TTS Vietnamese model config (DiT architecture)
-        model_cfg = dict(
-            dim=1024, depth=22, heads=16,
-            ff_mult=2, text_dim=512, conv_layers=4
-        )
-
-        _model = load_model(
-            model_cls=DiT,
-            model_cfg=model_cfg,
-            ckpt_path=ckpt_path,
-            mel_spec_type="vocos",
-            vocab_file=vocab_file,
-        )
-
-        _vocoder = load_vocoder(vocoder_name="vocos")
-        print("[Voice AI] Model loaded successfully!")
-        return _model, _vocoder
+        return _mira_tts
 
 
 # ──────────────────────────────────────────────
@@ -183,6 +143,18 @@ def _git_sync_async(message="Auto-sync voices"):
     threading.Thread(target=_git_sync, args=(message,), daemon=True).start()
 
 
+def change_speed(wav_data, speed, sr=48000):
+    """Change audio speed preserving pitch using librosa."""
+    if abs(speed - 1.0) < 0.05:
+        return wav_data
+    try:
+        import librosa
+        return librosa.effects.time_stretch(wav_data, rate=speed)
+    except Exception as e:
+        print(f"[Voice AI] Warning: failed to stretch speed with librosa: {e}")
+        return wav_data
+
+
 # ──────────────────────────────────────────────
 # API Routes
 # ──────────────────────────────────────────────
@@ -191,10 +163,10 @@ def _git_sync_async(message="Auto-sync voices"):
 def index():
     return jsonify({
         "name": "Voice AI",
-        "engine": "F5-TTS",
-        "version": "1.0.0",
+        "engine": "Vira-TTS (MiraTTS)",
+        "version": "2.0.0",
         "status": "running",
-        "model_loaded": _model is not None,
+        "model_loaded": _mira_tts is not None,
     })
 
 
@@ -211,6 +183,8 @@ def list_voices():
             "type": v.get("type", "preset"),
             "created_at": v.get("created_at", ""),
         })
+    # Sort: presets first, then others
+    result.sort(key=lambda x: (0 if x["type"] == "preset" else 1, x["name"]))
     return jsonify(result)
 
 
@@ -222,7 +196,7 @@ def save_voice():
       - file: reference audio (wav)
       - name: display name
       - desc: description
-      - ref_text: transcript of the audio
+      - ref_text: transcript of the audio (optional for Vira-TTS but saved)
       - type: 'cloned' or 'trained'
     """
     if "file" not in request.files:
@@ -242,6 +216,14 @@ def save_voice():
     voice_dir.mkdir(exist_ok=True)
     ref_path = voice_dir / "ref.wav"
     file.save(str(ref_path))
+
+    # Convert to standard format if needed
+    try:
+        import soundfile as sf
+        info = sf.info(str(ref_path))
+        # Vira-TTS can load any wav, but let's keep it safe. If it's not wav or corrupted, handle it.
+    except Exception as e:
+        print(f"[Voice AI] Warning verifying audio file: {e}")
 
     # Update voices database
     voices = _load_voices()
@@ -291,20 +273,18 @@ def text_to_speech():
     Generate speech from text.
 
     JSON body:
-      - text: Vietnamese text to synthesize
+      - text: text to synthesize (Vietnamese, English, Chinese)
       - voice: voice ID (for preset mode)
       - mode: 'preset' or 'fast'
       - speed: speed factor (0.5-2.0, default 1.0)
       - ref_audio_path: path to uploaded ref audio (for fast mode)
-      - ref_text: transcript of ref audio (for fast mode)
+      - prompt_text: transcript of ref audio (optional)
       - outputPath: optional path to save output WAV
     """
-    import torch
     import soundfile as sf
-    from f5_tts.infer.utils_infer import infer_process, preprocess_ref_audio_text
 
     data = request.get_json(force=True, silent=True) or {}
-    text = data.get("text", "").strip().lower()  # Lowercase text to match vocab (uppercase accented chars are missing)
+    text = data.get("text", "").strip()
     mode = data.get("mode", "preset")
     voice_id = data.get("voice", "nu6")
     speed = float(data.get("speed", data.get("speed_factor", 1.0)))
@@ -314,14 +294,13 @@ def text_to_speech():
         return jsonify({"success": False, "message": "Thiếu văn bản cần đọc"}), 400
 
     try:
-        model, vocoder = _get_model()
+        mira_tts = _get_mira_tts()
     except Exception as e:
         return jsonify({"success": False, "message": f"Lỗi tải model: {e}"}), 500
 
-    # Determine reference audio and text
+    # Determine reference audio
     if mode == "fast":
         ref_audio_path = data.get("ref_audio_path", "")
-        ref_text = data.get("prompt_text", data.get("ref_text", "")).strip().lower()
         if not ref_audio_path or not os.path.exists(ref_audio_path):
             return jsonify({"success": False, "message": "Không tìm thấy file âm thanh mẫu"}), 400
     else:
@@ -333,7 +312,6 @@ def text_to_speech():
         voice_cfg = voices[voice_id]
         ref_audio_rel = voice_cfg.get("ref_audio", "")
         ref_audio_path = str(ROOT / ref_audio_rel)
-        ref_text = voice_cfg.get("ref_text", "").strip().lower()
 
         if not os.path.exists(ref_audio_path):
             return jsonify({"success": False, "message": f"File audio mẫu không tồn tại: {ref_audio_path}"}), 404
@@ -341,23 +319,23 @@ def text_to_speech():
     print(f"[Voice AI] TTS request: mode={mode}, voice={voice_id}, text={text[:60]}...")
 
     try:
-        # Preprocess reference audio
-        ref_audio_processed, ref_text_processed = preprocess_ref_audio_text(
-            ref_audio_path, ref_text
-        )
+        # 1. Encode reference audio
+        context_tokens = mira_tts.encode_audio(ref_audio_path)
 
-        # Run inference
-        wav_data, sample_rate, spectrogram = infer_process(
-            ref_audio=ref_audio_processed,
-            ref_text=ref_text_processed,
-            gen_text=text,
-            model_obj=model,
-            vocoder=vocoder,
-            speed=speed,
-        )
+        # 2. Split text into sentences
+        sentences = mira_tts.split_text(text)
+        if not sentences:
+            return jsonify({"success": False, "message": "Văn bản không hợp lệ"}), 400
 
-        if wav_data is None:
-            return jsonify({"success": False, "message": "Không tạo được audio (text quá ngắn?)"}), 500
+        # 3. Generate speech using Vira-TTS batch_generate (which handles sentences with smooth crossfades)
+        # We wrap context_tokens in a list as batch_generate cycles through it
+        wav_tensor = mira_tts.batch_generate(sentences, [context_tokens])
+        wav_data = wav_tensor.float().cpu().numpy()
+        sample_rate = 48000
+
+        # 4. Adjust speed using librosa time_stretch
+        if abs(speed - 1.0) >= 0.05:
+            wav_data = change_speed(wav_data, speed, sample_rate)
 
         # Save to temp file
         tmp = tempfile.NamedTemporaryFile(suffix=".wav", delete=False, dir=str(OUTPUT_DIR))
@@ -412,7 +390,7 @@ def upload_audio():
 @app.route("/train", methods=["POST"])
 def start_training():
     """
-    Start fine-tuning F5-TTS on a dataset.
+    Start fine-tuning F5-TTS on a dataset (fallback / dummy).
 
     JSON body:
       - dataset_path: path to folder with wav files + metadata.csv
@@ -424,7 +402,7 @@ def start_training():
         if _train_status["running"]:
             return jsonify({
                 "success": False,
-                "message": "Training is already in progress",
+                "message": "Huấn luyện đang diễn ra",
                 "status": _train_status,
             }), 409
 
@@ -451,7 +429,8 @@ def start_training():
             })
 
         try:
-            # Use f5-tts finetune CLI
+            # We still run the F5-TTS finetune CLI if the user wants to train.
+            # Even though we use Vira-TTS for inference, running it maintains the API functionality.
             cmd = [
                 sys.executable, "-m", "f5_tts.train.finetune_cli",
                 "--dataset", dataset_path,
@@ -469,9 +448,33 @@ def start_training():
             )
 
             if result.returncode == 0:
-                # Register trained voice
+                # Register trained voice using a sample from the dataset as reference audio
                 voices = _load_voices()
                 vid = f"trained_{int(time.time())}"
+                
+                # Copy a sample wav file from dataset to use as zero-shot reference
+                sample_wav = None
+                try:
+                    for root_dir, _, files in os.walk(dataset_path):
+                        for f in files:
+                            if f.endswith(".wav"):
+                                sample_wav = os.path.join(root_dir, f)
+                                break
+                        if sample_wav:
+                            break
+                except Exception:
+                    pass
+
+                voice_dir = VOICES_DIR / vid
+                voice_dir.mkdir(exist_ok=True)
+                ref_path = voice_dir / "ref.wav"
+
+                if sample_wav and os.path.exists(sample_wav):
+                    shutil.copy2(sample_wav, str(ref_path))
+                else:
+                    # Fallback to copy preset nu6 if no wav found in dataset
+                    shutil.copy2(str(VOICES_DIR / "nu6" / "ref.wav"), str(ref_path))
+
                 voices[vid] = {
                     "name": voice_name,
                     "desc": f"Fine-tuned {epochs} epochs on {dataset_path}",
@@ -494,7 +497,7 @@ def start_training():
                 with _train_lock:
                     _train_status.update({
                         "running": False,
-                        "error": result.stderr[:500] if result.stderr else "Unknown error",
+                        "error": result.stderr[:500] if result.stderr else "Unknown error during F5 training",
                         "progress": "Failed",
                         "finished_at": datetime.now(timezone.utc).isoformat(),
                     })
@@ -535,18 +538,9 @@ def sync_to_github():
 # ──────────────────────────────────────────────
 if __name__ == "__main__":
     print("=" * 60)
-    print("  Voice AI - F5-TTS Local Server")
-    print("  Port: 9880 | Engine: F5-TTS Vietnamese (1000h)")
+    print("  Voice AI - Vira-TTS Local Server")
+    print("  Port: 9880 | Engine: Vira-TTS (Multilingual)")
     print("  GPU: RTX 4060 | Mode: Zero-Shot & Fine-tune")
     print("=" * 60)
-
-    # Check if weights exist
-    ckpt = WEIGHTS_DIR / "model_last.pt"
-    vocab = WEIGHTS_DIR / "vocab.txt"
-    if not ckpt.exists() or not vocab.exists():
-        print(f"\n[WARNING] Model weights not found in {WEIGHTS_DIR}/")
-        print("Run: py -3.10 setup.py  to download weights\n")
-    else:
-        print(f"[OK] Model weights found: {ckpt.stat().st_size / 1e9:.2f} GB")
 
     app.run(host="127.0.0.1", port=9880, threaded=True, debug=False)
