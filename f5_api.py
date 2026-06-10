@@ -1,13 +1,14 @@
 """
-Voice AI - Vira-TTS Local API Server
-=====================================
+Voice AI - Vira-TTS Local API Server (v2.1.0)
+=============================================
 High-quality multi-lingual voice cloning and synthesis powered by Vira-TTS (MiraTTS).
 Runs on port 9880, integrates with OpenClaw tab on web-mcbooks-export.
 
-Modes:
-  - preset: Use saved voices from voices.json (37 voices)
-  - fast:   Zero-shot clone with 3-10s reference audio
-  - train:  Fine-tune on longer recordings (fallback to F5-TTS CLI)
+Features:
+  - Dynamic pause insertion (breathing gaps) based on punctuation (commas, periods, etc.)
+  - Safe Vietnamese text normalization (spells out numbers/dates but preserves punctuation)
+  - Automatic intermediate file cleanup (after sending or after 30 minutes)
+  - Zero-shot voice cloning and preset voices (37 distinct voices)
 """
 
 import os
@@ -19,6 +20,7 @@ import hashlib
 import subprocess
 import threading
 import tempfile
+import re
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -116,6 +118,78 @@ def _save_voices(data):
 
 
 # ──────────────────────────────────────────────
+# Safe Text Normalization (preserving punctuation)
+# ──────────────────────────────────────────────
+def normalize_text_safe(text):
+    """Normalize numbers, dates, abbreviations, but preserve sentence punctuation."""
+    punc_map = {
+        ",": " _comma_ ",
+        ".": " _period_ ",
+        "?": " _question_ ",
+        "!": " _exclamation_ ",
+        ";": " _semicolon_ ",
+        ":": " _colon_ "
+    }
+    original_text = text
+    try:
+        # 1. Replace punctuation with placeholders
+        for p, placeholder in punc_map.items():
+            text = text.replace(p, placeholder)
+            
+        from mira.utils import normalize_vietnamese, punc_norm
+        # 2. Run standard normalizer (expands numbers, dates, etc.)
+        norm_text = normalize_vietnamese(text)
+        norm_text = punc_norm(norm_text)
+        
+        # 3. Restore punctuation
+        for p, placeholder in punc_map.items():
+            norm_text = re.sub(rf'\s*{placeholder.strip()}\s*', f'{p} ', norm_text)
+            
+        # 4. Clean up spacing
+        norm_text = re.sub(r'\s+', ' ', norm_text).strip()
+        norm_text = re.sub(r'\s+([.,!?;:])', r'\1', norm_text)
+        norm_text = re.sub(r'([.,!?;:])(?=[^\s\d])', r'\1 ', norm_text)
+        
+        return norm_text.strip()
+    except Exception as e:
+        print(f"[Voice AI] Safe normalization failed, using fallback: {e}")
+        return original_text
+
+
+# ──────────────────────────────────────────────
+# Trash File Cleanup (Background & On-close)
+# ──────────────────────────────────────────────
+def _cleanup_loop():
+    """Background loop to clean up output & upload files older than 30 minutes."""
+    while True:
+        try:
+            now = time.time()
+            # Clean output/
+            for f in OUTPUT_DIR.glob("*"):
+                if f.is_file() and now - f.stat().st_mtime > 1800: # 30 mins
+                    try:
+                        f.unlink()
+                        print(f"[Voice AI] Auto-cleaned old output file: {f.name}")
+                    except Exception:
+                        pass
+            # Clean uploads/
+            for f in UPLOADS_DIR.glob("*"):
+                if f.is_file() and now - f.stat().st_mtime > 1800: # 30 mins
+                    try:
+                        f.unlink()
+                        print(f"[Voice AI] Auto-cleaned old upload file: {f.name}")
+                    except Exception:
+                        pass
+        except Exception as e:
+            print(f"[Voice AI] Error in cleanup loop: {e}")
+        time.sleep(600) # every 10 mins
+
+
+# Start background cleanup thread
+threading.Thread(target=_cleanup_loop, daemon=True).start()
+
+
+# ──────────────────────────────────────────────
 # Git Sync (background)
 # ──────────────────────────────────────────────
 def _git_sync(message="Auto-sync voices"):
@@ -164,7 +238,7 @@ def index():
     return jsonify({
         "name": "Voice AI",
         "engine": "Vira-TTS (MiraTTS)",
-        "version": "2.0.0",
+        "version": "2.1.0",
         "status": "running",
         "model_loaded": _mira_tts is not None,
     })
@@ -183,7 +257,6 @@ def list_voices():
             "type": v.get("type", "preset"),
             "created_at": v.get("created_at", ""),
         })
-    # Sort: presets first, then others
     result.sort(key=lambda x: (0 if x["type"] == "preset" else 1, x["name"]))
     return jsonify(result)
 
@@ -192,12 +265,6 @@ def list_voices():
 def save_voice():
     """
     Save a new voice to the library.
-    Expects multipart form with:
-      - file: reference audio (wav)
-      - name: display name
-      - desc: description
-      - ref_text: transcript of the audio (optional for Vira-TTS but saved)
-      - type: 'cloned' or 'trained'
     """
     if "file" not in request.files:
         return jsonify({"success": False, "error": "No audio file"}), 400
@@ -216,14 +283,6 @@ def save_voice():
     voice_dir.mkdir(exist_ok=True)
     ref_path = voice_dir / "ref.wav"
     file.save(str(ref_path))
-
-    # Convert to standard format if needed
-    try:
-        import soundfile as sf
-        info = sf.info(str(ref_path))
-        # Vira-TTS can load any wav, but let's keep it safe. If it's not wav or corrupted, handle it.
-    except Exception as e:
-        print(f"[Voice AI] Warning verifying audio file: {e}")
 
     # Update voices database
     voices = _load_voices()
@@ -270,18 +329,10 @@ def delete_voice(voice_id):
 @app.route("/tts", methods=["POST"])
 def text_to_speech():
     """
-    Generate speech from text.
-
-    JSON body:
-      - text: text to synthesize (Vietnamese, English, Chinese)
-      - voice: voice ID (for preset mode)
-      - mode: 'preset' or 'fast'
-      - speed: speed factor (0.5-2.0, default 1.0)
-      - ref_audio_path: path to uploaded ref audio (for fast mode)
-      - prompt_text: transcript of ref audio (optional)
-      - outputPath: optional path to save output WAV
+    Generate speech from text with dynamic dynamic pause insertion.
     """
     import soundfile as sf
+    import torch
 
     data = request.get_json(force=True, silent=True) or {}
     text = data.get("text", "").strip()
@@ -322,18 +373,68 @@ def text_to_speech():
         # 1. Encode reference audio
         context_tokens = mira_tts.encode_audio(ref_audio_path)
 
-        # 2. Split text into sentences
-        sentences = mira_tts.split_text(text)
-        if not sentences:
+        # 2. Normalize text safely (spells out numbers but keeps punctuation)
+        norm_text = normalize_text_safe(text)
+        if not norm_text:
             return jsonify({"success": False, "message": "Văn bản không hợp lệ"}), 400
 
-        # 3. Generate speech using Vira-TTS batch_generate (which handles sentences with smooth crossfades)
-        # We wrap context_tokens in a list as batch_generate cycles through it
-        wav_tensor = mira_tts.batch_generate(sentences, [context_tokens])
-        wav_data = wav_tensor.float().cpu().numpy()
+        # 3. Split by clause boundaries and sentence enders
+        parts = re.split(r'([,;:!?]|\.\.\.|\.)', norm_text)
+        segments = []
+        current_text = ""
+        for part in parts:
+            if not part:
+                continue
+            if part in {",", ";", ":", ".", "!", "?", "..."}:
+                if current_text.strip():
+                    segments.append((current_text.strip() + part, part))
+                    current_text = ""
+                else:
+                    if segments:
+                        last_seg, last_punc = segments[-1]
+                        segments[-1] = (last_seg + part, part)
+            else:
+                current_text += part
+                
+        if current_text.strip():
+            segments.append((current_text.strip(), ""))
+
+        # 4. Synthesize each segment and insert dynamic pauses
+        audios = []
         sample_rate = 48000
 
-        # 4. Adjust speed using librosa time_stretch
+        for seg_text, punc in segments:
+            seg_text = seg_text.strip()
+            if not seg_text:
+                continue
+                
+            print(f"[Voice AI] Generating clause: '{seg_text}'")
+            # Vira-TTS generate is extremely fast and high-quality
+            audio_seg = mira_tts.generate(seg_text, context_tokens)
+            
+            # Determine pause duration (silence) based on punctuation
+            if punc in {",", ";", ":"}:
+                pause_secs = 0.25 # Short breathing pause
+            elif punc in {".", "!", "?", "..."}:
+                pause_secs = 0.55 # Sentence pause
+            else:
+                pause_secs = 0.40 # Default pause
+                
+            silence_len = int(pause_secs * sample_rate)
+            silence = torch.zeros(silence_len, device=audio_seg.device, dtype=audio_seg.dtype)
+            
+            # Append silence
+            combined_seg = torch.cat([audio_seg, silence], dim=0)
+            audios.append(combined_seg)
+
+        if not audios:
+            return jsonify({"success": False, "message": "Không thể tạo giọng nói từ văn bản này"}), 400
+
+        # 5. Concatenate all segments
+        wav_tensor = torch.cat(audios, dim=0)
+        wav_data = wav_tensor.float().cpu().numpy()
+
+        # 6. Apply speed change if requested
         if abs(speed - 1.0) >= 0.05:
             wav_data = change_speed(wav_data, speed, sample_rate)
 
@@ -356,12 +457,25 @@ def text_to_speech():
                 print(f"[Voice AI] Could not save to outputPath: {e}")
 
         print(f"[Voice AI] TTS done, {len(wav_data)} samples at {sample_rate}Hz")
-        return send_file(
+        
+        # Stream file and delete immediately on response close
+        response = send_file(
             tmp.name,
             mimetype="audio/wav",
             as_attachment=False,
             download_name="voice_ai_output.wav"
         )
+        
+        @response.call_on_close
+        def cleanup_temp_file():
+            try:
+                if os.path.exists(tmp.name):
+                    os.unlink(tmp.name)
+                    print(f"[Voice AI] Cleaned up temporary session file: {tmp.name}")
+            except Exception as e:
+                print(f"[Voice AI] Error cleaning up temporary file: {e}")
+                
+        return response
 
     except Exception as e:
         import traceback
@@ -390,13 +504,7 @@ def upload_audio():
 @app.route("/train", methods=["POST"])
 def start_training():
     """
-    Start fine-tuning F5-TTS on a dataset (fallback / dummy).
-
-    JSON body:
-      - dataset_path: path to folder with wav files + metadata.csv
-      - epochs: number of training epochs (default 100)
-      - batch_size: batch size (default 2)
-      - voice_name: name for the resulting voice
+    Start fine-tuning F5-TTS on a dataset.
     """
     with _train_lock:
         if _train_status["running"]:
@@ -429,8 +537,6 @@ def start_training():
             })
 
         try:
-            # We still run the F5-TTS finetune CLI if the user wants to train.
-            # Even though we use Vira-TTS for inference, running it maintains the API functionality.
             cmd = [
                 sys.executable, "-m", "f5_tts.train.finetune_cli",
                 "--dataset", dataset_path,
@@ -448,7 +554,6 @@ def start_training():
             )
 
             if result.returncode == 0:
-                # Register trained voice using a sample from the dataset as reference audio
                 voices = _load_voices()
                 vid = f"trained_{int(time.time())}"
                 
@@ -472,7 +577,6 @@ def start_training():
                 if sample_wav and os.path.exists(sample_wav):
                     shutil.copy2(sample_wav, str(ref_path))
                 else:
-                    # Fallback to copy preset nu6 if no wav found in dataset
                     shutil.copy2(str(VOICES_DIR / "nu6" / "ref.wav"), str(ref_path))
 
                 voices[vid] = {
