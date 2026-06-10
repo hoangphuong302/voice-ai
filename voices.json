@@ -1,0 +1,10 @@
+{
+  "nu6": {
+    "name": "Nữ 6 – Giọng mẫu tiếng Việt",
+    "desc": "Giọng nữ trẻ, rõ ràng. Pre-trained từ dữ liệu 1000h tiếng Việt.",
+    "ref_audio": "voices/nu6/ref.wav",
+    "ref_text": "Nhật Bản có phải là quốc gia lý tưởng cho việc nuôi dạy con cái? Chào mọi người, đây là T-Connect TV.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  }
+}

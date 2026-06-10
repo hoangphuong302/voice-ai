@@ -1,0 +1,23 @@
+# Model weights (too large for GitHub)
+weights/
+*.pt
+*.ckpt
+*.safetensors
+*.bin
+
+# Generated output audio
+output/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temp uploads
+uploads/
+*.tmp
