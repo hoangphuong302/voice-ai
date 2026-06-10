@@ -22,5 +22,77 @@
     "ref_text": "随着时间的推移，这一切都会变得更好。",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu6": {
+    "name": "Nữ 6 (Nhanh Cao)",
+    "desc": "Giọng nữ miền Bắc, tốc độ nhanh, cao.",
+    "ref_audio": "voices/vi_nu6/ref.wav",
+    "ref_text": "Nhật Bản có phải là quốc gia lý tưởng cho việc nuôi dạy con cái?  Chào mọi người, đây là T-Connect TV  Nhiều năm trở lại đây thì cách dạy con của người Nhật luôn nổi tiếng thế giới bởi sự...",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_ngoc_huyen": {
+    "name": "Ngọc Huyền (Phát thanh viên)",
+    "desc": "Giọng nữ phát thanh viên truyền hình chuyên nghiệp.",
+    "ref_audio": "voices/vi_ngoc_huyen/ref.wav",
+    "ref_text": "Tính mua về học chơi ai ngờ lại dính luôn.  Cộng một em sách tiếng Thái đầy đủ chọn bộ từ tự học cân bản chữ cái đến từ vựng, ngữ pháp rồi thích nốt.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_duong": {
+    "name": "Nam Dương",
+    "desc": "Giọng nam miền Bắc trầm ấm, truyền cảm.",
+    "ref_audio": "voices/vi_duong/ref.wav",
+    "ref_text": "Bạn có muốn tự học tiếng Hàn thật nhanh mà vẫn hiệu quả không?  Bộ sách bí kíp tự học tiếng Hàn siêu nhanh sẽ giúp bạn làm được điều đó với sự kết hợp của 3 cuốn cực kỳ đặc biệt.  Đầu tiên,",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nhung": {
+    "name": "Nữ Nhung",
+    "desc": "Giọng nữ miền Bắc ngọt ngào, truyền cảm.",
+    "ref_audio": "voices/vi_nhung/ref.wav",
+    "ref_text": "Ngày nào cũng học từ vựng như chỉ được một thời gian rồi quên  Đừng vội chán nản  Cuốn sách này có thể giúp bạn ghi nhớ cả trăm từ vựng một ngày  Và thanh...",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu3": {
+    "name": "Nữ 3",
+    "desc": "Giọng nữ miền Bắc trẻ trung, tự nhiên.",
+    "ref_audio": "voices/vi_nu3/ref.wav",
+    "ref_text": "Có một điều khiến mình rất ấn tượng khi sống ở Nhật đó là sự tự giác và kỷ luật của trẻ em.  Mình không nói đến những em học sinh cấp 2, cấp 3 đâu, mà là những đứa trẻ trẻ trẻ.",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu8": {
+    "name": "Nữ 8 (Thủ khoa)",
+    "desc": "Giọng nữ miền Bắc rõ ràng, lưu loát.",
+    "ref_audio": "voices/vi_nu8/ref.wav",
+    "ref_text": "Xin chào tất cả quý vị khán giả  Em là Nguyễn Lê Hiền Mai  Và ngày hôm nay em rất vinh dự khi được nhận lời mời của VTV  Và có mặt tại truyền hòa cuối sáng ngày hôm nay  Với các môn khoa",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nam1": {
+    "name": "Nam 1",
+    "desc": "Giọng nam miền Bắc rõ ràng, đĩnh đạc.",
+    "ref_audio": "voices/vi_nam1/ref.wav",
+    "ref_text": "Công thức quay review đồ giáo dục đẹp chuẩn như các tiktoker  Việc của bạn chỉ cần áp dụng công thức vào thôi  Trong suốt 5 năm làm việc với các KOL và các doanh nghiệp  Mình đã đúng",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_tre_con": {
+    "name": "Trẻ em tiểu học",
+    "desc": "Giọng bé gái học sinh tiểu học tinh nghịch.",
+    "ref_audio": "voices/vi_tre_con/ref.wav",
+    "ref_text": "Em xin chào bác giám khảo và các bạn  Em tên là Phạm Ngọc Bảo Châu  Học sinh lớp 3G  Trường Tiểu học Nam Hành Công",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vi_nu_ngot": {
+    "name": "Nữ ngọt ngào",
+    "desc": "Giọng nữ ngọt ngào, truyền cảm, thích hợp đọc truyện.",
+    "ref_audio": "voices/vi_nu_ngot/ref.wav",
+    "ref_text": "Làm sao để nói giọng nhẹ nhàng á?  Rất là dễ nhá  Mọi người có để ý là ở các cô gái nhẹ nhàng  thì cơ thể sẽ có một cái độ mềm mại nhất định đúng không?",
+    "type": "preset",
+    "created_at": "2026-06-10T00:00:00Z"
   }
 }

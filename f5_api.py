@@ -53,6 +53,23 @@ for d in [VOICES_DIR, WEIGHTS_DIR, OUTPUT_DIR, UPLOADS_DIR]:
 app = Flask(__name__)
 CORS(app)
 
+# Apply G2P patch to fix Vietnamese character splitting bug in F5-TTS
+try:
+    import f5_tts.infer.utils_infer as utils_infer
+    def patched_convert_char_to_pinyin(text_list, polyphone=True):
+        custom_trans = str.maketrans({";": ",", "“": '"', "”": '"', "‘": "'", "’": "'"})
+        final_text_list = []
+        for text in text_list:
+            text = text.translate(custom_trans)
+            # Map characters directly to list of chars (avoiding Chinese word segmentation and space insertion)
+            char_list = list(text)
+            final_text_list.append(char_list)
+        return final_text_list
+    utils_infer.convert_char_to_pinyin = patched_convert_char_to_pinyin
+    print("[Voice AI] Patched convert_char_to_pinyin successfully to prevent word splitting!")
+except Exception as e:
+    print(f"[Voice AI] Warning: failed to patch G2P: {e}")
+
 # ──────────────────────────────────────────────
 # F5-TTS Model (lazy loaded)
 # ──────────────────────────────────────────────
@@ -287,7 +304,7 @@ def text_to_speech():
     from f5_tts.infer.utils_infer import infer_process, preprocess_ref_audio_text
 
     data = request.get_json(force=True, silent=True) or {}
-    text = data.get("text", "").strip()
+    text = data.get("text", "").strip().lower()  # Lowercase text to match vocab (uppercase accented chars are missing)
     mode = data.get("mode", "preset")
     voice_id = data.get("voice", "nu6")
     speed = float(data.get("speed", data.get("speed_factor", 1.0)))
@@ -304,7 +321,7 @@ def text_to_speech():
     # Determine reference audio and text
     if mode == "fast":
         ref_audio_path = data.get("ref_audio_path", "")
-        ref_text = data.get("prompt_text", data.get("ref_text", "")).strip()
+        ref_text = data.get("prompt_text", data.get("ref_text", "")).strip().lower()
         if not ref_audio_path or not os.path.exists(ref_audio_path):
             return jsonify({"success": False, "message": "Không tìm thấy file âm thanh mẫu"}), 400
     else:
@@ -316,7 +333,7 @@ def text_to_speech():
         voice_cfg = voices[voice_id]
         ref_audio_rel = voice_cfg.get("ref_audio", "")
         ref_audio_path = str(ROOT / ref_audio_rel)
-        ref_text = voice_cfg.get("ref_text", "")
+        ref_text = voice_cfg.get("ref_text", "").strip().lower()
 
         if not os.path.exists(ref_audio_path):
             return jsonify({"success": False, "message": f"File audio mẫu không tồn tại: {ref_audio_path}"}), 404
