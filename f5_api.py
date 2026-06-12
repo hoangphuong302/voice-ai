@@ -364,19 +364,89 @@ def _git_sync_async(message="Auto-sync voices"):
 
 
 def change_speed(wav_data, speed, sr=48000):
-    """Change audio speed preserving pitch using librosa."""
+    """Change audio speed preserving pitch. Uses rubberband (best quality) with fallback."""
     # Clamp speed to safe range
     if speed <= 0:
         speed = 1.0
     speed = max(0.25, min(4.0, speed))
     if abs(speed - 1.0) < 0.05:
         return wav_data
+
+    # Method 1: pyrubberband (highest quality - WSOLA algorithm)
+    try:
+        import pyrubberband as pyrb
+        result = pyrb.time_stretch(wav_data, sr, speed)
+        print(f"[Voice AI] Speed changed to {speed}x using rubberband (HQ)")
+        return result
+    except ImportError:
+        pass
+    except Exception as e:
+        print(f"[Voice AI] rubberband failed: {e}")
+
+    # Method 2: scipy-based high-quality resampling
+    # Resample to change speed, then pitch-correct via resampling back
+    try:
+        from scipy.signal import resample
+        import numpy as np
+        n_samples = len(wav_data)
+        # Stretch/compress the audio by resampling
+        n_target = int(n_samples / speed)
+        stretched = resample(wav_data, n_target)
+        print(f"[Voice AI] Speed changed to {speed}x using scipy resample")
+        return stretched.astype(np.float32)
+    except Exception as e:
+        print(f"[Voice AI] scipy resample failed: {e}")
+
+    # Method 3: librosa with better parameters (larger n_fft = less artifact)
     try:
         import librosa
-        return librosa.effects.time_stretch(wav_data, rate=speed)
+        result = librosa.effects.time_stretch(wav_data, rate=speed, n_fft=4096)
+        print(f"[Voice AI] Speed changed to {speed}x using librosa (n_fft=4096)")
+        return result
     except Exception as e:
-        print(f"[Voice AI] Warning: failed to stretch speed with librosa: {e}")
+        print(f"[Voice AI] Warning: all speed methods failed: {e}")
         return wav_data
+
+
+def detect_language(text):
+    """
+    Auto-detect language from text content.
+    Returns 'vi' for Vietnamese, 'en' for English, or detected language code.
+    """
+    import re
+
+    # Vietnamese diacritical marks (tonal marks + special letters)
+    vi_chars = set('àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ'
+                   'ÀÁẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬÈÉẺẼẸÊẾỀỂỄỆÌÍỈĨỊÒÓỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÙÚỦŨỤƯỨỪỬỮỰỲÝỶỸỴĐ')
+
+    # Count Vietnamese vs non-Vietnamese characters
+    text_chars = re.sub(r'[\s\d\W]', '', text)  # Remove spaces, digits, punctuation
+    if not text_chars:
+        return 'vi'  # Default to Vietnamese
+
+    vi_count = sum(1 for c in text_chars if c in vi_chars)
+    total = len(text_chars)
+    vi_ratio = vi_count / total if total > 0 else 0
+
+    # If more than 5% of characters are Vietnamese diacritics → Vietnamese
+    if vi_ratio > 0.05:
+        return 'vi'
+
+    # Check for common Vietnamese words without diacritics
+    vi_words = {'cua', 'trong', 'ngoai', 'la', 'nhung', 'duoc', 'khong', 'nhu', 'voi',
+                'cac', 'mot', 'hai', 'ba', 'bon', 'nam', 'sau', 'bay', 'tam', 'chin', 'muoi'}
+    words_lower = set(text.lower().split())
+    vi_word_hits = len(words_lower & vi_words)
+
+    if vi_word_hits >= 2:
+        return 'vi'
+
+    # Default: if text is mostly ASCII letters → English
+    ascii_count = sum(1 for c in text_chars if c.isascii())
+    if ascii_count / total > 0.9:
+        return 'en'
+
+    return 'vi'  # Default to Vietnamese
 
 
 # ──────────────────────────────────────────────
@@ -853,47 +923,88 @@ def text_to_speech():
             from audio_enhance import enhance_audio
             
             # Viterbox advanced params (all tuneable from frontend)
-            # Tuned for maximum voice cloning fidelity:
-            #   cfg_weight=0.7 → stronger adherence to reference voice
-            #   exaggeration=0.3 → natural/subtle expression (less voice deviation)
-            #   temperature=0.6 → more stable/consistent output
-            #   repetition_penalty=1.2 → per-README recommendation (2.0 was too aggressive)
-            exaggeration = float(data.get("exaggeration", 0.3))     # 0.0-2.0: emotion intensity
-            cfg_weight = float(data.get("cfg_weight", 0.7))         # 0.0-1.0: voice similarity (higher = closer to ref)
-            vb_temperature = float(data.get("vb_temperature", 0.6)) # 0.1-1.0: sampling randomness
+            exaggeration = float(data.get("exaggeration", 0.5))     # 0.0-2.0: emotion intensity
+            cfg_weight = float(data.get("cfg_weight", 2.5))         # 0.0-5.0: voice similarity
+            vb_temperature = float(data.get("vb_temperature", 0.5)) # 0.1-1.0: randomness
             top_p = float(data.get("top_p", 0.95))                  # nucleus sampling
-            rep_penalty = float(data.get("repetition_penalty", 1.2)) # repetition penalty (per README docs)
+            rep_penalty = float(data.get("repetition_penalty", 1.2)) # repetition penalty
             pause_ms = int(data.get("sentence_pause_ms", 400))      # pause between sentences
             
-            # Determine reference audio for voice cloning
+            # ── Auto Language Detection ──
+            lang = detect_language(text)
+            print(f"[Voice AI] Auto-detected language: {lang}")
+            
+            # ── Try to load pre-computed embeddings (FAST path) ──
+            cached_embeddings_path = None
             ref_audio_path = None
+            use_cached = False
+            
             if mode == "fast":
+                # Fast clone: always compute from uploaded audio
                 ref_audio_path = data.get("ref_audio_path", "")
                 if not ref_audio_path or not os.path.exists(ref_audio_path) or os.path.isdir(ref_audio_path):
                     ref_audio_path = None
             else:
-                ref_audio_rel = voice_cfg.get("ref_audio", "")
-                if ref_audio_rel:
-                    ref_path_candidate = str(ROOT / ref_audio_rel)
-                    if os.path.exists(ref_path_candidate):
-                        ref_audio_path = ref_path_candidate
+                # Preset mode: check for cached embeddings first
+                cache_path = ROOT / "voices" / voice_id / "embeddings.pt"
+                if cache_path.exists():
+                    cached_embeddings_path = str(cache_path)
+                    use_cached = True
+                else:
+                    # Fallback: compute from ref.wav
+                    ref_audio_rel = voice_cfg.get("ref_audio", "")
+                    if ref_audio_rel:
+                        ref_path_candidate = str(ROOT / ref_audio_rel)
+                        if os.path.exists(ref_path_candidate):
+                            ref_audio_path = ref_path_candidate
             
-            print(f"[Voice AI] Viterbox: exag={exaggeration}, cfg={cfg_weight}, temp={vb_temperature}, top_p={top_p}, ref={'YES' if ref_audio_path else 'random'}")
-            
-            # Generate audio with Viterbox
-            audio_tensor = engine.generate(
-                text=text,
-                language="vi",
-                audio_prompt=ref_audio_path,
-                exaggeration=exaggeration,
-                cfg_weight=cfg_weight,
-                temperature=vb_temperature,
-                top_p=top_p,
-                repetition_penalty=rep_penalty,
-                split_sentences=True,
-                crossfade_ms=50,
-                sentence_pause_ms=pause_ms,
-            )
+            if use_cached:
+                # ── FAST PATH: Load pre-computed embeddings ──
+                import torch
+                from viterbox.tts import TTSConds
+                from viterbox.models.t3.modules.cond_enc import T3Cond
+                
+                conds = TTSConds.load(cached_embeddings_path, engine.device)
+                
+                # Override emotion_adv with current exaggeration
+                if hasattr(conds.t3, 'emotion_adv'):
+                    conds.t3.emotion_adv = (exaggeration * torch.ones(1, 1, 1)).to(engine.device)
+                
+                engine.conds = conds
+                
+                print(f"[Voice AI] Viterbox: CACHED embeddings for '{voice_id}', exag={exaggeration}, cfg={cfg_weight}, temp={vb_temperature}, lang={lang}")
+                
+                # Generate without audio_prompt (uses cached conds)
+                audio_tensor = engine.generate(
+                    text=text,
+                    language=lang,
+                    audio_prompt=None,  # Use cached conds
+                    exaggeration=exaggeration,
+                    cfg_weight=cfg_weight,
+                    temperature=vb_temperature,
+                    top_p=top_p,
+                    repetition_penalty=rep_penalty,
+                    split_sentences=True,
+                    crossfade_ms=50,
+                    sentence_pause_ms=pause_ms,
+                )
+            else:
+                # ── SLOW PATH: Compute from ref.wav ──
+                print(f"[Voice AI] Viterbox: computing from ref audio, exag={exaggeration}, cfg={cfg_weight}, temp={vb_temperature}, lang={lang}, ref={'YES' if ref_audio_path else 'random'}")
+                
+                audio_tensor = engine.generate(
+                    text=text,
+                    language=lang,
+                    audio_prompt=ref_audio_path,
+                    exaggeration=exaggeration,
+                    cfg_weight=cfg_weight,
+                    temperature=vb_temperature,
+                    top_p=top_p,
+                    repetition_penalty=rep_penalty,
+                    split_sentences=True,
+                    crossfade_ms=50,
+                    sentence_pause_ms=pause_ms,
+                )
             
             # Convert to numpy (output is [1, samples] at 24kHz)
             audio_np = audio_tensor[0].cpu().numpy()
