@@ -161,15 +161,6 @@
     "created_at": "2026-06-10T00:00:00Z",
     "model": "gwen-tts"
   },
-  "vi_nu14": {
-    "name": "Nữ 14",
-    "desc": "Giọng nữ miền Bắc trong sáng, hoạt ngôn.",
-    "ref_audio": "voices/vi_nu14/ref.wav",
-    "ref_text": "Hãy subscribe cho kênh Ghiền Mì Gõ Để không bỏ lỡ những video hấp dẫn",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
   "vi_nu15": {
     "name": "Nữ 15",
     "desc": "Giọng nữ miền Bắc thanh lịch, đĩnh đạc.",
@@ -448,5 +439,68 @@
     "type": "preset",
     "created_at": "2026-06-12T00:00:00Z",
     "model": "gwen-tts"
+  },
+  "gwen_yen_nhi": {
+    "name": "Yến Nhi (Gwen)",
+    "ref_audio": "voices/gwen_yen_nhi/ref.wav",
+    "ref_text": "sao lại không liên quan. các anh lấy vợ rồi các anh cứ đội chị lên đầu làm nóc nhà ấy, suốt ngày hỏi ý kiến các chị thì làm sao mà ra vấn đề được cho em đúng không.",
+    "model": "gwen-tts",
+    "lang": "vi"
+  },
+  "gwen_my_van": {
+    "name": "Mỹ Vân (Gwen)",
+    "ref_audio": "voices/gwen_my_van/ref.wav",
+    "ref_text": "bạn thân mến, chúng ta sẽ đến với một bài tập tiếp theo để giúp cho các bạn có hơi thở dài, sâu và đầy đặn hơn.",
+    "model": "gwen-tts",
+    "lang": "vi"
+  },
+  "gwen_ai_vy": {
+    "name": "Ái Vy (Gwen)",
+    "ref_audio": "voices/gwen_ai_vy/ref.wav",
+    "ref_text": "việt nam đang kiêu hãnh bước vào kỷ nguyên vươn mình rực rỡ với khát vọng mãnh liệt, trí tuệ đổi mới và tinh thần đoàn kết đất nước, tự tin bứt phá, kiến tạo một tương lai thịnh vượng và vươn tầm quốc tế.",
+    "model": "gwen-tts",
+    "lang": "vi"
+  },
+  "gwen_an_nhi": {
+    "name": "An Nhi (Gwen)",
+    "ref_audio": "voices/gwen_an_nhi/ref.wav",
+    "ref_text": "việt nam đang kiêu hãnh bước vào kỷ nguyên vươn mình rực rỡ với khát vọng mãnh liệt, trí tuệ đổi mới và tinh thần đoàn kết đất nước, tự tin bứt phá, kiến tạo một tương lai thịnh vượng và vươn tầm quốc tế.",
+    "model": "gwen-tts",
+    "lang": "vi"
+  },
+  "gwen_dieu_linh": {
+    "name": "Diệu Linh (Gwen)",
+    "ref_audio": "voices/gwen_dieu_linh/ref.wav",
+    "ref_text": "việt nam đang kiêu hãnh bước vào một kỷ nguyên vươn mình rực rỡ với khát vọng mãnh liệt, trí tuệ đổi mới và tinh thần đoàn kết.",
+    "model": "gwen-tts",
+    "lang": "vi"
+  },
+  "gwen_khanh_toan": {
+    "name": "Khánh Toàn (Gwen)",
+    "ref_audio": "voices/gwen_khanh_toan/ref.wav",
+    "ref_text": "việt nam đang kiêu hãnh bước vào kỷ nguyên vươn mình rực rỡ với khát vọng mãnh liệt, trí tuệ đổi mới, tinh thần đoàn kết.",
+    "model": "gwen-tts",
+    "lang": "vi"
+  },
+  "gwen_tran_lam": {
+    "name": "Trần Lâm (Gwen)",
+    "ref_audio": "voices/gwen_tran_lam/ref.wav",
+    "ref_text": "trí tuệ đổi mới và tinh thần đoàn kết, đất nước tự tin bứt phá, kiến tạo một tương lai thịnh vượng và vươn tầm quốc tế.",
+    "model": "gwen-tts",
+    "lang": "vi"
+  },
+  "gwen_nsnd_ha_phuong": {
+    "name": "NSND Hà Phương (Gwen)",
+    "ref_audio": "voices/gwen_nsnd_ha_phuong/ref.wav",
+    "ref_text": "đây là những lời cuối cùng của típ rót người sáng lập ra ai phôn áp bồ chấn động cả thế giới.",
+    "model": "gwen-tts",
+    "lang": "vi"
+  },
+  "gwen_nsnd_kim_cuc": {
+    "name": "NSND Kim Cúc (Gwen)",
+    "ref_audio": "voices/gwen_nsnd_kim_cuc/ref.wav",
+    "ref_text": "đi họp người ta đả thông mãi rồi. lão dòng tai nghe, rồi lão rủm cả người. lão làm như vô tình kéo ghế xích lại đám đông.",
+    "model": "gwen-tts",
+    "lang": "vi"
   }
 }
