@@ -1,5 +1,5 @@
 """
-Voice AI - Local TTS Server (v3.0.0)
+Voice AI - Local TTS Server (v1.1)
 =====================================
 High-quality multi-lingual voice cloning and synthesis.
 Runs on port 9880, integrates with OpenClaw tab on web-mcbooks-export.
@@ -10,8 +10,10 @@ Features:
   - Safe Vietnamese text normalization (spells out numbers/dates but preserves punctuation)
   - Automatic intermediate file cleanup (after sending or after 30 minutes)
   - Zero-shot voice cloning and preset voices
-  - Multi-engine: Vira-TTS, VieNeu-TTS, MiniMax Cloud
+  - Multi-engine: Gwen-TTS (Vietnamese), Fish Speech (Multilingual), VieNeu-TTS, MiniMax Cloud
 """
+
+VOICE_AI_VERSION = "1.1"
 
 import os
 import sys
@@ -644,6 +646,21 @@ def delete_voice(voice_id):
 
     _git_sync_async(f"Delete voice: {name}")
     return jsonify({"success": True, "message": f"Deleted '{name}'"})
+
+
+@app.route("/version", methods=["GET"])
+def version():
+    """Return current Voice AI version."""
+    return jsonify({
+        "version": VOICE_AI_VERSION,
+        "engine": "Gwen-TTS (Qwen3-TTS-0.6B)",
+        "features": [
+            "Sentence splitting for stable long text",
+            "Volume normalization",
+            "Vietnamese text preprocessing",
+            "Crossfade concatenation",
+        ]
+    })
 
 
 @app.route("/tts", methods=["POST"])
@@ -1620,8 +1637,8 @@ def sync_to_github():
 # ──────────────────────────────────────────────
 if __name__ == "__main__":
     print("=" * 60)
-    print("  Voice AI - Local TTS Server v3.0.0")
-    print("  Port: 9880 | Engines: Vira + VieNeu + MiniMax")
+    print(f"  Voice AI - Local TTS Server v{VOICE_AI_VERSION}")
+    print("  Port: 9880 | Engine: Gwen-TTS (Qwen3-TTS 0.6B)")
     print("  GPU: RTX 4060 | Audio Enhancement: ON")
     print("=" * 60)
 
