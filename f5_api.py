@@ -13,7 +13,7 @@ Features:
   - Multi-engine: Gwen-TTS (Vietnamese), Fish Speech (Multilingual), VieNeu-TTS, MiniMax Cloud
 """
 
-VOICE_AI_VERSION = "1.1"
+VOICE_AI_VERSION = "1.2"
 
 import os
 import sys
