@@ -940,9 +940,25 @@ def text_to_speech():
                 if not seg_text:
                     continue
                     
-                print(f"[Voice AI] Generating clause: '{seg_text}'")
                 audio_seg = engine.generate(seg_text, context_tokens)
                 audio_np_seg = audio_seg.float().cpu().numpy()
+                
+                # Trim leading/trailing silence from raw segment (keep a tiny 40ms margin)
+                try:
+                    import librosa
+                    audio_np_seg, _ = librosa.effects.trim(audio_np_seg, top_db=30)
+                except Exception as e:
+                    print(f"[Voice AI] Segment trim warning: {e}")
+                
+                # Apply smooth fade-in and fade-out to prevent click artifacts
+                seg_len = len(audio_np_seg)
+                fade_in_len = min(int(sample_rate * 0.005), seg_len // 4)   # 5ms
+                fade_out_len = min(int(sample_rate * 0.01), seg_len // 4)    # 10ms
+                if fade_in_len > 1:
+                    audio_np_seg[:fade_in_len] *= np.linspace(0.0, 1.0, fade_in_len, dtype=np.float32)
+                if fade_out_len > 1:
+                    audio_np_seg[-fade_out_len:] *= np.linspace(1.0, 0.0, fade_out_len, dtype=np.float32)
+                    
                 audio_parts.append(audio_np_seg)
                 
                 # Add natural pause with noise floor (not dead silence)

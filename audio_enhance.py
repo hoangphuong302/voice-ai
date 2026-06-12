@@ -60,7 +60,7 @@ def enhance_audio(wav_data, sample_rate, target_sr=48000):
             print(f"[Voice AI Enhance] HP filter skipped: {e}")
 
         # 4. Noise gate — zero out very quiet samples
-        gate_threshold = 0.003
+        gate_threshold = 0.0015
         envelope = np.abs(wav)
         # Smooth envelope with a short window to avoid chopping mid-syllable
         win_size = int(sr * 0.02)  # 20ms window
