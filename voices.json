@@ -481,5 +481,13 @@
     "model": "dolly-vn/viterbox",
     "type": "preset",
     "created_at": "2026-06-12T00:00:00Z"
+  },
+  "voice_1781234767_64977f": {
+    "name": "Test Clone Voice",
+    "desc": "Auto-test clone",
+    "ref_audio": "voices/voice_1781234767_64977f/ref.wav",
+    "ref_text": "Đây là giọng test tự động",
+    "type": "cloned",
+    "created_at": "2026-06-12T03:26:07.747268+00:00"
   }
 }
