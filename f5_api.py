@@ -853,11 +853,16 @@ def text_to_speech():
             from audio_enhance import enhance_audio
             
             # Viterbox advanced params (all tuneable from frontend)
-            exaggeration = float(data.get("exaggeration", 0.5))     # 0.0-2.0: emotion intensity
-            cfg_weight = float(data.get("cfg_weight", 0.5))         # 0.0-1.0: guidance strength
-            vb_temperature = float(data.get("vb_temperature", 0.8)) # 0.1-1.0: sampling randomness
+            # Tuned for maximum voice cloning fidelity:
+            #   cfg_weight=0.7 → stronger adherence to reference voice
+            #   exaggeration=0.3 → natural/subtle expression (less voice deviation)
+            #   temperature=0.6 → more stable/consistent output
+            #   repetition_penalty=1.2 → per-README recommendation (2.0 was too aggressive)
+            exaggeration = float(data.get("exaggeration", 0.3))     # 0.0-2.0: emotion intensity
+            cfg_weight = float(data.get("cfg_weight", 0.7))         # 0.0-1.0: voice similarity (higher = closer to ref)
+            vb_temperature = float(data.get("vb_temperature", 0.6)) # 0.1-1.0: sampling randomness
             top_p = float(data.get("top_p", 0.95))                  # nucleus sampling
-            rep_penalty = float(data.get("repetition_penalty", 2.0)) # repetition penalty
+            rep_penalty = float(data.get("repetition_penalty", 1.2)) # repetition penalty (per README docs)
             pause_ms = int(data.get("sentence_pause_ms", 400))      # pause between sentences
             
             # Determine reference audio for voice cloning
