@@ -464,6 +464,11 @@ def list_voices():
     voices = _load_voices()
     result = []
     for vid, v in voices.items():
+        ref_audio_rel = v.get("ref_audio", "")
+        has_preview = False
+        if ref_audio_rel:
+            ref_path = ROOT / ref_audio_rel
+            has_preview = ref_path.exists() and ref_path.is_file()
         result.append({
             "id": vid,
             "name": v.get("name", vid),
@@ -471,9 +476,34 @@ def list_voices():
             "type": v.get("type", "preset"),
             "model": v.get("model", ""),
             "created_at": v.get("created_at", ""),
+            "has_preview": has_preview,
         })
     result.sort(key=lambda x: (0 if x["type"] == "preset" else 1, x["name"]))
     return jsonify(result)
+
+
+@app.route("/voices/<voice_id>/preview", methods=["GET"])
+def preview_voice(voice_id):
+    """Return the reference audio sample for a voice (for preview/listening)."""
+    voices = _load_voices()
+    if voice_id not in voices:
+        return jsonify({"success": False, "error": "Voice not found"}), 404
+
+    voice = voices[voice_id]
+    ref_audio_rel = voice.get("ref_audio", "")
+    if not ref_audio_rel:
+        return jsonify({"success": False, "error": "No preview audio available"}), 404
+
+    ref_path = ROOT / ref_audio_rel
+    if not ref_path.exists() or not ref_path.is_file():
+        return jsonify({"success": False, "error": "Preview audio file not found"}), 404
+
+    return send_file(
+        str(ref_path),
+        mimetype="audio/wav",
+        as_attachment=False,
+        download_name=f"preview_{voice_id}.wav"
+    )
 
 
 @app.route("/voices", methods=["POST"])
