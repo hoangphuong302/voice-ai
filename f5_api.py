@@ -23,6 +23,7 @@ import subprocess
 import threading
 import tempfile
 import re
+import requests
 import numpy as np
 from pathlib import Path
 from datetime import datetime, timezone
@@ -675,7 +676,7 @@ def text_to_speech():
     
     # Auto-resolve model from voice if it's model-specific
     voice_model = voice_cfg.get("model")
-    requested_model = voice_model if voice_model else data.get("model", "dolly-vn/Vira-TTS")
+    requested_model = voice_model if voice_model else data.get("model", "fish-speech-1.5")
 
     if requested_model == "minimax":
         client_model = data.get("model", "")
@@ -685,7 +686,7 @@ def text_to_speech():
             requested_model = "minimax/speech-01-turbo"
 
     # ── Early validation BEFORE loading models (avoids 30-60s model load for invalid requests) ──
-    if mode != "fast" and not requested_model.startswith("minimax/"):
+    if mode != "fast" and not requested_model.startswith("minimax/") and requested_model != "fish-speech-1.5":
         # For preset/saved voice mode: validate voice exists before loading model
         if requested_model == "dolly-vn/Vira-TTS":
             if voice_id not in voices:
@@ -701,7 +702,7 @@ def text_to_speech():
             if not ref_audio_path_check or not os.path.exists(ref_audio_path_check) or os.path.isdir(ref_audio_path_check):
                 return jsonify({"success": False, "message": "Không tìm thấy file âm thanh mẫu hoặc đường dẫn không hợp lệ"}), 400
 
-    if not requested_model.startswith("minimax/"):
+    if not requested_model.startswith("minimax/") and requested_model != "fish-speech-1.5":
         try:
             engine = _get_engine(requested_model)
         except Exception as e:
@@ -728,7 +729,6 @@ def text_to_speech():
         print(f"[Voice AI] Synthesizing with MiniMax Cloud API: model={minimax_model_id}, voice={voice_id_val}, text={text[:60]}...")
         
         try:
-            import requests
             url = "https://api.minimax.io/v1/t2a_v2"
             headers = {
                 "Authorization": f"Bearer {api_key}",
@@ -916,6 +916,124 @@ def text_to_speech():
             return jsonify({"success": False, "message": f"Lỗi tổng hợp VieNeu: {str(e)}"}), 500
 
     # ────────────────────────────────────────────────────────
+    # Fish Speech 1.5 Synthesis Path (Dual-AR, highest quality)
+    # ────────────────────────────────────────────────────────
+    if requested_model == "fish-speech-1.5":
+        try:
+            import base64
+            import ormsgpack
+            
+            FISH_API_URL = "http://127.0.0.1:8080/v1/tts"
+            
+            # Build reference audio for voice cloning
+            references = []
+            ref_audio_path = None
+            ref_text = ""
+            
+            if mode == "fast":
+                # Fast clone mode: use uploaded audio
+                ref_audio_path = data.get("ref_audio_path", "")
+                ref_text = data.get("ref_text", "")
+            else:
+                # Preset mode: use voice library reference
+                ref_audio_rel = voice_cfg.get("ref_audio", "")
+                if ref_audio_rel:
+                    ref_audio_path = str(ROOT / ref_audio_rel)
+                ref_text = voice_cfg.get("ref_text", "")
+            
+            # Read reference audio bytes
+            if ref_audio_path and os.path.exists(ref_audio_path):
+                with open(ref_audio_path, "rb") as f:
+                    ref_audio_bytes = f.read()
+                references.append({
+                    "audio": ref_audio_bytes,
+                    "text": ref_text or ""
+                })
+            
+            # Fish Speech request payload
+            fish_payload = {
+                "text": text,
+                "references": references,
+                "reference_id": None,
+                "format": "wav",
+                "max_new_tokens": 2048,
+                "chunk_length": 300,
+                "top_p": 0.8,
+                "repetition_penalty": 1.1,
+                "temperature": 0.7,
+                "streaming": False,
+                "use_memory_cache": "on",
+                "seed": None,
+            }
+            
+            print(f"[Voice AI] Fish Speech 1.5: text={text[:50]}..., ref={ref_audio_path}")
+            
+            # Send request to Fish Speech API server
+            try:
+                packed = ormsgpack.packb(fish_payload)
+                resp = requests.post(
+                    FISH_API_URL,
+                    data=packed,
+                    headers={"content-type": "application/msgpack"},
+                    timeout=120,
+                )
+            except requests.exceptions.ConnectionError:
+                return jsonify({
+                    "success": False, 
+                    "message": "Fish Speech server chưa chạy! Hãy khởi động: D:/voice-ai/fish-speech/start_server.bat"
+                }), 503
+            
+            if resp.status_code != 200:
+                err_msg = resp.text[:200] if resp.text else "Unknown error"
+                return jsonify({"success": False, "message": f"Fish Speech error: {err_msg}"}), 500
+            
+            # Save response WAV
+            sample_rate = 44100  # Fish Speech native 44.1kHz
+            audio_data = resp.content
+            
+            # Apply speed change if requested
+            if abs(speed - 1.0) >= 0.05:
+                import io
+                import soundfile as sf_temp
+                audio_np_raw, sr_raw = sf_temp.read(io.BytesIO(audio_data))
+                audio_np_raw = change_speed(audio_np_raw, speed, sr_raw)
+                buf = io.BytesIO()
+                sf_temp.write(buf, audio_np_raw, sr_raw, format='WAV')
+                audio_data = buf.getvalue()
+                sample_rate = sr_raw
+            
+            # Save to temp file
+            tmp = tempfile.NamedTemporaryFile(suffix=".wav", delete=False, dir=str(OUTPUT_DIR))
+            tmp.write(audio_data)
+            tmp.close()
+            
+            # Also save to outputPath if specified
+            if output_path and output_path.strip():
+                try:
+                    os.makedirs(output_path.strip(), exist_ok=True)
+                    out_name = f"voice_{voice_id}_{int(time.time())}.wav"
+                    out_full = os.path.join(output_path.strip(), out_name)
+                    with open(out_full, 'wb') as f:
+                        f.write(audio_data)
+                    print(f"[Voice AI] Also saved to: {out_full}")
+                except Exception as e:
+                    print(f"[Voice AI] Warning: Could not save to outputPath: {e}")
+            
+            print(f"[Voice AI] Fish Speech 1.5 done, saved to {tmp.name}")
+            
+            return send_file(
+                tmp.name,
+                mimetype="audio/wav",
+                as_attachment=True,
+                download_name="output.wav"
+            )
+            
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return jsonify({"success": False, "message": f"Lỗi Fish Speech: {str(e)}"}), 500
+
+    # ────────────────────────────────────────────────────────
     # Viterbox Synthesis Path (Chatterbox-based, emotion control)
     # ────────────────────────────────────────────────────────
     if requested_model == "dolly-vn/viterbox":
@@ -1010,31 +1128,53 @@ def text_to_speech():
             audio_np = audio_tensor[0].cpu().numpy()
             sample_rate = 24000  # Viterbox native SR
             
-            # ── Post-processing: trim silence + fade to eliminate clicks ──
+            # ── Post-processing: aggressive anti-click + quality enhancement ──
             import numpy as np
+            from scipy import signal as scipy_signal
             
-            # Trim trailing silence (below -40dB threshold)
-            threshold = 0.01  # ~-40dB
+            # 1. High-pass filter at 60Hz to remove low-freq pops/clicks
+            try:
+                sos = scipy_signal.butter(4, 60, btype='highpass', fs=sample_rate, output='sos')
+                audio_np = scipy_signal.sosfilt(sos, audio_np).astype(np.float32)
+            except Exception:
+                pass
+            
+            # 2. De-click: find and smooth isolated amplitude spikes
+            # A "click" is a sample that's >3x the local RMS
+            window = 512
+            for i in range(0, len(audio_np) - window, window):
+                chunk = audio_np[i:i+window]
+                local_rms = np.sqrt(np.mean(chunk**2))
+                if local_rms > 0:
+                    spike_mask = np.abs(chunk) > 4.0 * local_rms
+                    if np.any(spike_mask):
+                        # Smooth spikes via linear interpolation
+                        for j in np.where(spike_mask)[0]:
+                            idx = i + j
+                            if 1 < idx < len(audio_np) - 1:
+                                audio_np[idx] = (audio_np[idx-1] + audio_np[idx+1]) / 2
+            
+            # 3. Trim trailing silence (below -40dB)
+            threshold = 0.008
             abs_audio = np.abs(audio_np)
-            # Find last sample above threshold
             above_thresh = np.where(abs_audio > threshold)[0]
             if len(above_thresh) > 0:
                 last_voice = above_thresh[-1]
-                # Keep 50ms of padding after last voice
-                pad_samples = int(0.05 * sample_rate)
+                pad_samples = int(0.03 * sample_rate)  # 30ms padding
                 trim_end = min(last_voice + pad_samples, len(audio_np))
                 audio_np = audio_np[:trim_end]
             
-            # Apply fade-out (30ms) to prevent end click
-            fade_out_samples = int(0.03 * sample_rate)  # 30ms
+            # 4. Aggressive fade-out (100ms) — eliminates any end artifact
+            fade_out_ms = 100
+            fade_out_samples = int(fade_out_ms / 1000 * sample_rate)
             if len(audio_np) > fade_out_samples:
-                fade_out = np.linspace(1.0, 0.0, fade_out_samples)
+                fade_out = np.linspace(1.0, 0.0, fade_out_samples) ** 2  # quadratic = smoother
                 audio_np[-fade_out_samples:] *= fade_out
             
-            # Apply fade-in (10ms) to prevent start click
-            fade_in_samples = int(0.01 * sample_rate)  # 10ms
+            # 5. Smooth fade-in (20ms)
+            fade_in_samples = int(0.02 * sample_rate)
             if len(audio_np) > fade_in_samples:
-                fade_in = np.linspace(0.0, 1.0, fade_in_samples)
+                fade_in = np.linspace(0.0, 1.0, fade_in_samples) ** 2
                 audio_np[:fade_in_samples] *= fade_in
             
             # Apply speed change if requested
