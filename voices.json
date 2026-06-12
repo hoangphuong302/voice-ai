@@ -8,16 +8,16 @@
     "created_at": "2026-06-10T00:00:00Z"
   },
   "en_female": {
-    "name": "[English] LJSpeech (Nữ - Tiếng Anh)",
-    "desc": "Giọng nữ tiếng Anh chuẩn từ bộ dữ liệu LJSpeech.",
+    "name": "[English] LJSpeech (Tông trầm)",
+    "desc": "Giọng tiếng Anh tông trầm. F0~88Hz",
     "ref_audio": "voices/en_female/ref.wav",
     "ref_text": "Some have as a part of their daily service one character or another.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z"
   },
   "zh_female": {
-    "name": "[Chinese] Mẫu Nữ (Tiếng Trung)",
-    "desc": "Giọng nữ tiếng Trung Quốc phổ thông.",
+    "name": "[Chinese] Nữ (Tiếng Trung)",
+    "desc": "Giọng nữ tiếng Trung tông cao. F0~261Hz",
     "ref_audio": "voices/zh_female/ref.wav",
     "ref_text": "随着时间的推移，这一切都会变得更好。",
     "type": "preset",
@@ -40,8 +40,8 @@
     "created_at": "2026-06-10T00:00:00Z"
   },
   "vi_duong": {
-    "name": "Nam Dương",
-    "desc": "Giọng nam miền Bắc trầm ấm, truyền cảm.",
+    "name": "Nữ Dương",
+    "desc": "Giọng nữ tông trung thấp. F0~201Hz",
     "ref_audio": "voices/vi_duong/ref.wav",
     "ref_text": "Bạn có muốn tự học tiếng Hàn thật nhanh mà vẫn hiệu quả không?  Bộ sách bí kíp tự học tiếng Hàn siêu nhanh sẽ giúp bạn làm được điều đó với sự kết hợp của 3 cuốn cực kỳ đặc biệt.  Đầu tiên,",
     "type": "preset",
@@ -56,8 +56,8 @@
     "created_at": "2026-06-10T00:00:00Z"
   },
   "vi_nu3": {
-    "name": "Nữ 3",
-    "desc": "Giọng nữ miền Bắc trẻ trung, tự nhiên.",
+    "name": "Nữ 3 (Cao)",
+    "desc": "Giọng nữ tông cao. F0~278Hz",
     "ref_audio": "voices/vi_nu3/ref.wav",
     "ref_text": "Có một điều khiến mình rất ấn tượng khi sống ở Nhật đó là sự tự giác và kỷ luật của trẻ em.  Mình không nói đến những em học sinh cấp 2, cấp 3 đâu, mà là những đứa trẻ trẻ trẻ.",
     "type": "preset",
@@ -104,24 +104,24 @@
     "created_at": "2026-06-10T00:00:00Z"
   },
   "vi_duong2": {
-    "name": "Nam Dương 2",
-    "desc": "Giọng nam trầm ấm, rõ ràng, tốc độ vừa phải.",
+    "name": "Nữ Dương 2",
+    "desc": "Giọng nữ tông trung thấp. F0~190Hz",
     "ref_audio": "voices/vi_duong2/ref.wav",
     "ref_text": "Có phải bạn đã học tiếng Hàn và luôn ước có một cuốn sách tổng hợp lại tất cả ngữ pháp  để mỗi lần ôn thi không phải mò mẫm trong đồng giáo trình dày cộp,  vướng mất thời gian lại không được.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z"
   },
   "vi_grifin": {
-    "name": "Nam Grifin",
-    "desc": "Giọng nam năng động, thích hợp làm video review.",
+    "name": "Nữ Grifin",
+    "desc": "Giọng nữ tông trung. F0~214Hz",
     "ref_audio": "voices/vi_grifin/ref.wav",
     "ref_text": "Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè  Thiếu đi quát mai, có thằng ngu nào chạy sau lưng tao bóng cạn tùm lum nè  Ok, xíu tao gọi lại cho  Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z"
   },
   "vi_nu2_dieu": {
-    "name": "Nữ Điệu (Quảng cáo)",
-    "desc": "Giọng nữ cao, điệu đà, thích hợp đọc quảng cáo.",
+    "name": "Nữ Điệu (Tông cao)",
+    "desc": "Giọng nữ điệu đà, tông rất cao. F0~348Hz",
     "ref_audio": "voices/vi_nu2_dieu/ref.wav",
     "ref_text": "Có ai mê giọng bắc giống như tôi không nhỉ?  Phở vi phong hoàng gia với thịt thật tươi ngon",
     "type": "preset",
@@ -232,16 +232,16 @@
     "created_at": "2026-06-10T00:00:00Z"
   },
   "vi_nu16": {
-    "name": "Nữ 16",
-    "desc": "Giọng nữ miền Bắc hoạt bát.",
+    "name": "Nữ 16 (Cao)",
+    "desc": "Giọng nữ tông cao. F0~262Hz",
     "ref_audio": "voices/vi_nu16/ref.wav",
     "ref_text": "Giảm ra rất là ok luôn nha  Tiếp theo chúng ta sẽ có một cái cây giàn nền  Đấy là cây số 04 mà mọi người hay hỏi là  Chị ơi cho em xin in tư của cây cọ giàn nền",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z"
   },
   "vi_nu17": {
-    "name": "Nữ 17",
-    "desc": "Giọng nữ miền Bắc ấm áp.",
+    "name": "Nữ 17 (Cao)",
+    "desc": "Giọng nữ tông cao. F0~275Hz",
     "ref_audio": "voices/vi_nu17/ref.wav",
     "ref_text": "Từ vị trí bét lớp tới tốt 3 chỉ sau một học kỳ nhờ bớt chăm chỉ một cách máy móc,  tỳ tỳ chiều khống su gây bão khi bật mí vũ khí bí mật của các...",
     "type": "preset",
@@ -298,7 +298,7 @@
   "vieneu_ngoc_lan": {
     "name": "[VieNeu] Ngọc Lan (Nữ dịu dàng)",
     "desc": "Giọng nữ miền Bắc dịu dàng, truyền cảm của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_ngoc_lan/ref.wav",
     "ref_text": "",
     "type": "preset",
     "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
@@ -308,7 +308,7 @@
   "vieneu_gia_bao": {
     "name": "[VieNeu] Gia Bảo (Nam mượt mà)",
     "desc": "Giọng nam miền Bắc mượt mà, tự nhiên của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_gia_bao/ref.wav",
     "ref_text": "",
     "type": "preset",
     "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
@@ -318,7 +318,7 @@
   "vieneu_thai_son": {
     "name": "[VieNeu] Thái Sơn (Nam chắc khỏe)",
     "desc": "Giọng nam khỏe khoắn, rõ ràng của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_thai_son/ref.wav",
     "ref_text": "",
     "type": "preset",
     "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
@@ -328,7 +328,7 @@
   "vieneu_duc_tri": {
     "name": "[VieNeu] Đức Trí (Nam rõ ràng)",
     "desc": "Giọng nam phát thanh rõ ràng, tự tin của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_duc_tri/ref.wav",
     "ref_text": "",
     "type": "preset",
     "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
@@ -338,7 +338,7 @@
   "vieneu_my_duyen": {
     "name": "[VieNeu] Mỹ Duyên (Nữ mượt mà)",
     "desc": "Giọng nữ ngọt ngào, mượt mà của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_my_duyen/ref.wav",
     "ref_text": "",
     "type": "preset",
     "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
@@ -348,7 +348,7 @@
   "vieneu_truc_ly": {
     "name": "[VieNeu] Trúc Ly (Nữ trẻ trung)",
     "desc": "Giọng nữ năng động, trẻ trung của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_truc_ly/ref.wav",
     "ref_text": "",
     "type": "preset",
     "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
@@ -358,7 +358,7 @@
   "vieneu_xuan_vinh": {
     "name": "[VieNeu] Xuân Vĩnh (Nam vui tươi)",
     "desc": "Giọng nam vui tươi, thân thiện của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_xuan_vinh/ref.wav",
     "ref_text": "",
     "type": "preset",
     "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
@@ -368,7 +368,7 @@
   "vieneu_trong_huu": {
     "name": "[VieNeu] Trọng Hữu (Nam uyên bác)",
     "desc": "Giọng nam trưởng thành, uyên bác, thích hợp đọc tin tức/sách nói.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_trong_huu/ref.wav",
     "ref_text": "",
     "type": "preset",
     "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
@@ -378,7 +378,7 @@
   "vieneu_binh_an": {
     "name": "[VieNeu] Bình An (Nam điềm đạm)",
     "desc": "Giọng nam ấm áp, điềm đạm của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_binh_an/ref.wav",
     "ref_text": "",
     "type": "preset",
     "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
@@ -388,76 +388,16 @@
   "vieneu_ngoc_linh": {
     "name": "[VieNeu] Ngọc Linh (Nữ tươi sáng)",
     "desc": "Giọng nữ tươi sáng, truyền cảm hứng của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_ngoc_linh/ref.wav",
     "ref_text": "",
     "type": "preset",
     "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
     "voice_name": "Ngọc Linh",
     "created_at": "2026-06-10T00:00:00Z"
   },
-  "minimax_qn_jingying": {
-    "name": "[MiniMax] Nam Tinh Anh",
-    "desc": "Giọng nam thông minh, tự tin, chuyên nghiệp của MiniMax.",
-    "ref_audio": "",
-    "ref_text": "",
-    "type": "preset",
-    "model": "minimax",
-    "voice_id": "male-qn-jingying",
-    "created_at": "2026-06-11T00:00:00Z"
-  },
-  "minimax_shaonv": {
-    "name": "[MiniMax] Nữ Thiếu Nữ",
-    "desc": "Giọng nữ trẻ trung, dễ thương, sinh động của MiniMax.",
-    "ref_audio": "",
-    "ref_text": "",
-    "type": "preset",
-    "model": "minimax",
-    "voice_id": "female-shaonv",
-    "created_at": "2026-06-11T00:00:00Z"
-  },
-  "minimax_changsheng": {
-    "name": "[MiniMax] Nam Truyền Cảm",
-    "desc": "Giọng nam trung niên trầm ấm, thuyết phục của MiniMax.",
-    "ref_audio": "",
-    "ref_text": "",
-    "type": "preset",
-    "model": "minimax",
-    "voice_id": "male-qd-changsheng",
-    "created_at": "2026-06-11T00:00:00Z"
-  },
-  "minimax_chaoniang": {
-    "name": "[MiniMax] Nữ Ngọt Ngào",
-    "desc": "Giọng nữ ngọt ngào, truyền cảm, thích hợp đọc truyện.",
-    "ref_audio": "",
-    "ref_text": "",
-    "type": "preset",
-    "model": "minimax",
-    "voice_id": "female-qy-chaoniang",
-    "created_at": "2026-06-11T00:00:00Z"
-  },
-  "minimax_presenter_female": {
-    "name": "[MiniMax] Nữ Phát Thanh Viên",
-    "desc": "Giọng nữ phát thanh viên tin tức chuyên nghiệp của MiniMax.",
-    "ref_audio": "",
-    "ref_text": "",
-    "type": "preset",
-    "model": "minimax",
-    "voice_id": "presenter-female",
-    "created_at": "2026-06-11T00:00:00Z"
-  },
-  "minimax_presenter_male": {
-    "name": "[MiniMax] Nam Phát Thanh Viên",
-    "desc": "Giọng nam phát thanh viên đĩnh đạc, rõ ràng của MiniMax.",
-    "ref_audio": "",
-    "ref_text": "",
-    "type": "preset",
-    "model": "minimax",
-    "voice_id": "presenter-male",
-    "created_at": "2026-06-11T00:00:00Z"
-  },
   "viterbox_sample1": {
-    "name": "⭐ Viterbox Mẫu Nam Trầm",
-    "desc": "Giọng nam trầm ấm tích hợp sẵn của Viterbox",
+    "name": "⭐ Viterbox Nữ 1 (Ấm áp)",
+    "desc": "Giọng nữ ấm áp, tông trung. F0~232Hz",
     "ref_audio": "voices/viterbox_sample1/ref.wav",
     "ref_text": "",
     "model": "dolly-vn/viterbox",
@@ -465,8 +405,8 @@
     "created_at": "2026-06-12T00:00:00Z"
   },
   "viterbox_sample2": {
-    "name": "⭐ Viterbox Mẫu Nữ Trẻ",
-    "desc": "Giọng nữ trẻ trung rõ ràng tích hợp sẵn của Viterbox",
+    "name": "⭐ Viterbox Nữ 2 (Trầm)",
+    "desc": "Giọng nữ tông trầm, từ tốn. F0~176Hz",
     "ref_audio": "voices/viterbox_sample2/ref.wav",
     "ref_text": "",
     "model": "dolly-vn/viterbox",
@@ -474,8 +414,8 @@
     "created_at": "2026-06-12T00:00:00Z"
   },
   "viterbox_sample3": {
-    "name": "⭐ Viterbox Mẫu Nữ Ấm",
-    "desc": "Giọng nữ trầm ấm truyền cảm tích hợp sẵn của Viterbox",
+    "name": "⭐ Viterbox Nữ 3 (Trong trẻo)",
+    "desc": "Giọng nữ cao, trong trẻo. F0~241Hz",
     "ref_audio": "voices/viterbox_sample3/ref.wav",
     "ref_text": "",
     "model": "dolly-vn/viterbox",

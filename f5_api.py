@@ -1010,6 +1010,33 @@ def text_to_speech():
             audio_np = audio_tensor[0].cpu().numpy()
             sample_rate = 24000  # Viterbox native SR
             
+            # ── Post-processing: trim silence + fade to eliminate clicks ──
+            import numpy as np
+            
+            # Trim trailing silence (below -40dB threshold)
+            threshold = 0.01  # ~-40dB
+            abs_audio = np.abs(audio_np)
+            # Find last sample above threshold
+            above_thresh = np.where(abs_audio > threshold)[0]
+            if len(above_thresh) > 0:
+                last_voice = above_thresh[-1]
+                # Keep 50ms of padding after last voice
+                pad_samples = int(0.05 * sample_rate)
+                trim_end = min(last_voice + pad_samples, len(audio_np))
+                audio_np = audio_np[:trim_end]
+            
+            # Apply fade-out (30ms) to prevent end click
+            fade_out_samples = int(0.03 * sample_rate)  # 30ms
+            if len(audio_np) > fade_out_samples:
+                fade_out = np.linspace(1.0, 0.0, fade_out_samples)
+                audio_np[-fade_out_samples:] *= fade_out
+            
+            # Apply fade-in (10ms) to prevent start click
+            fade_in_samples = int(0.01 * sample_rate)  # 10ms
+            if len(audio_np) > fade_in_samples:
+                fade_in = np.linspace(0.0, 1.0, fade_in_samples)
+                audio_np[:fade_in_samples] *= fade_in
+            
             # Apply speed change if requested
             if abs(speed - 1.0) >= 0.05:
                 audio_np = change_speed(audio_np, speed, sample_rate)
