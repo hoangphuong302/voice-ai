@@ -365,6 +365,10 @@ def _git_sync_async(message="Auto-sync voices"):
 
 def change_speed(wav_data, speed, sr=48000):
     """Change audio speed preserving pitch using librosa."""
+    # Clamp speed to safe range
+    if speed <= 0:
+        speed = 1.0
+    speed = max(0.25, min(4.0, speed))
     if abs(speed - 1.0) < 0.05:
         return wav_data
     try:
@@ -553,7 +557,13 @@ def text_to_speech():
     text = data.get("text", "").strip()
     mode = data.get("mode", "preset")
     voice_id = data.get("voice", "nu6")
-    speed = float(data.get("speed", data.get("speed_factor", 1.0)))
+    try:
+        speed = float(data.get("speed", data.get("speed_factor", 1.0)))
+        if speed <= 0:
+            speed = 1.0
+        speed = max(0.25, min(4.0, speed))
+    except (ValueError, TypeError):
+        speed = 1.0
     output_path = data.get("outputPath", "")
 
     if not text:
@@ -574,11 +584,29 @@ def text_to_speech():
         else:
             requested_model = "minimax/speech-01-turbo"
 
+    # ── Early validation BEFORE loading models (avoids 30-60s model load for invalid requests) ──
+    if mode != "fast" and not requested_model.startswith("minimax/"):
+        # For preset/saved voice mode: validate voice exists before loading model
+        if requested_model == "dolly-vn/Vira-TTS":
+            if voice_id not in voices:
+                return jsonify({"success": False, "message": f"Voice '{voice_id}' không tồn tại"}), 404
+            ref_audio_rel = voice_cfg.get("ref_audio", "")
+            ref_audio_check = str(ROOT / ref_audio_rel) if ref_audio_rel else ""
+            if not ref_audio_check or not os.path.exists(ref_audio_check) or os.path.isdir(ref_audio_check):
+                return jsonify({"success": False, "message": f"File audio mẫu không tồn tại hoặc không hợp lệ: {ref_audio_check}"}), 404
+    elif mode == "fast" and not requested_model.startswith("minimax/"):
+        # For fast clone mode: validate ref_audio_path exists before loading model
+        ref_audio_path_check = data.get("ref_audio_path", "")
+        if requested_model in ("dolly-vn/Vira-TTS", "pnnbao-ump/VieNeu-TTS-v3-Turbo"):
+            if not ref_audio_path_check or not os.path.exists(ref_audio_path_check) or os.path.isdir(ref_audio_path_check):
+                return jsonify({"success": False, "message": "Không tìm thấy file âm thanh mẫu hoặc đường dẫn không hợp lệ"}), 400
+
     if not requested_model.startswith("minimax/"):
         try:
             engine = _get_engine(requested_model)
         except Exception as e:
             return jsonify({"success": False, "message": f"Lỗi tải model: {e}"}), 500
+
 
     print(f"[Voice AI] TTS request: model={requested_model}, mode={mode}, voice={voice_id}, text={text[:60]}...")
 
