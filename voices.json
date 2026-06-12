@@ -5,7 +5,8 @@
     "ref_audio": "voices/nu6/ref.wav",
     "ref_text": "Nhật Bản có phải là quốc gia lý tưởng cho việc nuôi dạy con cái? Chào mọi người, đây là T-Connect TV.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "en_female": {
     "name": "[English] LJSpeech (Tông trầm)",
@@ -13,7 +14,8 @@
     "ref_audio": "voices/en_female/ref.wav",
     "ref_text": "Some have as a part of their daily service one character or another.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "zh_female": {
     "name": "[Chinese] Nữ (Tiếng Trung)",
@@ -21,7 +23,8 @@
     "ref_audio": "voices/zh_female/ref.wav",
     "ref_text": "随着时间的推移，这一切都会变得更好。",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu6": {
     "name": "Nữ 6 (Nhanh Cao)",
@@ -29,7 +32,8 @@
     "ref_audio": "voices/vi_nu6/ref.wav",
     "ref_text": "Nhật Bản có phải là quốc gia lý tưởng cho việc nuôi dạy con cái?  Chào mọi người, đây là T-Connect TV  Nhiều năm trở lại đây thì cách dạy con của người Nhật luôn nổi tiếng thế giới bởi sự...",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_ngoc_huyen": {
     "name": "Ngọc Huyền (Phát thanh viên)",
@@ -37,7 +41,8 @@
     "ref_audio": "voices/vi_ngoc_huyen/ref.wav",
     "ref_text": "Tính mua về học chơi ai ngờ lại dính luôn.  Cộng một em sách tiếng Thái đầy đủ chọn bộ từ tự học cân bản chữ cái đến từ vựng, ngữ pháp rồi thích nốt.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_duong": {
     "name": "Nữ Dương",
@@ -45,7 +50,8 @@
     "ref_audio": "voices/vi_duong/ref.wav",
     "ref_text": "Bạn có muốn tự học tiếng Hàn thật nhanh mà vẫn hiệu quả không?  Bộ sách bí kíp tự học tiếng Hàn siêu nhanh sẽ giúp bạn làm được điều đó với sự kết hợp của 3 cuốn cực kỳ đặc biệt.  Đầu tiên,",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nhung": {
     "name": "Nữ Nhung",
@@ -53,7 +59,8 @@
     "ref_audio": "voices/vi_nhung/ref.wav",
     "ref_text": "Ngày nào cũng học từ vựng như chỉ được một thời gian rồi quên  Đừng vội chán nản  Cuốn sách này có thể giúp bạn ghi nhớ cả trăm từ vựng một ngày  Và thanh...",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu3": {
     "name": "Nữ 3 (Cao)",
@@ -61,7 +68,8 @@
     "ref_audio": "voices/vi_nu3/ref.wav",
     "ref_text": "Có một điều khiến mình rất ấn tượng khi sống ở Nhật đó là sự tự giác và kỷ luật của trẻ em.  Mình không nói đến những em học sinh cấp 2, cấp 3 đâu, mà là những đứa trẻ trẻ trẻ.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu8": {
     "name": "Nữ 8 (Thủ khoa)",
@@ -69,7 +77,8 @@
     "ref_audio": "voices/vi_nu8/ref.wav",
     "ref_text": "Xin chào tất cả quý vị khán giả  Em là Nguyễn Lê Hiền Mai  Và ngày hôm nay em rất vinh dự khi được nhận lời mời của VTV  Và có mặt tại truyền hòa cuối sáng ngày hôm nay  Với các môn khoa",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nam1": {
     "name": "Nam 1",
@@ -77,7 +86,8 @@
     "ref_audio": "voices/vi_nam1/ref.wav",
     "ref_text": "Công thức quay review đồ giáo dục đẹp chuẩn như các tiktoker  Việc của bạn chỉ cần áp dụng công thức vào thôi  Trong suốt 5 năm làm việc với các KOL và các doanh nghiệp  Mình đã đúng",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_tre_con": {
     "name": "Trẻ em tiểu học",
@@ -85,7 +95,8 @@
     "ref_audio": "voices/vi_tre_con/ref.wav",
     "ref_text": "Em xin chào bác giám khảo và các bạn  Em tên là Phạm Ngọc Bảo Châu  Học sinh lớp 3G  Trường Tiểu học Nam Hành Công",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu_ngot": {
     "name": "Nữ ngọt ngào",
@@ -93,7 +104,8 @@
     "ref_audio": "voices/vi_nu_ngot/ref.wav",
     "ref_text": "Làm sao để nói giọng nhẹ nhàng á?  Rất là dễ nhá  Mọi người có để ý là ở các cô gái nhẹ nhàng  thì cơ thể sẽ có một cái độ mềm mại nhất định đúng không?",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_vo": {
     "name": "Vợ Sam",
@@ -101,7 +113,8 @@
     "ref_audio": "voices/vi_vo/ref.wav",
     "ref_text": "Hôm nay anh sẽ giúp các em bóc trần văn hóa công sở Hàn Quốc nha. Nghe xong thì các em sẽ biết tại sao anh nghỉ việc sau đúng 3 tháng.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_duong2": {
     "name": "Nữ Dương 2",
@@ -109,7 +122,8 @@
     "ref_audio": "voices/vi_duong2/ref.wav",
     "ref_text": "Có phải bạn đã học tiếng Hàn và luôn ước có một cuốn sách tổng hợp lại tất cả ngữ pháp  để mỗi lần ôn thi không phải mò mẫm trong đồng giáo trình dày cộp,  vướng mất thời gian lại không được.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_grifin": {
     "name": "Nữ Grifin",
@@ -117,7 +131,8 @@
     "ref_audio": "voices/vi_grifin/ref.wav",
     "ref_text": "Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè  Thiếu đi quát mai, có thằng ngu nào chạy sau lưng tao bóng cạn tùm lum nè  Ok, xíu tao gọi lại cho  Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu2_dieu": {
     "name": "Nữ Điệu (Tông cao)",
@@ -125,7 +140,8 @@
     "ref_audio": "voices/vi_nu2_dieu/ref.wav",
     "ref_text": "Có ai mê giọng bắc giống như tôi không nhỉ?  Phở vi phong hoàng gia với thịt thật tươi ngon",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu11": {
     "name": "Nữ 11",
@@ -133,7 +149,8 @@
     "ref_audio": "voices/vi_nu11/ref.wav",
     "ref_text": "Tháng 10 này, mình đi làm đúng 20 ngày mà lương văn phòng vẫn được 14 triệu.  Hãy cùng tổng kết chi tiêu tháng 10 của cô gái trẻ 22 tuổi sống tự lập chi tiêu mọi thứ.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu13": {
     "name": "Nữ 13",
@@ -141,7 +158,8 @@
     "ref_audio": "voices/vi_nu13/ref.wav",
     "ref_text": "Phòng của mình sẽ là 5 người bạn cũng học nơi U khác  Còn bình thường thì mình thấy các bạn ở trong Nam sẽ ở khoảng 9 người một phòng  Và đều là sinh viên của U",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu14": {
     "name": "Nữ 14",
@@ -149,7 +167,8 @@
     "ref_audio": "voices/vi_nu14/ref.wav",
     "ref_text": "Hãy subscribe cho kênh Ghiền Mì Gõ Để không bỏ lỡ những video hấp dẫn",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu15": {
     "name": "Nữ 15",
@@ -157,7 +176,8 @@
     "ref_audio": "voices/vi_nu15/ref.wav",
     "ref_text": "Tổng kết những cuốn tiểu thuyết hay mà mình đọc được trong năm 2025  Mình sẽ bỏ qua những cuốn trinh thám và những cuốn sách đã đọc lại nhắc đến ở video trước",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu4": {
     "name": "Nữ 4",
@@ -165,7 +185,8 @@
     "ref_audio": "voices/vi_nu4/ref.wav",
     "ref_text": "Giọng Bắc được coi là chuẩn, đó là chuẩn theo giọng của người Hà Nội  Nhưng mọi người cũng biết rồi, họ là những người rất là nghiêm túc, khôn thước và...",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu5": {
     "name": "Nữ 5",
@@ -173,7 +194,8 @@
     "ref_audio": "voices/vi_nu5/ref.wav",
     "ref_text": "Có người thì thanh cao, có người thì khi cất giọng nói lên là thấy nó lanh lành, lanh lành như là tiếng thủy tình vỡ vậy",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu7": {
     "name": "Nữ 7",
@@ -181,7 +203,8 @@
     "ref_audio": "voices/vi_nu7/ref.wav",
     "ref_text": "Cách để không bị bí idea dù gặp bất kể đề writing nào, dù là các bài writing nhỏ trong các bài kiểm tra trên lớp hay là các bài như writing trong IELTS thì chắc hẳn ít.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu9_thoisu": {
     "name": "Nữ Thời Sự (Bản tin)",
@@ -189,7 +212,8 @@
     "ref_audio": "voices/vi_nu9_thoisu/ref.wav",
     "ref_text": "Hãy subscribe cho kênh Ghiền Mì Gõ Để không bỏ lỡ những video hấp dẫn",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_gai1": {
     "name": "Nữ Trẻ 1",
@@ -197,7 +221,8 @@
     "ref_audio": "voices/vi_gai1/ref.wav",
     "ref_text": "Thế nên là nếu như mà mọi người cần nhu cầu học nguyên một cái combo như vậy thì đặt mua sách ngay dưới đây  Hoặc cứ nhắn cho bên mình, bên mình sẽ tư vấn cho bạn học combo nào là phù hợp he",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_gai2": {
     "name": "Nữ Trẻ 2",
@@ -205,7 +230,8 @@
     "ref_audio": "voices/vi_gai2/ref.wav",
     "ref_text": "Ai thuộc team học tiếng Hàn mà cứ học được vài hôm là nản  Thuộc từ hôm nay, mai quên sạch, muốn nói mà trong đầu trống trơn  Thì gặp bộ này là chân ái luôn nha  Để không bỏ lỡ những video hấp dẫn",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_gai3": {
     "name": "Nữ Trẻ 3",
@@ -213,7 +239,8 @@
     "ref_audio": "voices/vi_gai3/ref.wav",
     "ref_text": "Hola, me llamo Tuha, tengo 25 años y trabajo en el sector del marketing.  Llevo dos meses aprendiendo español de forma autodidacta.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_gai4": {
     "name": "Nữ Trẻ 4",
@@ -221,7 +248,8 @@
     "ref_audio": "voices/vi_gai4/ref.wav",
     "ref_text": "Đừng học thêm một chữ tiếng Hàn nào nữa cho đến khi bạn biết điều này.  Hãy mở sách ra và thử tổng hợp những từ vựng tiếng Hàn có liên quan đến nhau theo chủ đề như thế này.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_tre_con2": {
     "name": "Bé gái mẫu giọng",
@@ -229,7 +257,8 @@
     "ref_audio": "voices/vi_tre_con2/ref.wav",
     "ref_text": "Đây là thành quả của con  Sau hơn 3 tháng học chiếc bút ngại ngữ này  Con tự tin hơn với trình độ tiếng Anh của mình  Con biết thêm tiếng Trung",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu16": {
     "name": "Nữ 16 (Cao)",
@@ -237,7 +266,8 @@
     "ref_audio": "voices/vi_nu16/ref.wav",
     "ref_text": "Giảm ra rất là ok luôn nha  Tiếp theo chúng ta sẽ có một cái cây giàn nền  Đấy là cây số 04 mà mọi người hay hỏi là  Chị ơi cho em xin in tư của cây cọ giàn nền",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu17": {
     "name": "Nữ 17 (Cao)",
@@ -245,7 +275,8 @@
     "ref_audio": "voices/vi_nu17/ref.wav",
     "ref_text": "Từ vị trí bét lớp tới tốt 3 chỉ sau một học kỳ nhờ bớt chăm chỉ một cách máy móc,  tỳ tỳ chiều khống su gây bão khi bật mí vũ khí bí mật của các...",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu19": {
     "name": "Nữ 19",
@@ -253,7 +284,8 @@
     "ref_audio": "voices/vi_nu19/ref.wav",
     "ref_text": "Cùng là biết nhưng tạo sao biết một người là Kennen chứ không dùng Whitson.  Hãy nhớ mẹo, Kennen là biết một người, địa điểm hoặc thứ gì đó, còn Whitson biết thông tin.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vi_nu20": {
     "name": "Nữ 20",
@@ -261,7 +293,8 @@
     "ref_audio": "voices/vi_nu20/ref.wav",
     "ref_text": "Aten là khi kể chuyện, Raiden là trò chuyện, Sprague đi với ngôn ngữ.  Vậy nên một câu chuyện là đang kể nội dung dài nên phải dùng Atenant.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "en_female_1": {
     "name": "[English] Nữ 1 (Mạnh mẽ)",
@@ -269,7 +302,8 @@
     "ref_audio": "voices/en_female_1/ref.wav",
     "ref_text": "in being comparatively modern.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "en_female_2": {
     "name": "[English] Nữ 2 (Tự nhiên)",
@@ -277,7 +311,8 @@
     "ref_audio": "voices/en_female_2/ref.wav",
     "ref_text": "For although the Chinese took impressions from woodblocks engraved in relief for centuries before the woodcutters of the Netherlands,",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "en_female_3": {
     "name": "[English] Nữ 3 (Trang trọng)",
@@ -285,7 +320,8 @@
     "ref_audio": "voices/en_female_3/ref.wav",
     "ref_text": "produced the block books, which were the immediate predecessors of the true printed book,",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "en_female_4": {
     "name": "[English] Nữ 4 (Kể chuyện)",
@@ -293,7 +329,8 @@
     "ref_audio": "voices/en_female_4/ref.wav",
     "ref_text": "The invention of movable metal letters in the middle of the 15th century may justly be considered as the invention of the art of printing.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vieneu_ngoc_lan": {
     "name": "Ngọc Lan (Nữ dịu dàng)",
@@ -301,7 +338,8 @@
     "ref_audio": "voices/vieneu_ngoc_lan/ref.wav",
     "ref_text": "Xin chào, đây là giọng mẫu thử.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vieneu_gia_bao": {
     "name": "Gia Bảo (Nam mượt mà)",
@@ -309,7 +347,8 @@
     "ref_audio": "voices/vieneu_gia_bao/ref.wav",
     "ref_text": "Xuân chào, đây là dọng mũ thừa.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vieneu_thai_son": {
     "name": "Thái Sơn (Nam chắc khỏe)",
@@ -317,7 +356,8 @@
     "ref_audio": "voices/vieneu_thai_son/ref.wav",
     "ref_text": "Xin chào, đây là dòng mẫu thử.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vieneu_duc_tri": {
     "name": "Đức Trí (Nam rõ ràng)",
@@ -325,7 +365,8 @@
     "ref_audio": "voices/vieneu_duc_tri/ref.wav",
     "ref_text": "Xin chào, đây là giọng mẫu thử.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vieneu_my_duyen": {
     "name": "Mỹ Duyên (Nữ mượt mà)",
@@ -333,7 +374,8 @@
     "ref_audio": "voices/vieneu_my_duyen/ref.wav",
     "ref_text": "Xin chào, đây là giọng mẫu thử.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vieneu_truc_ly": {
     "name": "Trúc Ly (Nữ trẻ trung)",
@@ -341,7 +383,8 @@
     "ref_audio": "voices/vieneu_truc_ly/ref.wav",
     "ref_text": "Xin chào, đây là giọng mẫu thử",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vieneu_xuan_vinh": {
     "name": "Xuân Vĩnh (Nam vui tươi)",
@@ -349,7 +392,8 @@
     "ref_audio": "voices/vieneu_xuan_vinh/ref.wav",
     "ref_text": "Xin chào, đây là giọng mẫu thử.",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vieneu_trong_huu": {
     "name": "Trọng Hữu (Nam uyên bác)",
@@ -357,7 +401,8 @@
     "ref_audio": "voices/vieneu_trong_huu/ref.wav",
     "ref_text": "Xin chào, đây là dọng mẫu thử",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vieneu_binh_an": {
     "name": "Bình An (Nam điềm đạm)",
@@ -365,7 +410,8 @@
     "ref_audio": "voices/vieneu_binh_an/ref.wav",
     "ref_text": "Xin chào, đây là giọng mẫu thử",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "vieneu_ngoc_linh": {
     "name": "Ngọc Linh (Nữ tươi sáng)",
@@ -373,7 +419,8 @@
     "ref_audio": "voices/vieneu_ngoc_linh/ref.wav",
     "ref_text": "Xin chào, đây là dòng mẫu thử",
     "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z"
+    "created_at": "2026-06-10T00:00:00Z",
+    "model": "gwen-tts"
   },
   "viterbox_sample1": {
     "name": "Nữ 1 (Ấm áp)",
@@ -381,7 +428,8 @@
     "ref_audio": "voices/viterbox_sample1/ref.wav",
     "ref_text": "Oto thường nhân hơn và có nhiều loại hơn sau với thuyền, nhưng thuyền có thể chở được nhiều hàng hoá hương và phù hợp hơn cho quán đường dài hơn.",
     "type": "preset",
-    "created_at": "2026-06-12T00:00:00Z"
+    "created_at": "2026-06-12T00:00:00Z",
+    "model": "gwen-tts"
   },
   "viterbox_sample2": {
     "name": "Nữ 2 (Trầm)",
@@ -389,7 +437,8 @@
     "ref_audio": "voices/viterbox_sample2/ref.wav",
     "ref_text": "Mỏ nên chung quốc nào được công nhận rộng giải nhất trên toàn cầu.",
     "type": "preset",
-    "created_at": "2026-06-12T00:00:00Z"
+    "created_at": "2026-06-12T00:00:00Z",
+    "model": "gwen-tts"
   },
   "viterbox_sample3": {
     "name": "Nữ 3 (Trong trẻo)",
@@ -397,6 +446,7 @@
     "ref_audio": "voices/viterbox_sample3/ref.wav",
     "ref_text": "một số ví dụ về các bài tập có thể giúp tăng năng xuất là gì.",
     "type": "preset",
-    "created_at": "2026-06-12T00:00:00Z"
+    "created_at": "2026-06-12T00:00:00Z",
+    "model": "gwen-tts"
   }
 }
