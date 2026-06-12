@@ -8,24 +8,6 @@
     "created_at": "2026-06-10T00:00:00Z",
     "model": "gwen-tts"
   },
-  "en_female": {
-    "name": "[English] LJSpeech (Tông trầm)",
-    "desc": "Giọng tiếng Anh tông trầm. F0~88Hz",
-    "ref_audio": "voices/en_female/ref.wav",
-    "ref_text": "Some have as a part of their daily service one character or another.",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "zh_female": {
-    "name": "[Chinese] Nữ (Tiếng Trung)",
-    "desc": "Giọng nữ tiếng Trung tông cao. F0~261Hz",
-    "ref_audio": "voices/zh_female/ref.wav",
-    "ref_text": "随着时间的推移，这一切都会变得更好。",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
   "vi_nu6": {
     "name": "Nữ 6 (Nhanh Cao)",
     "desc": "Giọng nữ miền Bắc, tốc độ nhanh, cao.",
@@ -287,128 +269,11 @@
     "created_at": "2026-06-10T00:00:00Z",
     "model": "gwen-tts"
   },
-  "en_female_1": {
-    "name": "[English] Nữ 1 (Mạnh mẽ)",
-    "desc": "Giọng nữ tiếng Anh chuẩn, rõ ràng, tốc độ vừa phải.",
-    "ref_audio": "voices/en_female_1/ref.wav",
-    "ref_text": "in being comparatively modern.",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "en_female_2": {
-    "name": "[English] Nữ 2 (Tự nhiên)",
-    "desc": "Giọng nữ tiếng Anh chuẩn, tự nhiên.",
-    "ref_audio": "voices/en_female_2/ref.wav",
-    "ref_text": "For although the Chinese took impressions from woodblocks engraved in relief for centuries before the woodcutters of the Netherlands,",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "en_female_3": {
-    "name": "[English] Nữ 3 (Trang trọng)",
-    "desc": "Giọng nữ tiếng Anh chuyên nghiệp, đĩnh đạc.",
-    "ref_audio": "voices/en_female_3/ref.wav",
-    "ref_text": "produced the block books, which were the immediate predecessors of the true printed book,",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "en_female_4": {
-    "name": "[English] Nữ 4 (Kể chuyện)",
-    "desc": "Giọng nữ tiếng Anh ấm áp, truyền cảm.",
-    "ref_audio": "voices/en_female_4/ref.wav",
-    "ref_text": "The invention of movable metal letters in the middle of the 15th century may justly be considered as the invention of the art of printing.",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "vieneu_ngoc_lan": {
-    "name": "Ngọc Lan (Nữ dịu dàng)",
-    "desc": "Giọng nữ miền Bắc dịu dàng, truyền cảm của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "voices/vieneu_ngoc_lan/ref.wav",
-    "ref_text": "Xin chào, đây là giọng mẫu thử.",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "vieneu_gia_bao": {
-    "name": "Gia Bảo (Nam mượt mà)",
-    "desc": "Giọng nam miền Bắc mượt mà, tự nhiên của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "voices/vieneu_gia_bao/ref.wav",
-    "ref_text": "Xuân chào, đây là dọng mũ thừa.",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "vieneu_thai_son": {
-    "name": "Thái Sơn (Nam chắc khỏe)",
-    "desc": "Giọng nam khỏe khoắn, rõ ràng của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "voices/vieneu_thai_son/ref.wav",
-    "ref_text": "Xin chào, đây là dòng mẫu thử.",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
   "vieneu_duc_tri": {
     "name": "Đức Trí (Nam rõ ràng)",
     "desc": "Giọng nam phát thanh rõ ràng, tự tin của VieNeu-TTS v3 Turbo.",
     "ref_audio": "voices/vieneu_duc_tri/ref.wav",
     "ref_text": "Xin chào, đây là giọng mẫu thử.",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "vieneu_my_duyen": {
-    "name": "Mỹ Duyên (Nữ mượt mà)",
-    "desc": "Giọng nữ ngọt ngào, mượt mà của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "voices/vieneu_my_duyen/ref.wav",
-    "ref_text": "Xin chào, đây là giọng mẫu thử.",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "vieneu_truc_ly": {
-    "name": "Trúc Ly (Nữ trẻ trung)",
-    "desc": "Giọng nữ năng động, trẻ trung của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "voices/vieneu_truc_ly/ref.wav",
-    "ref_text": "Xin chào, đây là giọng mẫu thử",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "vieneu_xuan_vinh": {
-    "name": "Xuân Vĩnh (Nam vui tươi)",
-    "desc": "Giọng nam vui tươi, thân thiện của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "voices/vieneu_xuan_vinh/ref.wav",
-    "ref_text": "Xin chào, đây là giọng mẫu thử.",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "vieneu_trong_huu": {
-    "name": "Trọng Hữu (Nam uyên bác)",
-    "desc": "Giọng nam trưởng thành, uyên bác, thích hợp đọc tin tức/sách nói.",
-    "ref_audio": "voices/vieneu_trong_huu/ref.wav",
-    "ref_text": "Xin chào, đây là dọng mẫu thử",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "vieneu_binh_an": {
-    "name": "Bình An (Nam điềm đạm)",
-    "desc": "Giọng nam ấm áp, điềm đạm của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "voices/vieneu_binh_an/ref.wav",
-    "ref_text": "Xin chào, đây là giọng mẫu thử",
-    "type": "preset",
-    "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
-  },
-  "vieneu_ngoc_linh": {
-    "name": "Ngọc Linh (Nữ tươi sáng)",
-    "desc": "Giọng nữ tươi sáng, truyền cảm hứng của VieNeu-TTS v3 Turbo.",
-    "ref_audio": "voices/vieneu_ngoc_linh/ref.wav",
-    "ref_text": "Xin chào, đây là dòng mẫu thử",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
     "model": "gwen-tts"
