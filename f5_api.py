@@ -23,6 +23,7 @@ import subprocess
 import threading
 import tempfile
 import re
+import numpy as np
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -171,6 +172,11 @@ def _get_engine(model_name="dolly-vn/Vira-TTS"):
         elif model_name == "pnnbao-ump/VieNeu-TTS-v3-Turbo":
             if _mira_tts is not None:
                 print("[Voice AI] Unloading Vira-TTS model...")
+                try:
+                    if hasattr(_mira_tts, "pipe") and hasattr(_mira_tts.pipe, "close"):
+                        _mira_tts.pipe.close()
+                except Exception as e:
+                    print(f"[Voice AI] Warning closing Vira-TTS pipeline: {e}")
                 _mira_tts = None
             if _viterbox_tts is not None:
                 print("[Voice AI] Unloading Viterbox model...")
@@ -194,6 +200,11 @@ def _get_engine(model_name="dolly-vn/Vira-TTS"):
         elif model_name == "dolly-vn/viterbox":
             if _mira_tts is not None:
                 print("[Voice AI] Unloading Vira-TTS model...")
+                try:
+                    if hasattr(_mira_tts, "pipe") and hasattr(_mira_tts.pipe, "close"):
+                        _mira_tts.pipe.close()
+                except Exception as e:
+                    print(f"[Voice AI] Warning closing Vira-TTS pipeline: {e}")
                 _mira_tts = None
             if _vieneu_tts is not None:
                 print("[Voice AI] Unloading VieNeu-TTS-v3-Turbo model...")
