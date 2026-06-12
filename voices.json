@@ -294,5 +294,192 @@
     "ref_text": "The invention of movable metal letters in the middle of the 15th century may justly be considered as the invention of the art of printing.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vieneu_ngoc_lan": {
+    "name": "[VieNeu] Ngọc Lan (Nữ dịu dàng)",
+    "desc": "Giọng nữ miền Bắc dịu dàng, truyền cảm của VieNeu-TTS v3 Turbo.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Ngọc Lan",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vieneu_gia_bao": {
+    "name": "[VieNeu] Gia Bảo (Nam mượt mà)",
+    "desc": "Giọng nam miền Bắc mượt mà, tự nhiên của VieNeu-TTS v3 Turbo.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Gia Bảo",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vieneu_thai_son": {
+    "name": "[VieNeu] Thái Sơn (Nam chắc khỏe)",
+    "desc": "Giọng nam khỏe khoắn, rõ ràng của VieNeu-TTS v3 Turbo.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Thái Sơn",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vieneu_duc_tri": {
+    "name": "[VieNeu] Đức Trí (Nam rõ ràng)",
+    "desc": "Giọng nam phát thanh rõ ràng, tự tin của VieNeu-TTS v3 Turbo.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Đức Trí",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vieneu_my_duyen": {
+    "name": "[VieNeu] Mỹ Duyên (Nữ mượt mà)",
+    "desc": "Giọng nữ ngọt ngào, mượt mà của VieNeu-TTS v3 Turbo.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Mỹ Duyên",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vieneu_truc_ly": {
+    "name": "[VieNeu] Trúc Ly (Nữ trẻ trung)",
+    "desc": "Giọng nữ năng động, trẻ trung của VieNeu-TTS v3 Turbo.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Trúc Ly",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vieneu_xuan_vinh": {
+    "name": "[VieNeu] Xuân Vĩnh (Nam vui tươi)",
+    "desc": "Giọng nam vui tươi, thân thiện của VieNeu-TTS v3 Turbo.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Xuân Vĩnh",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vieneu_trong_huu": {
+    "name": "[VieNeu] Trọng Hữu (Nam uyên bác)",
+    "desc": "Giọng nam trưởng thành, uyên bác, thích hợp đọc tin tức/sách nói.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Trọng Hữu",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vieneu_binh_an": {
+    "name": "[VieNeu] Bình An (Nam điềm đạm)",
+    "desc": "Giọng nam ấm áp, điềm đạm của VieNeu-TTS v3 Turbo.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Bình An",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "vieneu_ngoc_linh": {
+    "name": "[VieNeu] Ngọc Linh (Nữ tươi sáng)",
+    "desc": "Giọng nữ tươi sáng, truyền cảm hứng của VieNeu-TTS v3 Turbo.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Ngọc Linh",
+    "created_at": "2026-06-10T00:00:00Z"
+  },
+  "minimax_qn_jingying": {
+    "name": "[MiniMax] Nam Tinh Anh",
+    "desc": "Giọng nam thông minh, tự tin, chuyên nghiệp của MiniMax.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "male-qn-jingying",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "minimax_shaonv": {
+    "name": "[MiniMax] Nữ Thiếu Nữ",
+    "desc": "Giọng nữ trẻ trung, dễ thương, sinh động của MiniMax.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "female-shaonv",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "minimax_changsheng": {
+    "name": "[MiniMax] Nam Truyền Cảm",
+    "desc": "Giọng nam trung niên trầm ấm, thuyết phục của MiniMax.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "male-qd-changsheng",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "minimax_chaoniang": {
+    "name": "[MiniMax] Nữ Ngọt Ngào",
+    "desc": "Giọng nữ ngọt ngào, truyền cảm, thích hợp đọc truyện.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "female-qy-chaoniang",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "minimax_presenter_female": {
+    "name": "[MiniMax] Nữ Phát Thanh Viên",
+    "desc": "Giọng nữ phát thanh viên tin tức chuyên nghiệp của MiniMax.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "presenter-female",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "minimax_presenter_male": {
+    "name": "[MiniMax] Nam Phát Thanh Viên",
+    "desc": "Giọng nam phát thanh viên đĩnh đạc, rõ ràng của MiniMax.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "presenter-male",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "viterbox_sample1": {
+    "name": "⭐ Viterbox Mẫu Nam Trầm",
+    "desc": "Giọng nam trầm ấm tích hợp sẵn của Viterbox",
+    "ref_audio": "voices/viterbox_sample1/ref.wav",
+    "ref_text": "",
+    "model": "dolly-vn/viterbox",
+    "type": "preset",
+    "created_at": "2026-06-12T00:00:00Z"
+  },
+  "viterbox_sample2": {
+    "name": "⭐ Viterbox Mẫu Nữ Trẻ",
+    "desc": "Giọng nữ trẻ trung rõ ràng tích hợp sẵn của Viterbox",
+    "ref_audio": "voices/viterbox_sample2/ref.wav",
+    "ref_text": "",
+    "model": "dolly-vn/viterbox",
+    "type": "preset",
+    "created_at": "2026-06-12T00:00:00Z"
+  },
+  "viterbox_sample3": {
+    "name": "⭐ Viterbox Mẫu Nữ Ấm",
+    "desc": "Giọng nữ trầm ấm truyền cảm tích hợp sẵn của Viterbox",
+    "ref_audio": "voices/viterbox_sample3/ref.wav",
+    "ref_text": "",
+    "model": "dolly-vn/viterbox",
+    "type": "preset",
+    "created_at": "2026-06-12T00:00:00Z"
   }
 }

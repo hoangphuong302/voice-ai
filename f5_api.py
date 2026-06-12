@@ -1,14 +1,16 @@
 """
-Voice AI - Vira-TTS Local API Server (v2.1.0)
-=============================================
-High-quality multi-lingual voice cloning and synthesis powered by Vira-TTS (MiraTTS).
+Voice AI - Local TTS Server (v3.0.0)
+=====================================
+High-quality multi-lingual voice cloning and synthesis.
 Runs on port 9880, integrates with OpenClaw tab on web-mcbooks-export.
 
 Features:
-  - Dynamic pause insertion (breathing gaps) based on punctuation (commas, periods, etc.)
+  - Studio-grade audio post-processing pipeline (denoise, normalize, crossfade)
+  - Dynamic pause insertion with natural noise floor
   - Safe Vietnamese text normalization (spells out numbers/dates but preserves punctuation)
   - Automatic intermediate file cleanup (after sending or after 30 minutes)
-  - Zero-shot voice cloning and preset voices (37 distinct voices)
+  - Zero-shot voice cloning and preset voices
+  - Multi-engine: Vira-TTS, VieNeu-TTS, MiniMax Cloud
 """
 
 import os
@@ -52,10 +54,13 @@ app = Flask(__name__)
 CORS(app)
 
 # ──────────────────────────────────────────────
-# Vira-TTS Model (lazy loaded)
+# Vira-TTS & VieNeu-TTS Models (lazy loaded)
 # ──────────────────────────────────────────────
 _mira_tts = None
-_mira_lock = threading.Lock()
+_vieneu_tts = None
+_viterbox_tts = None
+_current_model = None
+_engine_lock = threading.Lock()
 
 # Training state (F5-TTS training fallback)
 _train_status = {
@@ -68,34 +73,153 @@ _train_status = {
 _train_lock = threading.Lock()
 
 
-def _get_mira_tts():
-    """Lazy-load Vira-TTS model on first request."""
-    global _mira_tts
-    if _mira_tts is not None:
-        return _mira_tts
+# ──────────────────────────────────────────────
+# Whisper Model for Automatic Transcription (lazy loaded on CPU)
+# ──────────────────────────────────────────────
+_whisper_model = None
+_whisper_lock = threading.Lock()
 
-    with _mira_lock:
-        if _mira_tts is not None:
+def _get_whisper_model():
+    global _whisper_model
+    if _whisper_model is None:
+        with _whisper_lock:
+            if _whisper_model is None:
+                print("[Voice AI] Loading faster-whisper model (base)...")
+                from faster_whisper import WhisperModel
+                # Force CPU execution to prevent GPU VRAM issues
+                _whisper_model = WhisperModel("base", device="cpu", compute_type="float32")
+                print("[Voice AI] faster-whisper model loaded successfully!")
+    return _whisper_model
+
+def transcribe_audio(audio_path):
+    """Transcribe reference audio to text using faster-whisper."""
+    if not audio_path or not os.path.exists(audio_path):
+        return ""
+    try:
+        model = _get_whisper_model()
+        print(f"[Voice AI] Auto-transcribing reference audio: {audio_path}...")
+        t0 = time.time()
+        segments, info = model.transcribe(audio_path, beam_size=5, language="vi")
+        text = " ".join([seg.text for seg in segments]).strip()
+        dt = time.time() - t0
+        print(f"[Voice AI] Auto-transcribed in {dt:.2f}s: '{text}'")
+        return text
+    except Exception as e:
+        print(f"[Voice AI] Auto-transcription failed: {e}")
+        return ""
+
+
+def _get_engine(model_name="dolly-vn/Vira-TTS"):
+    """Get active engine, dynamically swapping if needed and cleaning VRAM."""
+    global _mira_tts, _vieneu_tts, _viterbox_tts, _current_model
+    
+    if _current_model == model_name:
+        if model_name == "dolly-vn/Vira-TTS" and _mira_tts is not None:
+            return _mira_tts
+        elif model_name == "pnnbao-ump/VieNeu-TTS-v3-Turbo" and _vieneu_tts is not None:
+            return _vieneu_tts
+        elif model_name == "dolly-vn/viterbox" and _viterbox_tts is not None:
+            return _viterbox_tts
+
+    with _engine_lock:
+        if _current_model == model_name:
+            if model_name == "dolly-vn/Vira-TTS" and _mira_tts is not None:
+                return _mira_tts
+            elif model_name == "pnnbao-ump/VieNeu-TTS-v3-Turbo" and _vieneu_tts is not None:
+                return _vieneu_tts
+            elif model_name == "dolly-vn/viterbox" and _viterbox_tts is not None:
+                return _viterbox_tts
+
+        import gc
+        import torch
+
+        if model_name == "dolly-vn/Vira-TTS":
+            if _vieneu_tts is not None:
+                print("[Voice AI] Unloading VieNeu-TTS-v3-Turbo model...")
+                try:
+                    _vieneu_tts.close()
+                except Exception as e:
+                    print(f"[Voice AI] Warning closing Vieneu: {e}")
+                _vieneu_tts = None
+            if _viterbox_tts is not None:
+                print("[Voice AI] Unloading Viterbox model...")
+                _viterbox_tts = None
+            
+            gc.collect()
+            torch.cuda.empty_cache()
+
+            print("[Voice AI] Loading Vira-TTS model (dolly-vn/Vira-TTS)...")
+            
+            # Bypass Windows CUDA_PATH assertion by pointing to a dummy path with /bin
+            dummy_cuda = os.path.join(str(ROOT), "dummy_cuda")
+            os.makedirs(os.path.join(dummy_cuda, "bin"), exist_ok=True)
+            os.environ["CUDA_PATH"] = dummy_cuda
+            os.environ["HF_HUB_DISABLE_SYMLINKS"] = "1"
+
+            try:
+                from mira.model import MiraTTS
+                # We specify tp=1 for single GPU, and cache_max_entry_count=0.1 to save VRAM on RTX 4060
+                _mira_tts = MiraTTS(model_dir='dolly-vn/Vira-TTS', tp=1, cache_max_entry_count=0.1)
+                _current_model = "dolly-vn/Vira-TTS"
+                print("[Voice AI] Vira-TTS model loaded successfully!")
+            except Exception as e:
+                print(f"[Voice AI] Error loading Vira-TTS model: {e}")
+                raise e
+
             return _mira_tts
 
-        print("[Voice AI] Loading Vira-TTS model (dolly-vn/Vira-TTS)...")
-        
-        # Bypass Windows CUDA_PATH assertion by pointing to a dummy path with /bin
-        dummy_cuda = os.path.join(str(ROOT), "dummy_cuda")
-        os.makedirs(os.path.join(dummy_cuda, "bin"), exist_ok=True)
-        os.environ["CUDA_PATH"] = dummy_cuda
-        os.environ["HF_HUB_DISABLE_SYMLINKS"] = "1"
+        elif model_name == "pnnbao-ump/VieNeu-TTS-v3-Turbo":
+            if _mira_tts is not None:
+                print("[Voice AI] Unloading Vira-TTS model...")
+                _mira_tts = None
+            if _viterbox_tts is not None:
+                print("[Voice AI] Unloading Viterbox model...")
+                _viterbox_tts = None
 
-        try:
-            from mira.model import MiraTTS
-            # We specify tp=1 for single GPU, and cache_max_entry_count=0.1 to save VRAM on RTX 4060
-            _mira_tts = MiraTTS(model_dir='dolly-vn/Vira-TTS', tp=1, cache_max_entry_count=0.1)
-            print("[Voice AI] Vira-TTS model loaded successfully!")
-        except Exception as e:
-            print(f"[Voice AI] Error loading Vira-TTS model: {e}")
-            raise e
+            gc.collect()
+            torch.cuda.empty_cache()
 
-        return _mira_tts
+            print("[Voice AI] Loading VieNeu-TTS-v3-Turbo model...")
+            try:
+                from vieneu import Vieneu
+                _vieneu_tts = Vieneu()
+                _current_model = "pnnbao-ump/VieNeu-TTS-v3-Turbo"
+                print("[Voice AI] VieNeu-TTS-v3-Turbo model loaded successfully!")
+            except Exception as e:
+                print(f"[Voice AI] Error loading VieNeu-TTS-v3-Turbo model: {e}")
+                raise e
+
+            return _vieneu_tts
+
+        elif model_name == "dolly-vn/viterbox":
+            if _mira_tts is not None:
+                print("[Voice AI] Unloading Vira-TTS model...")
+                _mira_tts = None
+            if _vieneu_tts is not None:
+                print("[Voice AI] Unloading VieNeu-TTS-v3-Turbo model...")
+                try:
+                    _vieneu_tts.close()
+                except Exception as e:
+                    print(f"[Voice AI] Warning closing Vieneu: {e}")
+                _vieneu_tts = None
+
+            gc.collect()
+            torch.cuda.empty_cache()
+
+            print("[Voice AI] Loading Viterbox model (dolly-vn/viterbox)...")
+            try:
+                from viterbox import Viterbox
+                _viterbox_tts = Viterbox.from_pretrained("cuda")
+                _current_model = "dolly-vn/viterbox"
+                print("[Voice AI] Viterbox model loaded successfully!")
+            except Exception as e:
+                print(f"[Voice AI] Error loading Viterbox model: {e}")
+                raise e
+
+            return _viterbox_tts
+            
+        else:
+            raise ValueError(f"Unknown model name: {model_name}")
 
 
 # ──────────────────────────────────────────────
@@ -122,19 +246,18 @@ def _save_voices(data):
 # ──────────────────────────────────────────────
 def normalize_text_safe(text):
     """Normalize numbers, dates, abbreviations, but preserve sentence punctuation."""
-    punc_map = {
-        ",": " _comma_ ",
-        ".": " _period_ ",
-        "?": " _question_ ",
-        "!": " _exclamation_ ",
-        ";": " _semicolon_ ",
-        ":": " _colon_ "
-    }
     original_text = text
     try:
-        # 1. Replace punctuation with placeholders
-        for p, placeholder in punc_map.items():
-            text = text.replace(p, placeholder)
+        # 1. Replace punctuation with placeholders (using regex to avoid number separators)
+        # We only replace when they are NOT between two digits.
+        text = re.sub(r'(?<!\d),|,(?!\d)', ' XYZCOMMAXYZ ', text)
+        text = re.sub(r'(?<!\d)\.|\.(?!\d)', ' XYZPERIODXYZ ', text)
+        text = re.sub(r'(?<!\d):|:(?!\d)', ' XYZCOLONXYZ ', text)
+        
+        # Other punctuation can be replaced globally or safely
+        text = text.replace("?", " XYZQUESTIONXYZ ")
+        text = text.replace("!", " XYZEXCLAMATIONXYZ ")
+        text = text.replace(";", " XYZSEMICOLONXYZ ")
             
         from mira.utils import normalize_vietnamese, punc_norm
         # 2. Run standard normalizer (expands numbers, dates, etc.)
@@ -142,15 +265,27 @@ def normalize_text_safe(text):
         norm_text = punc_norm(norm_text)
         
         # 3. Restore punctuation
+        punc_map = {
+            ",": "XYZCOMMAXYZ",
+            ".": "XYZPERIODXYZ",
+            "?": "XYZQUESTIONXYZ",
+            "!": "XYZEXCLAMATIONXYZ",
+            ";": "XYZSEMICOLONXYZ",
+            ":": "XYZCOLONXYZ"
+        }
+        
         for p, placeholder in punc_map.items():
-            norm_text = re.sub(rf'\s*{placeholder.strip()}\s*', f'{p} ', norm_text)
+            norm_text = re.sub(rf'\s*{placeholder}\s*', f'{p} ', norm_text, flags=re.IGNORECASE)
             
         # 4. Clean up spacing
         norm_text = re.sub(r'\s+', ' ', norm_text).strip()
         norm_text = re.sub(r'\s+([.,!?;:])', r'\1', norm_text)
         norm_text = re.sub(r'([.,!?;:])(?=[^\s\d])', r'\1 ', norm_text)
         
-        return norm_text.strip()
+        # Clean up double punctuation (including "? ." and ". .")
+        norm_text = re.sub(r'([.,!?;:])\s*[.]', r'\1', norm_text)
+        
+        return re.sub(r'\s+', ' ', norm_text).strip()
     except Exception as e:
         print(f"[Voice AI] Safe normalization failed, using fallback: {e}")
         return original_text
@@ -235,13 +370,77 @@ def change_speed(wav_data, speed, sr=48000):
 
 @app.route("/", methods=["GET"])
 def index():
+    active_name = "Vira-TTS" if _current_model == "dolly-vn/Vira-TTS" else ("Viterbox" if _current_model == "dolly-vn/viterbox" else "VieNeu-TTS-v3-Turbo")
     return jsonify({
         "name": "Voice AI",
-        "engine": "Vira-TTS (MiraTTS)",
-        "version": "2.1.0",
+        "engine": active_name,
+        "version": "3.0.0",
         "status": "running",
-        "model_loaded": _mira_tts is not None,
+        "model_loaded": (_mira_tts is not None or _vieneu_tts is not None or _viterbox_tts is not None),
+        "active_model": _current_model or "None"
     })
+
+
+def _load_minimax_key():
+    # 1. Try env variable
+    key = os.environ.get("MINIMAX_API_KEY", "").strip()
+    if key:
+        return key
+
+    # 2. Try minimax_key.txt
+    for path_str in ["D:/voice-ai/minimax_key.txt", "C:/Workspace/minimax_key.txt"]:
+        key_path = Path(path_str)
+        if key_path.exists():
+            try:
+                val = key_path.read_text(encoding="utf-8").strip()
+                if val:
+                    return val
+            except Exception:
+                pass
+
+    # 3. Try openclaw config profiles
+    profiles_path = Path("C:/Users/phuong 1.2024/Desktop/antigravity/TELE_auth-profiles.json")
+    if profiles_path.exists():
+        try:
+            profiles = json.loads(profiles_path.read_text(encoding="utf-8"))
+            key = profiles.get("profiles", {}).get("minimax-portal:default", {}).get("access", "").strip()
+            if key:
+                return key
+        except Exception:
+            pass
+
+    return None
+
+
+@app.route("/models", methods=["GET"])
+def list_models():
+    return jsonify([
+        {
+            "id": "dolly-vn/viterbox",
+            "name": "⭐ Viterbox (24→48kHz, Biểu cảm)",
+            "desc": "Chất lượng cao nhất! Dựa trên Chatterbox, train 3000h+ tiếng Việt, kiểm soát biểu cảm"
+        },
+        {
+            "id": "dolly-vn/Vira-TTS",
+            "name": "Vira-TTS (48kHz)",
+            "desc": "Giọng đọc truyền cảm, chuẩn tiếng Việt & Anh"
+        },
+        {
+            "id": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+            "name": "VieNeu-TTS-v3-Turbo (48kHz)",
+            "desc": "Mô hình nhẹ, hỗ trợ biểu cảm & giọng preset đa dạng"
+        },
+        {
+            "id": "minimax/speech-01-turbo",
+            "name": "MiniMax Speech-01-Turbo (Cloud API)",
+            "desc": "API đám mây từ MiniMax, chất lượng cao, phản hồi nhanh"
+        },
+        {
+            "id": "minimax/speech-02-hd",
+            "name": "MiniMax Speech-02-HD (Premium Cloud)",
+            "desc": "Mô hình HD cao cấp nhất từ MiniMax, biểu cảm tự nhiên vượt trội"
+        }
+    ])
 
 
 @app.route("/voices", methods=["GET"])
@@ -255,6 +454,7 @@ def list_voices():
             "name": v.get("name", vid),
             "desc": v.get("desc", ""),
             "type": v.get("type", "preset"),
+            "model": v.get("model", ""),
             "created_at": v.get("created_at", ""),
         })
     result.sort(key=lambda x: (0 if x["type"] == "preset" else 1, x["name"]))
@@ -283,6 +483,10 @@ def save_voice():
     voice_dir.mkdir(exist_ok=True)
     ref_path = voice_dir / "ref.wav"
     file.save(str(ref_path))
+
+    # Auto-transcribe if empty
+    if not ref_text.strip():
+        ref_text = transcribe_audio(str(ref_path))
 
     # Update voices database
     voices = _load_voices()
@@ -329,7 +533,7 @@ def delete_voice(voice_id):
 @app.route("/tts", methods=["POST"])
 def text_to_speech():
     """
-    Generate speech from text with dynamic dynamic pause insertion.
+    Generate speech from text with dynamic dynamic pause insertion and multiple models.
     """
     import soundfile as sf
     import torch
@@ -344,143 +548,467 @@ def text_to_speech():
     if not text:
         return jsonify({"success": False, "message": "Thiếu văn bản cần đọc"}), 400
 
-    try:
-        mira_tts = _get_mira_tts()
-    except Exception as e:
-        return jsonify({"success": False, "message": f"Lỗi tải model: {e}"}), 500
+    # Determine reference voice config
+    voices = _load_voices()
+    voice_cfg = voices.get(voice_id, {})
+    
+    # Auto-resolve model from voice if it's model-specific
+    voice_model = voice_cfg.get("model")
+    requested_model = voice_model if voice_model else data.get("model", "dolly-vn/Vira-TTS")
 
-    # Determine reference audio
-    if mode == "fast":
-        ref_audio_path = data.get("ref_audio_path", "")
-        if not ref_audio_path or not os.path.exists(ref_audio_path):
-            return jsonify({"success": False, "message": "Không tìm thấy file âm thanh mẫu"}), 400
-    else:
-        # Preset mode - load from voices.json
-        voices = _load_voices()
-        if voice_id not in voices:
-            return jsonify({"success": False, "message": f"Voice '{voice_id}' không tồn tại"}), 404
+    if requested_model == "minimax":
+        client_model = data.get("model", "")
+        if client_model.startswith("minimax/"):
+            requested_model = client_model
+        else:
+            requested_model = "minimax/speech-01-turbo"
 
-        voice_cfg = voices[voice_id]
-        ref_audio_rel = voice_cfg.get("ref_audio", "")
-        ref_audio_path = str(ROOT / ref_audio_rel)
+    if not requested_model.startswith("minimax/"):
+        try:
+            engine = _get_engine(requested_model)
+        except Exception as e:
+            return jsonify({"success": False, "message": f"Lỗi tải model: {e}"}), 500
 
-        if not os.path.exists(ref_audio_path):
-            return jsonify({"success": False, "message": f"File audio mẫu không tồn tại: {ref_audio_path}"}), 404
+    print(f"[Voice AI] TTS request: model={requested_model}, mode={mode}, voice={voice_id}, text={text[:60]}...")
 
-    print(f"[Voice AI] TTS request: mode={mode}, voice={voice_id}, text={text[:60]}...")
+    # ────────────────────────────────────────────────────────
+    # MiniMax-TTS Synthesis Path (Cloud API)
+    # ────────────────────────────────────────────────────────
+    if requested_model.startswith("minimax/"):
+        minimax_model_id = requested_model.split("/", 1)[1] # "speech-01-turbo" or "speech-02-hd"
+        api_key = _load_minimax_key()
+        if not api_key:
+            return jsonify({
+                "success": False,
+                "message": "Chưa cấu hình API Key cho MiniMax. Vui lòng ghi key vào file D:\\voice-ai\\minimax_key.txt hoặc thiết lập biến môi trường MINIMAX_API_KEY."
+            }), 400
 
-    try:
-        # 1. Encode reference audio
-        context_tokens = mira_tts.encode_audio(ref_audio_path)
+        # Resolve voice ID from preset or use as-is
+        voice_id_val = voice_cfg.get("voice_id", voice_id) # fallback to voice_id itself
 
-        # 2. Normalize text safely (spells out numbers but keeps punctuation)
-        norm_text = normalize_text_safe(text)
-        if not norm_text:
-            return jsonify({"success": False, "message": "Văn bản không hợp lệ"}), 400
+        print(f"[Voice AI] Synthesizing with MiniMax Cloud API: model={minimax_model_id}, voice={voice_id_val}, text={text[:60]}...")
+        
+        try:
+            import requests
+            url = "https://api.minimax.io/v1/t2a_v2"
+            headers = {
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            }
+            payload = {
+                "model": minimax_model_id,
+                "text": text,
+                "voice_setting": {
+                    "voice_id": voice_id_val,
+                    "speed": 1,
+                    "vol": 1,
+                    "pitch": 0
+                },
+                "audio_setting": {
+                    "format": "mp3",
+                    "audio_sample_rate": 32000,
+                    "bitrate": 128000,
+                    "channel": 1
+                }
+            }
 
-        # 3. Split by clause boundaries and sentence enders
-        parts = re.split(r'([,;:!?]|\.\.\.|\.)', norm_text)
-        segments = []
-        current_text = ""
-        for part in parts:
-            if not part:
-                continue
-            if part in {",", ";", ":", ".", "!", "?", "..."}:
-                if current_text.strip():
-                    segments.append((current_text.strip() + part, part))
-                    current_text = ""
+            res = requests.post(url, headers=headers, json=payload, timeout=30)
+            if res.status_code != 200:
+                return jsonify({"success": False, "message": f"Lỗi gọi API MiniMax: HTTP {res.status_code} - {res.text}"}), 500
+
+            content_type = res.headers.get("Content-Type", "")
+            if "application/json" in content_type:
+                err_data = res.json()
+                status_msg = err_data.get("base_resp", {}).get("status_msg", "Unknown error")
+                return jsonify({"success": False, "message": f"MiniMax API trả về lỗi: {status_msg}"}), 400
+
+            # Save MP3 content
+            tmp_mp3 = tempfile.NamedTemporaryFile(suffix=".mp3", delete=False, dir=str(OUTPUT_DIR))
+            tmp_mp3.write(res.content)
+            tmp_mp3.close()
+
+            import librosa
+            import soundfile as sf
+            
+            try:
+                wav_data, sample_rate = librosa.load(tmp_mp3.name, sr=32000)
+                # Apply speed change if requested
+                if abs(speed - 1.0) >= 0.05:
+                    wav_data = change_speed(wav_data, speed, sample_rate)
+                
+                # Save to WAV
+                tmp_wav = tempfile.NamedTemporaryFile(suffix=".wav", delete=False, dir=str(OUTPUT_DIR))
+                sf.write(tmp_wav.name, wav_data, sample_rate)
+                tmp_wav.close()
+                
+                final_tmp_path = tmp_wav.name
+                mimetype_val = "audio/wav"
+                download_name_val = "voice_ai_output.wav"
+                
+                try: os.unlink(tmp_mp3.name)
+                except Exception: pass
+            except Exception as e:
+                print(f"[Voice AI] Warning: failed to convert MiniMax MP3 to WAV: {e}. Returning raw MP3.")
+                final_tmp_path = tmp_mp3.name
+                mimetype_val = "audio/mpeg"
+                download_name_val = "voice_ai_output.mp3"
+
+            # Save to outputPath if specified
+            if output_path and output_path.strip():
+                try:
+                    os.makedirs(output_path.strip(), exist_ok=True)
+                    final_name = os.path.join(
+                        output_path.strip(),
+                        f"voice_ai_{voice_id}_{int(time.time())}.wav" if mimetype_val == "audio/wav" else f"voice_ai_{voice_id}_{int(time.time())}.mp3"
+                    )
+                    shutil.copy2(final_tmp_path, final_name)
+                    print(f"[Voice AI] MiniMax Output saved to: {final_name}")
+                except Exception as e:
+                    print(f"[Voice AI] Could not save MiniMax to outputPath: {e}")
+
+            print(f"[Voice AI] MiniMax Cloud TTS done successfully!")
+
+            response = send_file(
+                final_tmp_path,
+                mimetype=mimetype_val,
+                as_attachment=False,
+                download_name=download_name_val
+            )
+
+            @response.call_on_close
+            def cleanup_temp_file():
+                try:
+                    if os.path.exists(final_tmp_path):
+                        os.unlink(final_tmp_path)
+                        print(f"[Voice AI] Cleaned up temporary MiniMax file: {final_tmp_path}")
+                except Exception as e:
+                    print(f"[Voice AI] Error cleaning up temporary file: {e}")
+
+            return response
+
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return jsonify({"success": False, "message": f"Lỗi tổng hợp MiniMax: {str(e)}"}), 500
+
+    # ────────────────────────────────────────────────────────
+    # VieNeu-TTS Synthesis Path
+    # ────────────────────────────────────────────────────────
+    if requested_model == "pnnbao-ump/VieNeu-TTS-v3-Turbo":
+        try:
+            # 1. Preset voice mode
+            if voice_cfg.get("model") == "pnnbao-ump/VieNeu-TTS-v3-Turbo":
+                voice_name = voice_cfg.get("voice_name", "Ngọc Lan")
+                print(f"[Voice AI] Synthesizing with VieNeu preset: {voice_name}")
+                audio_np = engine.infer(text=text, voice=voice_name, temperature=0.65)
+            # 2. Fast/Cloned voice mode
+            else:
+                if mode == "fast":
+                    ref_audio_path = data.get("ref_audio_path", "")
+                    ref_text_val = data.get("ref_text", "").strip()
                 else:
-                    if segments:
-                        last_seg, last_punc = segments[-1]
-                        segments[-1] = (last_seg + part, part)
-            else:
-                current_text += part
-                
-        if current_text.strip():
-            segments.append((current_text.strip(), ""))
+                    ref_audio_rel = voice_cfg.get("ref_audio", "")
+                    ref_audio_path = str(ROOT / ref_audio_rel)
+                    ref_text_val = voice_cfg.get("ref_text", "").strip()
 
-        # 4. Synthesize each segment and insert dynamic pauses
-        audios = []
-        sample_rate = 48000
+                if not ref_audio_path or not os.path.exists(ref_audio_path) or os.path.isdir(ref_audio_path):
+                    return jsonify({"success": False, "message": "Không tìm thấy file âm thanh mẫu hoặc đường dẫn không hợp lệ"}), 400
 
-        for seg_text, punc in segments:
-            seg_text = seg_text.strip()
-            if not seg_text:
-                continue
-                
-            print(f"[Voice AI] Generating clause: '{seg_text}'")
-            # Vira-TTS generate is extremely fast and high-quality
-            audio_seg = mira_tts.generate(seg_text, context_tokens)
-            
-            # Determine pause duration (silence) based on punctuation
-            if punc in {",", ";", ":"}:
-                pause_secs = 0.25 # Short breathing pause
-            elif punc in {".", "!", "?", "..."}:
-                pause_secs = 0.55 # Sentence pause
-            else:
-                pause_secs = 0.40 # Default pause
-                
-            silence_len = int(pause_secs * sample_rate)
-            silence = torch.zeros(silence_len, device=audio_seg.device, dtype=audio_seg.dtype)
-            
-            # Append silence
-            combined_seg = torch.cat([audio_seg, silence], dim=0)
-            audios.append(combined_seg)
+                # Auto-transcribe if empty
+                if not ref_text_val:
+                    ref_text_val = transcribe_audio(ref_audio_path)
 
-        if not audios:
-            return jsonify({"success": False, "message": "Không thể tạo giọng nói từ văn bản này"}), 400
+                print(f"[Voice AI] Cloning with VieNeu reference: {ref_audio_path} (ref_text: '{ref_text_val}')")
+                audio_np = engine.infer(text=text, ref_audio=ref_audio_path, ref_text=ref_text_val or None, temperature=0.65)
 
-        # 5. Concatenate all segments
-        wav_tensor = torch.cat(audios, dim=0)
-        wav_data = wav_tensor.float().cpu().numpy()
+            sample_rate = 48000
+            if abs(speed - 1.0) >= 0.05:
+                audio_np = change_speed(audio_np, speed, sample_rate)
 
-        # 6. Apply speed change if requested
-        if abs(speed - 1.0) >= 0.05:
-            wav_data = change_speed(wav_data, speed, sample_rate)
-
-        # Save to temp file
-        tmp = tempfile.NamedTemporaryFile(suffix=".wav", delete=False, dir=str(OUTPUT_DIR))
-        sf.write(tmp.name, wav_data, sample_rate)
-        tmp.close()
-
-        # Also save to outputPath if specified
-        if output_path and output_path.strip():
+            # Post-processing enhancement
             try:
-                os.makedirs(output_path.strip(), exist_ok=True)
-                final_name = os.path.join(
-                    output_path.strip(),
-                    f"voice_ai_{voice_id}_{int(time.time())}.wav"
-                )
-                shutil.copy2(tmp.name, final_name)
-                print(f"[Voice AI] Output saved to: {final_name}")
+                from audio_enhance import enhance_audio
+                audio_np = enhance_audio(audio_np, sample_rate, target_sr=48000)
+                print(f"[Voice AI] VieNeu audio enhanced successfully")
             except Exception as e:
-                print(f"[Voice AI] Could not save to outputPath: {e}")
+                print(f"[Voice AI] Enhancement skipped: {e}")
 
-        print(f"[Voice AI] TTS done, {len(wav_data)} samples at {sample_rate}Hz")
-        
-        # Stream file and delete immediately on response close
-        response = send_file(
-            tmp.name,
-            mimetype="audio/wav",
-            as_attachment=False,
-            download_name="voice_ai_output.wav"
-        )
-        
-        @response.call_on_close
-        def cleanup_temp_file():
+            # Save to temp file
+            tmp = tempfile.NamedTemporaryFile(suffix=".wav", delete=False, dir=str(OUTPUT_DIR))
+            sf.write(tmp.name, audio_np, sample_rate)
+            tmp.close()
+
+            # Save to outputPath if specified
+            if output_path and output_path.strip():
+                try:
+                    os.makedirs(output_path.strip(), exist_ok=True)
+                    final_name = os.path.join(
+                        output_path.strip(),
+                        f"voice_ai_{voice_id}_{int(time.time())}.wav"
+                    )
+                    shutil.copy2(tmp.name, final_name)
+                    print(f"[Voice AI] Output saved to: {final_name}")
+                except Exception as e:
+                    print(f"[Voice AI] Could not save to outputPath: {e}")
+
+            print(f"[Voice AI] VieNeu TTS done, {len(audio_np)} samples at {sample_rate}Hz")
+
+            response = send_file(
+                tmp.name,
+                mimetype="audio/wav",
+                as_attachment=False,
+                download_name="voice_ai_output.wav"
+            )
+
+            @response.call_on_close
+            def cleanup_temp_file():
+                try:
+                    if os.path.exists(tmp.name):
+                        os.unlink(tmp.name)
+                        print(f"[Voice AI] Cleaned up temporary session file: {tmp.name}")
+                except Exception as e:
+                    print(f"[Voice AI] Error cleaning up temporary file: {e}")
+
+            return response
+
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return jsonify({"success": False, "message": f"Lỗi tổng hợp VieNeu: {str(e)}"}), 500
+
+    # ────────────────────────────────────────────────────────
+    # Viterbox Synthesis Path (Chatterbox-based, emotion control)
+    # ────────────────────────────────────────────────────────
+    if requested_model == "dolly-vn/viterbox":
+        try:
+            from audio_enhance import enhance_audio
+            
+            # Viterbox advanced params (all tuneable from frontend)
+            exaggeration = float(data.get("exaggeration", 0.5))     # 0.0-2.0: emotion intensity
+            cfg_weight = float(data.get("cfg_weight", 0.5))         # 0.0-1.0: guidance strength
+            vb_temperature = float(data.get("vb_temperature", 0.8)) # 0.1-1.0: sampling randomness
+            top_p = float(data.get("top_p", 0.95))                  # nucleus sampling
+            rep_penalty = float(data.get("repetition_penalty", 2.0)) # repetition penalty
+            pause_ms = int(data.get("sentence_pause_ms", 400))      # pause between sentences
+            
+            # Determine reference audio for voice cloning
+            ref_audio_path = None
+            if mode == "fast":
+                ref_audio_path = data.get("ref_audio_path", "")
+                if not ref_audio_path or not os.path.exists(ref_audio_path) or os.path.isdir(ref_audio_path):
+                    ref_audio_path = None
+            else:
+                ref_audio_rel = voice_cfg.get("ref_audio", "")
+                if ref_audio_rel:
+                    ref_path_candidate = str(ROOT / ref_audio_rel)
+                    if os.path.exists(ref_path_candidate):
+                        ref_audio_path = ref_path_candidate
+            
+            print(f"[Voice AI] Viterbox: exag={exaggeration}, cfg={cfg_weight}, temp={vb_temperature}, top_p={top_p}, ref={'YES' if ref_audio_path else 'random'}")
+            
+            # Generate audio with Viterbox
+            audio_tensor = engine.generate(
+                text=text,
+                language="vi",
+                audio_prompt=ref_audio_path,
+                exaggeration=exaggeration,
+                cfg_weight=cfg_weight,
+                temperature=vb_temperature,
+                top_p=top_p,
+                repetition_penalty=rep_penalty,
+                split_sentences=True,
+                crossfade_ms=50,
+                sentence_pause_ms=pause_ms,
+            )
+            
+            # Convert to numpy (output is [1, samples] at 24kHz)
+            audio_np = audio_tensor[0].cpu().numpy()
+            sample_rate = 24000  # Viterbox native SR
+            
+            # Apply speed change if requested
+            if abs(speed - 1.0) >= 0.05:
+                audio_np = change_speed(audio_np, speed, sample_rate)
+            
+            # Post-processing: upscale 24kHz → 48kHz + enhance
             try:
-                if os.path.exists(tmp.name):
-                    os.unlink(tmp.name)
-                    print(f"[Voice AI] Cleaned up temporary session file: {tmp.name}")
+                audio_np = enhance_audio(audio_np, sample_rate, target_sr=48000)
+                sample_rate = 48000
+                print(f"[Voice AI] Viterbox audio enhanced + upsampled to 48kHz")
             except Exception as e:
-                print(f"[Voice AI] Error cleaning up temporary file: {e}")
-                
-        return response
+                print(f"[Voice AI] Enhancement skipped: {e}")
+            
+            # Save to temp file
+            tmp = tempfile.NamedTemporaryFile(suffix=".wav", delete=False, dir=str(OUTPUT_DIR))
+            sf.write(tmp.name, audio_np, sample_rate)
+            tmp.close()
+            
+            # Also save to outputPath if specified
+            if output_path and output_path.strip():
+                try:
+                    os.makedirs(output_path.strip(), exist_ok=True)
+                    final_name = os.path.join(
+                        output_path.strip(),
+                        f"voice_ai_{voice_id}_{int(time.time())}.wav"
+                    )
+                    shutil.copy2(tmp.name, final_name)
+                    print(f"[Voice AI] Output saved to: {final_name}")
+                except Exception as e:
+                    print(f"[Voice AI] Could not save to outputPath: {e}")
+            
+            print(f"[Voice AI] Viterbox TTS done, {len(audio_np)} samples at {sample_rate}Hz")
+            
+            response = send_file(
+                tmp.name,
+                mimetype="audio/wav",
+                as_attachment=False,
+                download_name="voice_ai_output.wav"
+            )
+            
+            @response.call_on_close
+            def cleanup_temp_file():
+                try:
+                    if os.path.exists(tmp.name):
+                        os.unlink(tmp.name)
+                        print(f"[Voice AI] Cleaned up temporary session file: {tmp.name}")
+                except Exception as e:
+                    print(f"[Voice AI] Error cleaning up temporary file: {e}")
+            
+            return response
+        
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return jsonify({"success": False, "message": f"Lỗi tổng hợp Viterbox: {str(e)}"}), 500
 
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        return jsonify({"success": False, "message": f"Lỗi tổng hợp: {str(e)}"}), 500
+    # ────────────────────────────────────────────────────────
+    # Vira-TTS Synthesis Path
+    # ────────────────────────────────────────────────────────
+    else:
+        # Determine reference audio
+        if mode == "fast":
+            ref_audio_path = data.get("ref_audio_path", "")
+            if not ref_audio_path or not os.path.exists(ref_audio_path) or os.path.isdir(ref_audio_path):
+                return jsonify({"success": False, "message": "Không tìm thấy file âm thanh mẫu hoặc đường dẫn không hợp lệ"}), 400
+        else:
+            if voice_id not in voices:
+                return jsonify({"success": False, "message": f"Voice '{voice_id}' không tồn tại"}), 404
+
+            ref_audio_rel = voice_cfg.get("ref_audio", "")
+            ref_audio_path = str(ROOT / ref_audio_rel)
+
+            if not os.path.exists(ref_audio_path) or os.path.isdir(ref_audio_path):
+                return jsonify({"success": False, "message": f"File audio mẫu không tồn tại hoặc không hợp lệ: {ref_audio_path}"}), 404
+
+        try:
+            # 1. Encode reference audio
+            context_tokens = engine.encode_audio(ref_audio_path)
+
+            # 2. Normalize text safely (spells out numbers but keeps punctuation)
+            norm_text = normalize_text_safe(text)
+            if not norm_text:
+                return jsonify({"success": False, "message": "Văn bản không hợp lệ"}), 400
+
+            # 3. Split by clause boundaries and sentence enders
+            parts = re.split(r'([,;:!?]|\.\.\.|\.)', norm_text)
+            segments = []
+            current_text = ""
+            for part in parts:
+                if not part:
+                    continue
+                if part in {",", ";", ":", ".", "!", "?", "..."}:
+                    if current_text.strip():
+                        segments.append((current_text.strip() + part, part))
+                        current_text = ""
+                    else:
+                        if segments:
+                            last_seg, last_punc = segments[-1]
+                            segments[-1] = (last_seg + part, part)
+                else:
+                    current_text += part
+                    
+            if current_text.strip():
+                segments.append((current_text.strip(), ""))
+
+            # 4. Synthesize each segment and insert natural pauses
+            from audio_enhance import crossfade_segments, add_natural_pause, enhance_audio
+            
+            audio_parts = []  # list of numpy arrays for crossfade blending
+            sample_rate = 48000
+
+            for seg_text, punc in segments:
+                seg_text = seg_text.strip()
+                if not seg_text:
+                    continue
+                    
+                print(f"[Voice AI] Generating clause: '{seg_text}'")
+                audio_seg = engine.generate(seg_text, context_tokens)
+                audio_np_seg = audio_seg.float().cpu().numpy()
+                audio_parts.append(audio_np_seg)
+                
+                # Add natural pause with noise floor (not dead silence)
+                pause = add_natural_pause(sample_rate, punc)
+                audio_parts.append(pause)
+
+            if not audio_parts:
+                return jsonify({"success": False, "message": "Không thể tạo giọng nói từ văn bản này"}), 400
+
+            # 5. Join segments with smooth crossfade blending
+            wav_data = crossfade_segments(audio_parts, sample_rate, crossfade_ms=40)
+
+            # 6. Apply speed change if requested
+            if abs(speed - 1.0) >= 0.05:
+                wav_data = change_speed(wav_data, speed, sample_rate)
+            
+            # 7. Post-processing enhancement pipeline
+            try:
+                wav_data = enhance_audio(wav_data, sample_rate, target_sr=48000)
+                print(f"[Voice AI] Vira-TTS audio enhanced successfully")
+            except Exception as e:
+                print(f"[Voice AI] Enhancement skipped: {e}")
+
+            # Save to temp file
+            tmp = tempfile.NamedTemporaryFile(suffix=".wav", delete=False, dir=str(OUTPUT_DIR))
+            sf.write(tmp.name, wav_data, sample_rate)
+            tmp.close()
+
+            # Also save to outputPath if specified
+            if output_path and output_path.strip():
+                try:
+                    os.makedirs(output_path.strip(), exist_ok=True)
+                    final_name = os.path.join(
+                        output_path.strip(),
+                        f"voice_ai_{voice_id}_{int(time.time())}.wav"
+                    )
+                    shutil.copy2(tmp.name, final_name)
+                    print(f"[Voice AI] Output saved to: {final_name}")
+                except Exception as e:
+                    print(f"[Voice AI] Could not save to outputPath: {e}")
+
+            print(f"[Voice AI] TTS done, {len(wav_data)} samples at {sample_rate}Hz")
+            
+            # Stream file and delete immediately on response close
+            response = send_file(
+                tmp.name,
+                mimetype="audio/wav",
+                as_attachment=False,
+                download_name="voice_ai_output.wav"
+            )
+            
+            @response.call_on_close
+            def cleanup_temp_file():
+                try:
+                    if os.path.exists(tmp.name):
+                        os.unlink(tmp.name)
+                        print(f"[Voice AI] Cleaned up temporary session file: {tmp.name}")
+                except Exception as e:
+                    print(f"[Voice AI] Error cleaning up temporary file: {e}")
+                    
+            return response
+
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return jsonify({"success": False, "message": f"Lỗi tổng hợp: {str(e)}"}), 500
 
 
 @app.route("/upload", methods=["POST"])
@@ -642,9 +1170,9 @@ def sync_to_github():
 # ──────────────────────────────────────────────
 if __name__ == "__main__":
     print("=" * 60)
-    print("  Voice AI - Vira-TTS Local Server")
-    print("  Port: 9880 | Engine: Vira-TTS (Multilingual)")
-    print("  GPU: RTX 4060 | Mode: Zero-Shot & Fine-tune")
+    print("  Voice AI - Local TTS Server v3.0.0")
+    print("  Port: 9880 | Engines: Vira + VieNeu + MiniMax")
+    print("  GPU: RTX 4060 | Audio Enhancement: ON")
     print("=" * 60)
 
     app.run(host="127.0.0.1", port=9880, threaded=True, debug=False)
