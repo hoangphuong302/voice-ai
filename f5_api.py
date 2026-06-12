@@ -693,7 +693,7 @@ def text_to_speech():
     
     # Auto-resolve model from voice if it's model-specific
     voice_model = voice_cfg.get("model")
-    requested_model = voice_model if voice_model else data.get("model", "gwen-tts")
+    requested_model = voice_model if voice_model else data.get("model", "xtts-vi")
 
     if requested_model == "minimax":
         client_model = data.get("model", "")
@@ -703,7 +703,7 @@ def text_to_speech():
             requested_model = "minimax/speech-01-turbo"
 
     # ── Early validation BEFORE loading models (avoids 30-60s model load for invalid requests) ──
-    if mode != "fast" and not requested_model.startswith("minimax/") and requested_model not in ("fish-speech-1.5", "gwen-tts"):
+    if mode != "fast" and not requested_model.startswith("minimax/") and requested_model not in ("fish-speech-1.5", "gwen-tts", "xtts-vi"):
         # For preset/saved voice mode: validate voice exists before loading model
         if requested_model == "dolly-vn/Vira-TTS":
             if voice_id not in voices:
@@ -719,7 +719,7 @@ def text_to_speech():
             if not ref_audio_path_check or not os.path.exists(ref_audio_path_check) or os.path.isdir(ref_audio_path_check):
                 return jsonify({"success": False, "message": "Không tìm thấy file âm thanh mẫu hoặc đường dẫn không hợp lệ"}), 400
 
-    if not requested_model.startswith("minimax/") and requested_model not in ("fish-speech-1.5", "gwen-tts"):
+    if not requested_model.startswith("minimax/") and requested_model not in ("fish-speech-1.5", "gwen-tts", "xtts-vi"):
         try:
             engine = _get_engine(requested_model)
         except Exception as e:
@@ -1013,6 +1013,86 @@ def text_to_speech():
             import traceback
             traceback.print_exc()
             return jsonify({"success": False, "message": f"Lỗi Gwen-TTS: {str(e)}"}), 500
+
+    # ────────────────────────────────────────────────────────
+    # XTTS-v2 Vietnamese Synthesis Path (941h PhoAudiobook)
+    # ────────────────────────────────────────────────────────
+    if requested_model == "xtts-vi":
+        try:
+            XTTS_API_URL = "http://127.0.0.1:8082/tts"
+            
+            ref_audio_path = None
+            ref_text = ""
+            
+            if mode == "fast":
+                ref_audio_path = data.get("ref_audio_path", "")
+                ref_text = data.get("ref_text", "")
+            else:
+                ref_audio_rel = voice_cfg.get("ref_audio", "")
+                if ref_audio_rel:
+                    ref_audio_path = str(ROOT / ref_audio_rel)
+                ref_text = voice_cfg.get("ref_text", "")
+            
+            xtts_payload = {
+                "text": text,
+                "ref_audio": ref_audio_path or "",
+                "ref_text": ref_text or "",
+            }
+            
+            print(f"[Voice AI] XTTS-Vi: text={text[:50]}..., ref={ref_audio_path}")
+            
+            try:
+                resp = requests.post(XTTS_API_URL, json=xtts_payload, timeout=300)
+            except requests.exceptions.ConnectionError:
+                return jsonify({
+                    "success": False,
+                    "message": "XTTS-Vi server chưa chạy! Khởi động: D:/voice-ai/xtts-vi/api_server.py"
+                }), 503
+            
+            if resp.status_code != 200:
+                err_msg = resp.text[:200] if resp.text else "Unknown error"
+                return jsonify({"success": False, "message": f"XTTS-Vi error: {err_msg}"}), 500
+            
+            audio_data = resp.content
+            sample_rate = 22050  # XTTS native 22050Hz
+            
+            if abs(speed - 1.0) >= 0.05:
+                import io
+                import soundfile as sf_temp
+                audio_np_raw, sr_raw = sf_temp.read(io.BytesIO(audio_data))
+                audio_np_raw = change_speed(audio_np_raw, speed, sr_raw)
+                buf = io.BytesIO()
+                sf_temp.write(buf, audio_np_raw, sr_raw, format='WAV')
+                audio_data = buf.getvalue()
+                sample_rate = sr_raw
+            
+            tmp = tempfile.NamedTemporaryFile(suffix=".wav", delete=False, dir=str(OUTPUT_DIR))
+            tmp.write(audio_data)
+            tmp.close()
+            
+            if output_path and output_path.strip():
+                try:
+                    os.makedirs(output_path.strip(), exist_ok=True)
+                    out_name = f"voice_{voice_id}_{int(time.time())}.wav"
+                    out_full = os.path.join(output_path.strip(), out_name)
+                    with open(out_full, 'wb') as f:
+                        f.write(audio_data)
+                except Exception as e:
+                    print(f"[Voice AI] Warning: Could not save to outputPath: {e}")
+            
+            print(f"[Voice AI] XTTS-Vi done, saved to {tmp.name}")
+            
+            return send_file(
+                tmp.name,
+                mimetype="audio/wav",
+                as_attachment=True,
+                download_name="output.wav"
+            )
+            
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return jsonify({"success": False, "message": f"Lỗi XTTS-Vi: {str(e)}"}), 500
 
     # ────────────────────────────────────────────────────────
     # Fish Speech 1.5 Synthesis Path (multilingual fallback)

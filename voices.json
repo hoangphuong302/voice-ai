@@ -6,7 +6,7 @@
     "ref_text": "Nhật Bản có phải là quốc gia lý tưởng cho việc nuôi dạy con cái? Chào mọi người, đây là T-Connect TV.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu6": {
     "name": "Nữ 6 (Nhanh Cao)",
@@ -15,7 +15,7 @@
     "ref_text": "Nhật Bản có phải là quốc gia lý tưởng cho việc nuôi dạy con cái?  Chào mọi người, đây là T-Connect TV  Nhiều năm trở lại đây thì cách dạy con của người Nhật luôn nổi tiếng thế giới bởi sự...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_ngoc_huyen": {
     "name": "Ngọc Huyền (Phát thanh viên)",
@@ -24,7 +24,7 @@
     "ref_text": "Tính mua về học chơi ai ngờ lại dính luôn.  Cộng một em sách tiếng Thái đầy đủ chọn bộ từ tự học cân bản chữ cái đến từ vựng, ngữ pháp rồi thích nốt.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_duong": {
     "name": "Nữ Dương",
@@ -33,7 +33,7 @@
     "ref_text": "Bạn có muốn tự học tiếng Hàn thật nhanh mà vẫn hiệu quả không?  Bộ sách bí kíp tự học tiếng Hàn siêu nhanh sẽ giúp bạn làm được điều đó với sự kết hợp của 3 cuốn cực kỳ đặc biệt.  Đầu tiên,",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nhung": {
     "name": "Nữ Nhung",
@@ -42,7 +42,7 @@
     "ref_text": "Ngày nào cũng học từ vựng như chỉ được một thời gian rồi quên  Đừng vội chán nản  Cuốn sách này có thể giúp bạn ghi nhớ cả trăm từ vựng một ngày  Và thanh...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu3": {
     "name": "Nữ 3 (Cao)",
@@ -51,7 +51,7 @@
     "ref_text": "Có một điều khiến mình rất ấn tượng khi sống ở Nhật đó là sự tự giác và kỷ luật của trẻ em.  Mình không nói đến những em học sinh cấp 2, cấp 3 đâu, mà là những đứa trẻ trẻ trẻ.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu8": {
     "name": "Nữ 8 (Thủ khoa)",
@@ -60,7 +60,7 @@
     "ref_text": "Xin chào tất cả quý vị khán giả  Em là Nguyễn Lê Hiền Mai  Và ngày hôm nay em rất vinh dự khi được nhận lời mời của VTV  Và có mặt tại truyền hòa cuối sáng ngày hôm nay  Với các môn khoa",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nam1": {
     "name": "Nam 1",
@@ -69,7 +69,7 @@
     "ref_text": "Công thức quay review đồ giáo dục đẹp chuẩn như các tiktoker  Việc của bạn chỉ cần áp dụng công thức vào thôi  Trong suốt 5 năm làm việc với các KOL và các doanh nghiệp  Mình đã đúng",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_tre_con": {
     "name": "Trẻ em tiểu học",
@@ -78,7 +78,7 @@
     "ref_text": "Em xin chào bác giám khảo và các bạn  Em tên là Phạm Ngọc Bảo Châu  Học sinh lớp 3G  Trường Tiểu học Nam Hành Công",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu_ngot": {
     "name": "Nữ ngọt ngào",
@@ -87,7 +87,7 @@
     "ref_text": "Làm sao để nói giọng nhẹ nhàng á?  Rất là dễ nhá  Mọi người có để ý là ở các cô gái nhẹ nhàng  thì cơ thể sẽ có một cái độ mềm mại nhất định đúng không?",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_vo": {
     "name": "Vợ Sam",
@@ -96,7 +96,7 @@
     "ref_text": "Hôm nay anh sẽ giúp các em bóc trần văn hóa công sở Hàn Quốc nha. Nghe xong thì các em sẽ biết tại sao anh nghỉ việc sau đúng 3 tháng.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_duong2": {
     "name": "Nữ Dương 2",
@@ -105,7 +105,7 @@
     "ref_text": "Có phải bạn đã học tiếng Hàn và luôn ước có một cuốn sách tổng hợp lại tất cả ngữ pháp  để mỗi lần ôn thi không phải mò mẫm trong đồng giáo trình dày cộp,  vướng mất thời gian lại không được.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_grifin": {
     "name": "Nữ Grifin",
@@ -114,7 +114,7 @@
     "ref_text": "Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè  Thiếu đi quát mai, có thằng ngu nào chạy sau lưng tao bóng cạn tùm lum nè  Ok, xíu tao gọi lại cho  Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu2_dieu": {
     "name": "Nữ Điệu (Tông cao)",
@@ -123,7 +123,7 @@
     "ref_text": "Có ai mê giọng bắc giống như tôi không nhỉ?  Phở vi phong hoàng gia với thịt thật tươi ngon",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu11": {
     "name": "Nữ 11",
@@ -132,7 +132,7 @@
     "ref_text": "Tháng 10 này, mình đi làm đúng 20 ngày mà lương văn phòng vẫn được 14 triệu.  Hãy cùng tổng kết chi tiêu tháng 10 của cô gái trẻ 22 tuổi sống tự lập chi tiêu mọi thứ.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu13": {
     "name": "Nữ 13",
@@ -141,7 +141,7 @@
     "ref_text": "Phòng của mình sẽ là 5 người bạn cũng học nơi U khác  Còn bình thường thì mình thấy các bạn ở trong Nam sẽ ở khoảng 9 người một phòng  Và đều là sinh viên của U",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu15": {
     "name": "Nữ 15",
@@ -150,7 +150,7 @@
     "ref_text": "Tổng kết những cuốn tiểu thuyết hay mà mình đọc được trong năm 2025  Mình sẽ bỏ qua những cuốn trinh thám và những cuốn sách đã đọc lại nhắc đến ở video trước",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu4": {
     "name": "Nữ 4",
@@ -159,7 +159,7 @@
     "ref_text": "Giọng Bắc được coi là chuẩn, đó là chuẩn theo giọng của người Hà Nội  Nhưng mọi người cũng biết rồi, họ là những người rất là nghiêm túc, khôn thước và...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu5": {
     "name": "Nữ 5",
@@ -168,7 +168,7 @@
     "ref_text": "Có người thì thanh cao, có người thì khi cất giọng nói lên là thấy nó lanh lành, lanh lành như là tiếng thủy tình vỡ vậy",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu7": {
     "name": "Nữ 7",
@@ -177,7 +177,7 @@
     "ref_text": "Cách để không bị bí idea dù gặp bất kể đề writing nào, dù là các bài writing nhỏ trong các bài kiểm tra trên lớp hay là các bài như writing trong IELTS thì chắc hẳn ít.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu9_thoisu": {
     "name": "Nữ Thời Sự (Bản tin)",
@@ -186,7 +186,7 @@
     "ref_text": "Hãy subscribe cho kênh Ghiền Mì Gõ Để không bỏ lỡ những video hấp dẫn",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_gai1": {
     "name": "Nữ Trẻ 1",
@@ -195,7 +195,7 @@
     "ref_text": "Thế nên là nếu như mà mọi người cần nhu cầu học nguyên một cái combo như vậy thì đặt mua sách ngay dưới đây  Hoặc cứ nhắn cho bên mình, bên mình sẽ tư vấn cho bạn học combo nào là phù hợp he",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_gai2": {
     "name": "Nữ Trẻ 2",
@@ -204,7 +204,7 @@
     "ref_text": "Ai thuộc team học tiếng Hàn mà cứ học được vài hôm là nản  Thuộc từ hôm nay, mai quên sạch, muốn nói mà trong đầu trống trơn  Thì gặp bộ này là chân ái luôn nha  Để không bỏ lỡ những video hấp dẫn",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_gai3": {
     "name": "Nữ Trẻ 3",
@@ -213,7 +213,7 @@
     "ref_text": "Hola, me llamo Tuha, tengo 25 años y trabajo en el sector del marketing.  Llevo dos meses aprendiendo español de forma autodidacta.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_gai4": {
     "name": "Nữ Trẻ 4",
@@ -222,7 +222,7 @@
     "ref_text": "Đừng học thêm một chữ tiếng Hàn nào nữa cho đến khi bạn biết điều này.  Hãy mở sách ra và thử tổng hợp những từ vựng tiếng Hàn có liên quan đến nhau theo chủ đề như thế này.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_tre_con2": {
     "name": "Bé gái mẫu giọng",
@@ -231,7 +231,7 @@
     "ref_text": "Đây là thành quả của con  Sau hơn 3 tháng học chiếc bút ngại ngữ này  Con tự tin hơn với trình độ tiếng Anh của mình  Con biết thêm tiếng Trung",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu16": {
     "name": "Nữ 16 (Cao)",
@@ -240,7 +240,7 @@
     "ref_text": "Giảm ra rất là ok luôn nha  Tiếp theo chúng ta sẽ có một cái cây giàn nền  Đấy là cây số 04 mà mọi người hay hỏi là  Chị ơi cho em xin in tư của cây cọ giàn nền",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu17": {
     "name": "Nữ 17 (Cao)",
@@ -249,7 +249,7 @@
     "ref_text": "Từ vị trí bét lớp tới tốt 3 chỉ sau một học kỳ nhờ bớt chăm chỉ một cách máy móc,  tỳ tỳ chiều khống su gây bão khi bật mí vũ khí bí mật của các...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu19": {
     "name": "Nữ 19",
@@ -258,7 +258,7 @@
     "ref_text": "Cùng là biết nhưng tạo sao biết một người là Kennen chứ không dùng Whitson.  Hãy nhớ mẹo, Kennen là biết một người, địa điểm hoặc thứ gì đó, còn Whitson biết thông tin.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vi_nu20": {
     "name": "Nữ 20",
@@ -267,7 +267,7 @@
     "ref_text": "Aten là khi kể chuyện, Raiden là trò chuyện, Sprague đi với ngôn ngữ.  Vậy nên một câu chuyện là đang kể nội dung dài nên phải dùng Atenant.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "vieneu_duc_tri": {
     "name": "Đức Trí (Nam rõ ràng)",
@@ -276,7 +276,7 @@
     "ref_text": "Xin chào, đây là giọng mẫu thử.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "viterbox_sample1": {
     "name": "Nữ 1 (Ấm áp)",
@@ -285,7 +285,7 @@
     "ref_text": "Oto thường nhân hơn và có nhiều loại hơn sau với thuyền, nhưng thuyền có thể chở được nhiều hàng hoá hương và phù hợp hơn cho quán đường dài hơn.",
     "type": "preset",
     "created_at": "2026-06-12T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "viterbox_sample2": {
     "name": "Nữ 2 (Trầm)",
@@ -294,7 +294,7 @@
     "ref_text": "Mỏ nên chung quốc nào được công nhận rộng giải nhất trên toàn cầu.",
     "type": "preset",
     "created_at": "2026-06-12T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "viterbox_sample3": {
     "name": "Nữ 3 (Trong trẻo)",
@@ -303,69 +303,69 @@
     "ref_text": "một số ví dụ về các bài tập có thể giúp tăng năng xuất là gì.",
     "type": "preset",
     "created_at": "2026-06-12T00:00:00Z",
-    "model": "gwen-tts"
+    "model": "xtts-vi"
   },
   "gwen_yen_nhi": {
     "name": "Yến Nhi (Gwen)",
     "ref_audio": "voices/gwen_yen_nhi/ref.wav",
     "ref_text": "sao lại không liên quan. các anh lấy vợ rồi các anh cứ đội chị lên đầu làm nóc nhà ấy, suốt ngày hỏi ý kiến các chị thì làm sao mà ra vấn đề được cho em đúng không.",
-    "model": "gwen-tts",
+    "model": "xtts-vi",
     "lang": "vi"
   },
   "gwen_my_van": {
     "name": "Mỹ Vân (Gwen)",
     "ref_audio": "voices/gwen_my_van/ref.wav",
     "ref_text": "bạn thân mến, chúng ta sẽ đến với một bài tập tiếp theo để giúp cho các bạn có hơi thở dài, sâu và đầy đặn hơn.",
-    "model": "gwen-tts",
+    "model": "xtts-vi",
     "lang": "vi"
   },
   "gwen_ai_vy": {
     "name": "Ái Vy (Gwen)",
     "ref_audio": "voices/gwen_ai_vy/ref.wav",
     "ref_text": "việt nam đang kiêu hãnh bước vào kỷ nguyên vươn mình rực rỡ với khát vọng mãnh liệt, trí tuệ đổi mới và tinh thần đoàn kết đất nước, tự tin bứt phá, kiến tạo một tương lai thịnh vượng và vươn tầm quốc tế.",
-    "model": "gwen-tts",
+    "model": "xtts-vi",
     "lang": "vi"
   },
   "gwen_an_nhi": {
     "name": "An Nhi (Gwen)",
     "ref_audio": "voices/gwen_an_nhi/ref.wav",
     "ref_text": "việt nam đang kiêu hãnh bước vào kỷ nguyên vươn mình rực rỡ với khát vọng mãnh liệt, trí tuệ đổi mới và tinh thần đoàn kết đất nước, tự tin bứt phá, kiến tạo một tương lai thịnh vượng và vươn tầm quốc tế.",
-    "model": "gwen-tts",
+    "model": "xtts-vi",
     "lang": "vi"
   },
   "gwen_dieu_linh": {
     "name": "Diệu Linh (Gwen)",
     "ref_audio": "voices/gwen_dieu_linh/ref.wav",
     "ref_text": "việt nam đang kiêu hãnh bước vào một kỷ nguyên vươn mình rực rỡ với khát vọng mãnh liệt, trí tuệ đổi mới và tinh thần đoàn kết.",
-    "model": "gwen-tts",
+    "model": "xtts-vi",
     "lang": "vi"
   },
   "gwen_khanh_toan": {
     "name": "Khánh Toàn (Gwen)",
     "ref_audio": "voices/gwen_khanh_toan/ref.wav",
     "ref_text": "việt nam đang kiêu hãnh bước vào kỷ nguyên vươn mình rực rỡ với khát vọng mãnh liệt, trí tuệ đổi mới, tinh thần đoàn kết.",
-    "model": "gwen-tts",
+    "model": "xtts-vi",
     "lang": "vi"
   },
   "gwen_tran_lam": {
     "name": "Trần Lâm (Gwen)",
     "ref_audio": "voices/gwen_tran_lam/ref.wav",
     "ref_text": "trí tuệ đổi mới và tinh thần đoàn kết, đất nước tự tin bứt phá, kiến tạo một tương lai thịnh vượng và vươn tầm quốc tế.",
-    "model": "gwen-tts",
+    "model": "xtts-vi",
     "lang": "vi"
   },
   "gwen_nsnd_ha_phuong": {
     "name": "NSND Hà Phương (Gwen)",
     "ref_audio": "voices/gwen_nsnd_ha_phuong/ref.wav",
     "ref_text": "đây là những lời cuối cùng của típ rót người sáng lập ra ai phôn áp bồ chấn động cả thế giới.",
-    "model": "gwen-tts",
+    "model": "xtts-vi",
     "lang": "vi"
   },
   "gwen_nsnd_kim_cuc": {
     "name": "NSND Kim Cúc (Gwen)",
     "ref_audio": "voices/gwen_nsnd_kim_cuc/ref.wav",
     "ref_text": "đi họp người ta đả thông mãi rồi. lão dòng tai nghe, rồi lão rủm cả người. lão làm như vô tình kéo ghế xích lại đám đông.",
-    "model": "gwen-tts",
+    "model": "xtts-vi",
     "lang": "vi"
   }
 }
