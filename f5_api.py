@@ -57,7 +57,153 @@ for d in [VOICES_DIR, WEIGHTS_DIR, OUTPUT_DIR, UPLOADS_DIR]:
 app = Flask(__name__)
 CORS(app)
 
+
 # ──────────────────────────────────────────────
+# Auto-Start & Auto-Shutdown Backends Registry
+# ──────────────────────────────────────────────
+BACKENDS = {
+    "gwen-tts": {
+        "port": 8081,
+        "cmd": [str(ROOT / "gwen-tts" / ".venv" / "Scripts" / "python.exe"), str(ROOT / "gwen-tts" / "api_server.py")],
+        "cwd": str(ROOT / "gwen-tts"),
+        "process": None,
+        "last_active": 0.0,
+        "health_url": "http://127.0.0.1:8081/health",
+    },
+    "xtts-vi": {
+        "port": 8082,
+        "cmd": [str(ROOT / "xtts-vi" / ".venv" / "Scripts" / "python.exe"), str(ROOT / "xtts-vi" / "api_server.py")],
+        "cwd": str(ROOT / "xtts-vi"),
+        "process": None,
+        "last_active": 0.0,
+        "health_url": "http://127.0.0.1:8082/health",
+    }
+}
+_backends_lock = threading.Lock()
+IDLE_SHUTDOWN_TIMEOUT = 600.0 # 10 minutes in seconds
+
+def is_port_listening(port):
+    import socket
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        try:
+            s.connect(("127.0.0.1", port))
+            return True
+        except socket.error:
+            return False
+
+def ensure_backend_running(name):
+    """Start backend server automatically if not running, and update active timestamp."""
+    if name not in BACKENDS:
+        return
+    
+    b = BACKENDS[name]
+    with _backends_lock:
+        b["last_active"] = time.time()
+        
+        # Check if port is already active (could be started manually or previously)
+        if is_port_listening(b["port"]):
+            return
+            
+        print(f"[Voice AI] Auto-starting backend model server: {name}...")
+        
+        # Start the process in a new session/process group so it detaches properly
+        import subprocess
+        creationflags = 0
+        if os.name == 'nt':
+            creationflags = subprocess.CREATE_NEW_PROCESS_GROUP
+            
+        env = os.environ.copy()
+        env["PYTHONIOENCODING"] = "utf-8"
+        
+        proc = subprocess.Popen(
+            b["cmd"],
+            cwd=b["cwd"],
+            env=env,
+            creationflags=creationflags,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        )
+        b["process"] = proc
+        
+        # Poll health endpoint until online
+        t0 = time.time()
+        max_wait = 45.0 # allow 45s for heavy models to load on CUDA
+        online = False
+        
+        while time.time() - t0 < max_wait:
+            if proc.poll() is not None:
+                raise RuntimeError(f"Backend process {name} exited early with code {proc.poll()}")
+                
+            try:
+                resp = requests.get(b["health_url"], timeout=1)
+                if resp.status_code == 200:
+                    online = True
+                    break
+            except Exception:
+                pass
+            time.sleep(1.0)
+            
+        if not online:
+            try: proc.kill()
+            except Exception: pass
+            b["process"] = None
+            raise TimeoutError(f"Backend server {name} failed to become healthy on port {b['port']} within {max_wait}s")
+            
+        print(f"[Voice AI] Backend server {name} is online and healthy!")
+
+def monitor_backends_loop():
+    """Background thread to monitor and terminate idle backends."""
+    while True:
+        try:
+            time.sleep(30.0) # check every 30 seconds
+            now = time.time()
+            with _backends_lock:
+                for name, b in BACKENDS.items():
+                    if is_port_listening(b["port"]):
+                        if b["last_active"] > 0 and (now - b["last_active"] > IDLE_SHUTDOWN_TIMEOUT):
+                            print(f"[Voice AI] Engine {name} has been idle for {IDLE_SHUTDOWN_TIMEOUT}s. Shutting down to free VRAM/RAM...")
+                            
+                            if b["process"] is not None:
+                                try:
+                                    b["process"].terminate()
+                                    b["process"].wait(timeout=3)
+                                except Exception:
+                                    try: b["process"].kill()
+                                    except Exception: pass
+                                b["process"] = None
+                            else:
+                                if os.name == 'nt':
+                                    try:
+                                        cmd = f'for /f "tokens=5" %a in (\'netstat -aon ^| findstr :{b["port"]} ^| findstr LISTENING\') do taskkill /f /pid %a'
+                                        subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                                    except Exception as e:
+                                        print(f"[Voice AI] Error killing idle port {b['port']}: {e}")
+                            
+                            b["last_active"] = 0.0
+                            print(f"[Voice AI] Engine {name} successfully shut down.")
+        except Exception as e:
+            print(f"[Voice AI] Error in backend monitor loop: {e}")
+
+# Start background monitor thread
+threading.Thread(target=monitor_backends_loop, daemon=True).start()
+
+# Register exit handler to clean up child processes
+import atexit
+def cleanup_child_backends():
+    with _backends_lock:
+        for name, b in BACKENDS.items():
+            if b["process"] is not None:
+                print(f"[Voice AI] Terminating {name} child process on shutdown...")
+                try:
+                    b["process"].terminate()
+                    b["process"].wait(timeout=3)
+                except Exception:
+                    try: b["process"].kill()
+                    except Exception: pass
+atexit.register(cleanup_child_backends)
+
+# ──────────────────────────────────────────────
+
 # Vira-TTS & VieNeu-TTS Models (lazy loaded)
 # ──────────────────────────────────────────────
 _mira_tts = None
@@ -937,6 +1083,7 @@ def text_to_speech():
     # ────────────────────────────────────────────────────────
     if requested_model == "gwen-tts":
         try:
+            ensure_backend_running("gwen-tts")
             GWEN_API_URL = "http://127.0.0.1:8081/tts"
             
             # Build reference audio path
@@ -1019,6 +1166,7 @@ def text_to_speech():
     # ────────────────────────────────────────────────────────
     if requested_model == "xtts-vi":
         try:
+            ensure_backend_running("xtts-vi")
             XTTS_API_URL = "http://127.0.0.1:8082/tts"
             
             ref_audio_path = None
