@@ -13,7 +13,7 @@ Features:
   - Multi-engine: Gwen-TTS (Vietnamese), Fish Speech (Multilingual), VieNeu-TTS, MiniMax Cloud
 """
 
-VOICE_AI_VERSION = "1.2"
+VOICE_AI_VERSION = "1.3"
 
 import os
 import sys
@@ -653,12 +653,12 @@ def version():
     """Return current Voice AI version."""
     return jsonify({
         "version": VOICE_AI_VERSION,
-        "engine": "Gwen-TTS (Qwen3-TTS-0.6B)",
+        "engine": "XTTS-v2-Vietnamese (941h PhoAudiobook)",
         "features": [
             "Sentence splitting for stable long text",
-            "Volume normalization",
+            "Dynamic decoding parameters (temperature, repetition penalty)",
             "Vietnamese text preprocessing",
-            "Crossfade concatenation",
+            "Distortion-free linear peak normalization",
         ]
     })
 
@@ -1037,6 +1037,10 @@ def text_to_speech():
                 "text": text,
                 "ref_audio": ref_audio_path or "",
                 "ref_text": ref_text or "",
+                "temperature": data.get("temperature", 0.7),
+                "repetition_penalty": data.get("repetition_penalty", 2.0),
+                "top_k": data.get("top_k", 50),
+                "top_p": data.get("top_p", 0.85),
             }
             
             print(f"[Voice AI] XTTS-Vi: text={text[:50]}..., ref={ref_audio_path}")
