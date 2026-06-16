@@ -418,5 +418,14 @@
     "ref_text": "Xin chào, đây là Voice AI của nhà Sam. Hôm nay giá vàng đang biến động mạnh.",
     "type": "cloned",
     "created_at": "2026-06-16T01:54:06.370018+00:00"
+  },
+  "voice_1781580119_24b70e": {
+    "name": "nga 3",
+    "desc": "",
+    "ref_audio": "voices/voice_1781580119_24b70e/ref.wav",
+    "ref_text": "Có ai giống mình không? Mỗi lần bố mẹ chuẩn bị đi nước ngoài là mình lại lo nhiều hơn cả bố mẹ.  Không phải lo chuyện về mấy bay hay khách sạch, mà lo vì bố mẹ không biết ngoại ngữ.  Vì dụ như lúc cần hỏi đường, gọi tắc xí, gọi món ăn hay hỏi nhân viên sân bay thì phải làm sao.  Đặc biệt, người lớn tùy thường không quan dùng Google Zick.  Mốn dịch một câu cũng phải mở điện thoại, chọn ngôn ngữ, bấm mikro rồi đưa qua đưa lại rất bất tiện.  Thế nên trước chuyến đi gần đây, mình mua cho bố mẹ trước mấy phiên dịch AI mở 16 này.  Điều mình thích nhất là mấy rất dễ dùng.  Chỉ cần bấm nó rồi nói tiếng việt, ví dụ như, cho tôi hỏi nhà vị dịch ở đâu.  Mấy sẽ tự động dịch sang ngôn ngữ của người đối diện, sau đó người nước ngoài trả lời lại, mấy cũng dịch ngược về tiếng việt để bố mẹ hiểu ngay.  Không cần biết ngoại ngữ, không cần thao tác phức tạp.  Ngoài dịch giọc nói, mấy còn có thể dịch hình ảnh rất tiện, ví dụ như menu đổ ăn, biển báo dáo thông, bằng hướng dẫn trong sân bay hay trung tâm thương mại.  Chỉ cần đưa camera lên là mấy sẽ dịch ngay.  Mấy hỗ trợ tới 148 ngôn ngữ online và 19 ngôn ngữ online nên đi nhiều nước khác nhau cũng rất iên tâm.  Thật ra, điều mình thích nhất không phải là mấy dịch được bao nhiêu ngôn ngữ.  Mà là cảm giác iên tâm hơn khi bố mẹ đi nước ngoài.  Iên nhất khi cần hỏi đường, cần giao tiếp hoặc cần nhiều dúc đỡ, bố mẹ vẫn có thể tự sử lý được.  Nếu bố mẹ hoặc người thân của bạn sắp đi dù lịch, tham con cháo hoặc công tác ở nước ngoài thì mình nghĩ đây là một món đổ rất đáng để chuẩn bị.  Hiện mấy phiên dịch AI 16 đang được ưu đãi giảm để 40%  mình để linh tham khảo ở bên dưới cho mọi người nhé.",
+    "type": "cloned",
+    "model": "xtts-vi",
+    "created_at": "2026-06-16T03:22:23.812581+00:00"
   }
 }
