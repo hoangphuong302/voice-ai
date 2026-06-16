@@ -6,7 +6,7 @@
     "ref_text": "Tính mua về học chơi ai ngờ lại dính luôn.  Cộng một em sách tiếng Thái đầy đủ chọn bộ từ tự học cân bản chữ cái đến từ vựng, ngữ pháp rồi thích nốt.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_duong": {
     "name": "Nữ Dương",
@@ -15,16 +15,16 @@
     "ref_text": "Bạn có muốn tự học tiếng Hàn thật nhanh mà vẫn hiệu quả không?  Bộ sách bí kíp tự học tiếng Hàn siêu nhanh sẽ giúp bạn làm được điều đó với sự kết hợp của 3 cuốn cực kỳ đặc biệt.  Đầu tiên,",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nhung": {
     "name": "Nữ Nhung",
     "desc": "Giọng nữ miền Bắc ngọt ngào, truyền cảm.",
     "ref_audio": "voices/vi_nhung/ref.wav",
-    "ref_text": "Ngày nào cũng học từ vựng như chỉ được một thời gian rồi quên  Đừng vội chán nản  Cuốn sách này có thể giúp bạn ghi nhớ cả trăm từ vựng một ngày  Và thanh...",
+    "ref_text": "Ngày nào cũng học từ vận như chị được mô thời đang rồi quên, đừng vội chán nán của thích này có thể giúp bạn kìa nhớ cả chăm từ vận một ngày và thân.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu3": {
     "name": "Nữ 3 (Cao)",
@@ -33,7 +33,7 @@
     "ref_text": "Có một điều khiến mình rất ấn tượng khi sống ở Nhật đó là sự tự giác và kỷ luật của trẻ em.  Mình không nói đến những em học sinh cấp 2, cấp 3 đâu, mà là những đứa trẻ trẻ trẻ.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu8": {
     "name": "Nữ 8 (Thủ khoa)",
@@ -42,7 +42,7 @@
     "ref_text": "Xin chào tất cả quý vị khán giả  Em là Nguyễn Lê Hiền Mai  Và ngày hôm nay em rất vinh dự khi được nhận lời mời của VTV  Và có mặt tại truyền hòa cuối sáng ngày hôm nay  Với các môn khoa",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nam1": {
     "name": "Nam 1",
@@ -51,7 +51,7 @@
     "ref_text": "Công thức quay review đồ giáo dục đẹp chuẩn như các tiktoker  Việc của bạn chỉ cần áp dụng công thức vào thôi  Trong suốt 5 năm làm việc với các KOL và các doanh nghiệp  Mình đã đúng",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu_ngot": {
     "name": "Nữ ngọt ngào",
@@ -60,7 +60,7 @@
     "ref_text": "Làm sao để nói giọng nhẹ nhàng á?  Rất là dễ nhá  Mọi người có để ý là ở các cô gái nhẹ nhàng  thì cơ thể sẽ có một cái độ mềm mại nhất định đúng không?",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_vo": {
     "name": "adam",
@@ -69,7 +69,7 @@
     "ref_text": "Hôm nay anh sẽ giúp các em bóc trần văn hóa công sở Hàn Quốc nha. Nghe xong thì các em sẽ biết tại sao anh nghỉ việc sau đúng 3 tháng.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_duong2": {
     "name": "Nữ Dương 2",
@@ -78,7 +78,7 @@
     "ref_text": "Có phải bạn đã học tiếng Hàn và luôn ước có một cuốn sách tổng hợp lại tất cả ngữ pháp  để mỗi lần ôn thi không phải mò mẫm trong đồng giáo trình dày cộp,  vướng mất thời gian lại không được.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_grifin": {
     "name": "Nữ Grifin",
@@ -87,7 +87,7 @@
     "ref_text": "Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè  Thiếu đi quát mai, có thằng ngu nào chạy sau lưng tao bóng cạn tùm lum nè  Ok, xíu tao gọi lại cho  Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu2_dieu": {
     "name": "Nữ Điệu (Tông cao)",
@@ -96,7 +96,7 @@
     "ref_text": "Có ai mê giọng bắc giống như tôi không nhỉ?  Phở vi phong hoàng gia với thịt thật tươi ngon",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu11": {
     "name": "Nữ 11",
@@ -105,7 +105,7 @@
     "ref_text": "Tháng 10 này, mình đi làm đúng 20 ngày mà lương văn phòng vẫn được 14 triệu.  Hãy cùng tổng kết chi tiêu tháng 10 của cô gái trẻ 22 tuổi sống tự lập chi tiêu mọi thứ.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu13": {
     "name": "Nữ 13",
@@ -114,7 +114,7 @@
     "ref_text": "Phòng của mình sẽ là 5 người bạn cũng học nơi U khác  Còn bình thường thì mình thấy các bạn ở trong Nam sẽ ở khoảng 9 người một phòng  Và đều là sinh viên của U",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu15": {
     "name": "Nữ 15",
@@ -123,7 +123,7 @@
     "ref_text": "Tổng kết những cuốn tiểu thuyết hay mà mình đọc được trong năm 2025  Mình sẽ bỏ qua những cuốn trinh thám và những cuốn sách đã đọc lại nhắc đến ở video trước",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu4": {
     "name": "Nữ 4",
@@ -132,7 +132,7 @@
     "ref_text": "Giọng Bắc được coi là chuẩn, đó là chuẩn theo giọng của người Hà Nội  Nhưng mọi người cũng biết rồi, họ là những người rất là nghiêm túc, khôn thước và...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu5": {
     "name": "Nữ 5",
@@ -141,7 +141,7 @@
     "ref_text": "Có người thì thanh cao, có người thì khi cất giọng nói lên là thấy nó lanh lành, lanh lành như là tiếng thủy tình vỡ vậy",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu7": {
     "name": "Nữ 7",
@@ -150,7 +150,7 @@
     "ref_text": "Cách để không bị bí idea dù gặp bất kể đề writing nào, dù là các bài writing nhỏ trong các bài kiểm tra trên lớp hay là các bài như writing trong IELTS thì chắc hẳn ít.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu9_thoisu": {
     "name": "Nữ Thời Sự (Bản tin)",
@@ -159,7 +159,7 @@
     "ref_text": "Hãy subscribe cho kênh Ghiền Mì Gõ Để không bỏ lỡ những video hấp dẫn",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_gai1": {
     "name": "Nữ Trẻ 1",
@@ -168,7 +168,7 @@
     "ref_text": "Thế nên là nếu như mà mọi người cần nhu cầu học nguyên một cái combo như vậy thì đặt mua sách ngay dưới đây  Hoặc cứ nhắn cho bên mình, bên mình sẽ tư vấn cho bạn học combo nào là phù hợp he",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_gai2": {
     "name": "Nữ Trẻ 2",
@@ -177,7 +177,7 @@
     "ref_text": "Ai thuộc team học tiếng Hàn mà cứ học được vài hôm là nản  Thuộc từ hôm nay, mai quên sạch, muốn nói mà trong đầu trống trơn  Thì gặp bộ này là chân ái luôn nha  Để không bỏ lỡ những video hấp dẫn",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_gai3": {
     "name": "Nữ Trẻ 3",
@@ -186,7 +186,7 @@
     "ref_text": "Hola, me llamo Tuha, tengo 25 años y trabajo en el sector del marketing.  Llevo dos meses aprendiendo español de forma autodidacta.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_gai4": {
     "name": "Nữ Trẻ 4",
@@ -195,16 +195,16 @@
     "ref_text": "Đừng học thêm một chữ tiếng Hàn nào nữa cho đến khi bạn biết điều này.  Hãy mở sách ra và thử tổng hợp những từ vựng tiếng Hàn có liên quan đến nhau theo chủ đề như thế này.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_tre_con2": {
-    "name": "Bé gái mẫu giọng",
+    "name": "Em nhà cái Nga",
     "desc": "Giọng bé gái dễ thương, ngây thơ.",
     "ref_audio": "voices/vi_tre_con2/ref.wav",
     "ref_text": "Đây là thành quả của con  Sau hơn 3 tháng học chiếc bút ngại ngữ này  Con tự tin hơn với trình độ tiếng Anh của mình  Con biết thêm tiếng Trung",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu16": {
     "name": "Nữ 16 (Cao)",
@@ -213,7 +213,7 @@
     "ref_text": "Giảm ra rất là ok luôn nha  Tiếp theo chúng ta sẽ có một cái cây giàn nền  Đấy là cây số 04 mà mọi người hay hỏi là  Chị ơi cho em xin in tư của cây cọ giàn nền",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu17": {
     "name": "Nữ 17 (Cao)",
@@ -222,7 +222,7 @@
     "ref_text": "Từ vị trí bét lớp tới tốt 3 chỉ sau một học kỳ nhờ bớt chăm chỉ một cách máy móc,  tỳ tỳ chiều khống su gây bão khi bật mí vũ khí bí mật của các...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu19": {
     "name": "Nữ 19",
@@ -231,7 +231,7 @@
     "ref_text": "Cùng là biết nhưng tạo sao biết một người là Kennen chứ không dùng Whitson.  Hãy nhớ mẹo, Kennen là biết một người, địa điểm hoặc thứ gì đó, còn Whitson biết thông tin.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vi_nu20": {
     "name": "Nữ 20",
@@ -240,7 +240,7 @@
     "ref_text": "Aten là khi kể chuyện, Raiden là trò chuyện, Sprague đi với ngôn ngữ.  Vậy nên một câu chuyện là đang kể nội dung dài nên phải dùng Atenant.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "xtts-vi"
+    "model": "fish-speech-1.5"
   },
   "vieneu_duc_tri": {
     "name": "Đức Trí (Nam rõ ràng)",
@@ -415,9 +415,9 @@
     "name": "Chinh 1",
     "desc": "",
     "ref_audio": "voices/voice_1781574846_f027df/ref.wav",
-    "ref_text": "Cho mình hỏi nhanh nhé, nếu muốn nói tôi không hiểu thì trong tiếng Thái sẽ là A chánh mây khâu trầy hay B chánh khâu trầy mây, nếu bạn chọn A thì chính xác rồi.",
+    "ref_text": "Trong mình hỏi nhanh nhé, nếu muốn nói tôi không hiểu thì trong tính thái sẽ là A chánh mấy khau trầy, hai B chánh khâu trầy mây, nếu bạn chọn A thì chính xác rồi.",
     "type": "cloned",
-    "model": "xtts-vi",
+    "model": "fish-speech-1.5",
     "created_at": "2026-06-16T01:54:06.370018+00:00"
   },
   "voice_1781580119_24b70e": {
@@ -426,7 +426,7 @@
     "ref_audio": "voices/voice_1781580119_24b70e/ref.wav",
     "ref_text": "Có ai giống mình không? Mỗi lần bố mẹ chuẩn bị đi nước ngoài là mình lại lo nhiều hơn cả bố mẹ.  Không phải lo chuyện về mấy bay hay khách sạch, mà lo vì bố mẹ không biết ngoại ngữ.  Vì dụ như lúc cần hỏi đường, gọi tắc xí, gọi món ăn hay hỏi nhân viên sân bay thì phải làm sao.  Đặc biệt, người lớn tùy thường không quan dùng Google Zick.  Mốn dịch một câu cũng phải mở điện thoại, chọn ngôn ngữ, bấm mikro rồi đưa qua đưa lại rất bất tiện.  Thế nên trước chuyến đi gần đây, mình mua cho bố mẹ trước mấy phiên dịch AI mở 16 này.  Điều mình thích nhất là mấy rất dễ dùng.  Chỉ cần bấm nó rồi nói tiếng việt, ví dụ như, cho tôi hỏi nhà vị dịch ở đâu.  Mấy sẽ tự động dịch sang ngôn ngữ của người đối diện, sau đó người nước ngoài trả lời lại, mấy cũng dịch ngược về tiếng việt để bố mẹ hiểu ngay.  Không cần biết ngoại ngữ, không cần thao tác phức tạp.  Ngoài dịch giọc nói, mấy còn có thể dịch hình ảnh rất tiện, ví dụ như menu đổ ăn, biển báo dáo thông, bằng hướng dẫn trong sân bay hay trung tâm thương mại.  Chỉ cần đưa camera lên là mấy sẽ dịch ngay.  Mấy hỗ trợ tới 148 ngôn ngữ online và 19 ngôn ngữ online nên đi nhiều nước khác nhau cũng rất iên tâm.  Thật ra, điều mình thích nhất không phải là mấy dịch được bao nhiêu ngôn ngữ.  Mà là cảm giác iên tâm hơn khi bố mẹ đi nước ngoài.  Iên nhất khi cần hỏi đường, cần giao tiếp hoặc cần nhiều dúc đỡ, bố mẹ vẫn có thể tự sử lý được.  Nếu bố mẹ hoặc người thân của bạn sắp đi dù lịch, tham con cháo hoặc công tác ở nước ngoài thì mình nghĩ đây là một món đổ rất đáng để chuẩn bị.  Hiện mấy phiên dịch AI 16 đang được ưu đãi giảm để 40%  mình để linh tham khảo ở bên dưới cho mọi người nhé.",
     "type": "cloned",
-    "model": "xtts-vi",
+    "model": "fish-speech-1.5",
     "created_at": "2026-06-16T03:22:23.812581+00:00"
   }
 }
