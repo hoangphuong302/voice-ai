@@ -261,7 +261,7 @@
     "model": "dolly-vn/viterbox"
   },
   "viterbox_sample2": {
-    "name": "Nữ 2 (Trầm)",
+    "name": "Nam 1",
     "desc": "Giọng nữ tông trầm, từ tốn. F0~176Hz",
     "ref_audio": "voices/viterbox_sample2/ref.wav",
     "ref_text": "Mỏ nên chung quốc nào được công nhận rộng giải nhất trên toàn cầu.",
