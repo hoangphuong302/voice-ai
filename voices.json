@@ -551,5 +551,14 @@
     "type": "cloned",
     "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
     "created_at": "2026-06-17T02:47:19.100310+00:00"
+  },
+  "voice_1781664646_dd9400": {
+    "name": "chinh-vietneu",
+    "desc": "",
+    "ref_audio": "voices/voice_1781664646_dd9400/ref.wav",
+    "ref_text": "Chỉ vì không hiểu khách nước ngoài nói gì, mà nhiều người đã mất luôn đơn hàng.  Nếu bạn đang kinh doanh, bán hàng hoặc thường suy ngập khách nước ngoài thì hãy xem hết video này.  Có một tình huống, mà rất nhiều người từng gặp phải.  Khách nước ngoài bước vào cửa hàng và hỏi về sản phẩm để mô khách nói tiếng ăn.  Cáng như theo Mê Mố đã bảo tích product, lúc này,  nếu ngoại ngữ của bạn không tốt, bạn sẽ phải mở điện thoại lên để dịch, khách trờ, bạn dịch,  khách lại trờ, cuộc cho chuyển bị ngắc quảng liên tục.  Cảnh khách bắt đầu mất kinh nhận,  nhưng nếu có mấy phing dịch em mờ 16 thì mọi thứ sẽ khác, cầm máy lên, chỉ cần bấm núp và nói.  Tôi sẽ giới thiệu chi tiết sản phẩm này cho ăn.  Mấy sẽ dịch sang tiếng ăn, khách nghe chực tiếp bằng ngôn ngữ của họ sau đó khách trả lời.  Mấy tiếp tục dịch ngược lại sang tiếng việc, mọi thứ diễn ra tự nhiên hơn rất nhiều, không cần.  Mở quốc lối dịch, không phải đưa điện thoại qua lại, không làm gián đoạn cuộc cho chuyển.  Bây giờ hãy xem thêm một vài tính năng khác, ngoài dịch giọng nói hai triệu, mờ 16 còn hỗ trợ,  dịch hình ảnh, dịch tay liệu, dịch kia âm, hỗ trợ 148 ngôn ngữ online, hỗ trợ 19 ngôn ngữ offland,  y tóm lại, nhiều khi khách hàng không bỏ đi về giá, mà bỏ đi về hai bên không hiểu nhau.  Nếu công việc của bạn thường xuyên tiếp xúc với người nước ngoài thì mờ 16 thực sự là một công cụ rất đáng đầu tư.  Hình tại sản phẩm đang được ưu đại giảm giá lên tới 40%, linh đặt hàng mình để ngay bên dưới nhé.",
+    "type": "cloned",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "created_at": "2026-06-17T02:51:07.657194+00:00"
   }
 }
