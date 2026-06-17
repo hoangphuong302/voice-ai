@@ -3,19 +3,19 @@
     "name": "Ngọc Huyền (Phát thanh viên)",
     "desc": "Giọng nữ phát thanh viên truyền hình chuyên nghiệp.",
     "ref_audio": "voices/vi_ngoc_huyen/ref.wav",
-    "ref_text": "Tính mua về học chơi ai ngờ lại dính luôn.  Cộng một em sách tiếng Thái đầy đủ chọn bộ từ tự học cân bản chữ cái đến từ vựng, ngữ pháp rồi thích nốt.",
+    "ref_text": "Tính mua về học chơi ai ngờ lại dính luôn. Cộng một em sách tiếng thái đầy đủ chọn bộ từ tự học căn bản chứ cái đến từ vận. Ngữ pháp rồi thích nốt.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_duong": {
     "name": "Nữ Dương",
     "desc": "Giọng nữ tông trung thấp. F0~201Hz",
     "ref_audio": "voices/vi_duong/ref.wav",
-    "ref_text": "Bạn có muốn tự học tiếng Hàn thật nhanh mà vẫn hiệu quả không?  Bộ sách bí kíp tự học tiếng Hàn siêu nhanh sẽ giúp bạn làm được điều đó với sự kết hợp của 3 cuốn cực kỳ đặc biệt.  Đầu tiên,",
+    "ref_text": "Bạn có muốn tự hợp tiếng hành thật nhanh mà vẫn nhiều quả không? Bộ sách bị kip tự hợp tiếng hành xeo nhanh sẽ giúp bạn làm được điều đó, với sự kết hợp của ba cuốn cực kỳ đặc biệt. Đầu tiết!",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nhung": {
     "name": "Nữ Nhung",
@@ -24,223 +24,223 @@
     "ref_text": "Ngày nào cũng học từ vận như chị được mô thời đang rồi quên, đừng vội chán nán của thích này có thể giúp bạn kìa nhớ cả chăm từ vận một ngày và thân.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu3": {
     "name": "Nữ 3 (Cao)",
     "desc": "Giọng nữ tông cao. F0~278Hz",
     "ref_audio": "voices/vi_nu3/ref.wav",
-    "ref_text": "Có một điều khiến mình rất ấn tượng khi sống ở Nhật đó là sự tự giác và kỷ luật của trẻ em.  Mình không nói đến những em học sinh cấp 2, cấp 3 đâu, mà là những đứa trẻ trẻ trẻ.",
+    "ref_text": "Có một điều khiến mình rất Ấn tượng khi sống oi nhật đó là sự tự giáo và kiện luật của chạy em Mình không nói đến những em học sinh cấp 2, cấp 3 đồ mà là những đuổi trên...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu8": {
     "name": "Nữ 8 (Thủ khoa)",
     "desc": "Giọng nữ miền Bắc rõ ràng, lưu loát.",
     "ref_audio": "voices/vi_nu8/ref.wav",
-    "ref_text": "Xin chào tất cả quý vị khán giả  Em là Nguyễn Lê Hiền Mai  Và ngày hôm nay em rất vinh dự khi được nhận lời mời của VTV  Và có mặt tại truyền hòa cuối sáng ngày hôm nay  Với các môn khoa",
+    "ref_text": "Xin chào tất cả ký vị khán giả Em làm quý lý hiện mai và ngày hôm nay Em rất binh dự khi được nhận lời mời của VTV và có mặt tại Cho đọc của sáng ngày hôm nay Với các môn hoa",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nam1": {
     "name": "Nam 1",
     "desc": "Giọng nam miền Bắc rõ ràng, đĩnh đạc.",
     "ref_audio": "voices/vi_nam1/ref.wav",
-    "ref_text": "Công thức quay review đồ giáo dục đẹp chuẩn như các tiktoker  Việc của bạn chỉ cần áp dụng công thức vào thôi  Trong suốt 5 năm làm việc với các KOL và các doanh nghiệp  Mình đã đúng",
+    "ref_text": "Công thức quay rình như lùa giá dụng đẹp chuẩn như các tên tốt cơ Vìa của bạn chỉ cần áp dụng công thức và hồi Trong xuất năng năng làm việc với các KOL và các suy nghĩa Mình đế lúc",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu_ngot": {
     "name": "Nữ ngọt ngào",
     "desc": "Giọng nữ ngọt ngào, truyền cảm, thích hợp đọc truyện.",
     "ref_audio": "voices/vi_nu_ngot/ref.wav",
-    "ref_text": "Làm sao để nói giọng nhẹ nhàng á?  Rất là dễ nhá  Mọi người có để ý là ở các cô gái nhẹ nhàng  thì cơ thể sẽ có một cái độ mềm mại nhất định đúng không?",
+    "ref_text": "Lần xa đi nó dọng nhẹ nhàng á rất là dễ nhé mọi người có để ý là ở các cô gái nhẹ nhàng thì cơ thể sẽ có một cái đụng mì mái nhất địa đúng",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_vo": {
     "name": "adam",
     "desc": "Giọng nữ gia đình trẻ trung, tự nhiên.",
     "ref_audio": "voices/vi_vo/ref.wav",
-    "ref_text": "Hôm nay anh sẽ giúp các em bóc trần văn hóa công sở Hàn Quốc nha. Nghe xong thì các em sẽ biết tại sao anh nghỉ việc sau đúng 3 tháng.",
+    "ref_text": "Hôm nay anh sẽ dúp các em bóc trần văn hóa công sở hẳn quốc nhé. Nghe xong thì các em sẽ biết tại sao anh nghĩ việc sau đúng 3 tháng. Các em...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_duong2": {
     "name": "Nữ Dương 2",
     "desc": "Giọng nữ tông trung thấp. F0~190Hz",
     "ref_audio": "voices/vi_duong2/ref.wav",
-    "ref_text": "Có phải bạn đã học tiếng Hàn và luôn ước có một cuốn sách tổng hợp lại tất cả ngữ pháp  để mỗi lần ôn thi không phải mò mẫm trong đồng giáo trình dày cộp,  vướng mất thời gian lại không được.",
+    "ref_text": "Có phải, bạn đã học tiếng Hàn và luôn ước có một cuốn sách tổng hợp lại tất cả ngữ pháp để mỗi lần ôn thi không phải mỏm bấm trong đồng giáo trình dây cụp vừa mắt thời gian lại không?",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_grifin": {
     "name": "Nữ Grifin",
     "desc": "Giọng nữ tông trung. F0~214Hz",
     "ref_audio": "voices/vi_grifin/ref.wav",
-    "ref_text": "Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè  Thiếu đi quát mai, có thằng ngu nào chạy sau lưng tao bóng cạn tùm lum nè  Ok, xíu tao gọi lại cho  Alo, chào cưng, tao đang chở gia đình đi đóng thuế nè",
+    "ref_text": "Alo! Chào kênh, tao đang chở ra đầm đi đóng hết nè Chịu đi quắc nâng Các bạn ngon nào chạy xa lưng tao bấm chạy thầm lưng nè Ok xíu tao gọi đấy chắc Alo! Chào kênh, tao đang chở...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu2_dieu": {
     "name": "Nữ Điệu (Tông cao)",
     "desc": "Giọng nữ điệu đà, tông rất cao. F0~348Hz",
     "ref_audio": "voices/vi_nu2_dieu/ref.wav",
-    "ref_text": "Có ai mê giọng bắc giống như tôi không nhỉ?  Phở vi phong hoàng gia với thịt thật tươi ngon",
+    "ref_text": "Còn ai mê giọng bắt giống như tôi không nhỉ? Phở bị phong hoàng ra với kiet thật tươi ngon",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu11": {
     "name": "Nữ 11",
     "desc": "Giọng nữ miền Bắc ấm áp, truyền cảm.",
     "ref_audio": "voices/vi_nu11/ref.wav",
-    "ref_text": "Tháng 10 này, mình đi làm đúng 20 ngày mà lương văn phòng vẫn được 14 triệu.  Hãy cùng tổng kết chi tiêu tháng 10 của cô gái trẻ 22 tuổi sống tự lập chi tiêu mọi thứ.",
+    "ref_text": "Thả mọi này, bình đi làm đúng 20 ngày mà lương văn phóng vận được 14 chậu Hãy cùng tổng đất chi tiêu thảm mời của cô gái trẻ 22 tuổi sống tự lập chi tiêu mọi",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu13": {
     "name": "Nữ 13",
     "desc": "Giọng nữ miền Bắc dịu dàng, nhẹ nhàng.",
     "ref_audio": "voices/vi_nu13/ref.wav",
-    "ref_text": "Phòng của mình sẽ là 5 người bạn cũng học nơi U khác  Còn bình thường thì mình thấy các bạn ở trong Nam sẽ ở khoảng 9 người một phòng  Và đều là sinh viên của U",
+    "ref_text": "Phòng của mình sẽ là 5 người bạn. Cũng học nơi khác, còn mình thường thì mình thấy các bạn ở trong năm sẽ ở hẳn chiếm ở một phòng và đều là xin viên của u.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu15": {
     "name": "Nữ 15",
     "desc": "Giọng nữ miền Bắc thanh lịch, đĩnh đạc.",
     "ref_audio": "voices/vi_nu15/ref.wav",
-    "ref_text": "Tổng kết những cuốn tiểu thuyết hay mà mình đọc được trong năm 2025  Mình sẽ bỏ qua những cuốn trinh thám và những cuốn sách đã đọc lại nhắc đến ở video trước",
+    "ref_text": "Tổng kế những quấn điều thứ 2 và mình đọc được trong năm 2025 mình sẽ mỏ qua những quấn chính tháng và những quấn sách đã đọc lại nhắc đến ở video chứa người",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu4": {
     "name": "Nữ 4",
     "desc": "Giọng nữ miền Bắc truyền cảm, kể chuyện hay.",
     "ref_audio": "voices/vi_nu4/ref.wav",
-    "ref_text": "Giọng Bắc được coi là chuẩn, đó là chuẩn theo giọng của người Hà Nội  Nhưng mọi người cũng biết rồi, họ là những người rất là nghiêm túc, khôn thước và...",
+    "ref_text": "Giọc bắt được coi là chuẩn, đó là chuẩn theo dọc của người ha đội, nhưng mà người cũng biết rồi, họ là những người rất là nghiêm tốt, huynh thước vàng.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu5": {
     "name": "Nữ 5",
     "desc": "Giọng nữ miền Bắc ngọt ngào, ấm áp.",
     "ref_audio": "voices/vi_nu5/ref.wav",
-    "ref_text": "Có người thì thanh cao, có người thì khi cất giọng nói lên là thấy nó lanh lành, lanh lành như là tiếng thủy tình vỡ vậy",
+    "ref_text": "Ấn, có người thì thang cao, có người thì khi cất dọng nói lên là thấy nó lạnh lạnh lạnh như tiếng thủ tình vỡ vậy",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu7": {
     "name": "Nữ 7",
     "desc": "Giọng nữ miền Bắc trẻ trung, tự nhiên.",
     "ref_audio": "voices/vi_nu7/ref.wav",
-    "ref_text": "Cách để không bị bí idea dù gặp bất kể đề writing nào, dù là các bài writing nhỏ trong các bài kiểm tra trên lớp hay là các bài như writing trong IELTS thì chắc hẳn ít.",
+    "ref_text": "Cách để không bị bị idea dù gặp bất kể đề writing nào Rù là các bái writing nhỏ trong các bà kiểm tra trên lớp hay là các bà như writing trong IELTS thì chắc hẳn ít",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu9_thoisu": {
     "name": "Nữ Thời Sự (Bản tin)",
     "desc": "Giọng nữ đọc bản tin, thời sự trang trọng, chuyên nghiệp.",
     "ref_audio": "voices/vi_nu9_thoisu/ref.wav",
-    "ref_text": "Hãy subscribe cho kênh Ghiền Mì Gõ Để không bỏ lỡ những video hấp dẫn",
+    "ref_text": "Điện tập điều truyền cách phát âm, sao cho nhẹ nhàng và thành thát hình giọc nghe anh, hải tính, có sự độc đáo và mang độc nét vàn hòa vụ biện Tuy nhiên, trong...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_gai1": {
     "name": "Nữ Trẻ 1",
     "desc": "Giọng nữ trẻ năng động.",
     "ref_audio": "voices/vi_gai1/ref.wav",
-    "ref_text": "Thế nên là nếu như mà mọi người cần nhu cầu học nguyên một cái combo như vậy thì đặt mua sách ngay dưới đây  Hoặc cứ nhắn cho bên mình, bên mình sẽ tư vấn cho bạn học combo nào là phù hợp he",
+    "ref_text": "Thế nên là nếu mà mọi người cần nhu cầu học nguyên 1 cái cộng bô như vậy thì đặt mô sách ngay dưới đây hoặc kênh nhắn cho bên mình, bên mình sẽ tư vần cho bạn học cộng bô nào là phù hợp hê",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_gai2": {
     "name": "Nữ Trẻ 2",
     "desc": "Giọng nữ trẻ dễ thương.",
     "ref_audio": "voices/vi_gai2/ref.wav",
-    "ref_text": "Ai thuộc team học tiếng Hàn mà cứ học được vài hôm là nản  Thuộc từ hôm nay, mai quên sạch, muốn nói mà trong đầu trống trơn  Thì gặp bộ này là chân ái luôn nha  Để không bỏ lỡ những video hấp dẫn",
+    "ref_text": "Ai thuật tìm học tiếng hàng mà cứ, học được vai hôm là nạn, thuật tứ hôm nay, may quên sạch, muốn nói mà trong đầu trống trên thì gặp mộn này là chân ái rất nha",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_gai3": {
     "name": "Nữ Trẻ 3",
     "desc": "Giọng nữ trẻ trong trẻo.",
     "ref_audio": "voices/vi_gai3/ref.wav",
-    "ref_text": "Hola, me llamo Tuha, tengo 25 años y trabajo en el sector del marketing.  Llevo dos meses aprendiendo español de forma autodidacta.",
+    "ref_text": "Hello, I'm too hot, I have 25 years and work in the marketing sector. I take 2 months learning Spanish in a direct way.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_gai4": {
     "name": "Nữ Trẻ 4",
     "desc": "Giọng nữ trẻ ngọt ngào.",
     "ref_audio": "voices/vi_gai4/ref.wav",
-    "ref_text": "Đừng học thêm một chữ tiếng Hàn nào nữa cho đến khi bạn biết điều này.  Hãy mở sách ra và thử tổng hợp những từ vựng tiếng Hàn có liên quan đến nhau theo chủ đề như thế này.",
+    "ref_text": "Đừng học thêm một chữ tiến hạn nào nữa cho đến khi bạn biết điều này, hãy mở sách ra và thử tổng hợp những tư vận tiến hạn có liên quan đến nhau theo chủ đề như thế này.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_tre_con2": {
     "name": "Em nhà cái Nga",
     "desc": "Giọng bé gái dễ thương, ngây thơ.",
     "ref_audio": "voices/vi_tre_con2/ref.wav",
-    "ref_text": "Đây là thành quả của con  Sau hơn 3 tháng học chiếc bút ngại ngữ này  Con tự tin hơn với trình độ tiếng Anh của mình  Con biết thêm tiếng Trung",
+    "ref_text": "Đây là thành quả của con sau hơn 3 tháng học chiếc múc ngãi ngứa này Con từ tiên hơn mới chân độc diễn anh của mình Con biết thêm tiếng chung",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu16": {
     "name": "Nữ 16 (Cao)",
     "desc": "Giọng nữ tông cao. F0~262Hz",
     "ref_audio": "voices/vi_nu16/ref.wav",
-    "ref_text": "Giảm ra rất là ok luôn nha  Tiếp theo chúng ta sẽ có một cái cây giàn nền  Đấy là cây số 04 mà mọi người hay hỏi là  Chị ơi cho em xin in tư của cây cọ giàn nền",
+    "ref_text": "Dạ, rất là ok luôn nhé, tiếp theo, chúng ta sẽ có một cái cây dàn nền Đấy là cây số không bốn mà mọi người hay hỏi là Ất chỉ ở trên sinh inter của cây cò dàn nền",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu17": {
     "name": "Nữ 17 (Cao)",
     "desc": "Giọng nữ tông cao. F0~275Hz",
     "ref_audio": "voices/vi_nu17/ref.wav",
-    "ref_text": "Từ vị trí bét lớp tới tốt 3 chỉ sau một học kỳ nhờ bớt chăm chỉ một cách máy móc,  tỳ tỳ chiều khống su gây bão khi bật mí vũ khí bí mật của các...",
+    "ref_text": "Từ vị trí bắt lớp tới tốt 3 chỉ xô một học kỳ nhờ bất trong chỉ một cách mấy móc thì tìm xô khốn rù gây bảo khi bật mĩ vũ khí bí mật của các...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu19": {
     "name": "Nữ 19",
     "desc": "Giọng nữ miền Bắc dịu dàng.",
     "ref_audio": "voices/vi_nu19/ref.wav",
-    "ref_text": "Cùng là biết nhưng tạo sao biết một người là Kennen chứ không dùng Whitson.  Hãy nhớ mẹo, Kennen là biết một người, địa điểm hoặc thứ gì đó, còn Whitson biết thông tin.",
+    "ref_text": "Cùng là biết, nhưng tạo sao biết một người là Canon? Chứ không dùng Whison. Hãy nhớ mẹo Canon là biết một người, điểm hoặc thứ gì đó. Con Whison biết thông...",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vi_nu20": {
     "name": "Nữ 20",
     "desc": "Giọng nữ miền Bắc trong trẻo.",
     "ref_audio": "voices/vi_nu20/ref.wav",
-    "ref_text": "Aten là khi kể chuyện, Raiden là trò chuyện, Sprague đi với ngôn ngữ.  Vậy nên một câu chuyện là đang kể nội dung dài nên phải dùng Atenant.",
+    "ref_text": "Edson là khi kể chuyện, Raiden là cho chuyện. Sprac đi với ngôn ngữ, vậy nên một câu chuyện là đáng kể nội dung dài, nên phải dùng ở cellin.",
     "type": "preset",
     "created_at": "2026-06-10T00:00:00Z",
-    "model": "fish-speech-1.5"
+    "model": "xtts-vi"
   },
   "vieneu_duc_tri": {
     "name": "Đức Trí (Nam rõ ràng)",
@@ -344,7 +344,7 @@
   "vieneu_ngoc_lan": {
     "name": "Ngọc Lan (Nữ miền Nam - Studio)",
     "desc": "Giọng nữ miền Nam ngọt ngào, truyền cảm. Chuẩn phát thanh viên, không ngọng/méo.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_ngoc_lan/ref.wav",
     "ref_text": "",
     "type": "preset",
     "created_at": "2026-06-16T00:00:00Z",
@@ -354,7 +354,7 @@
   "vieneu_thai_son": {
     "name": "Thái Sơn (Nam miền Bắc - Studio)",
     "desc": "Giọng nam miền Bắc đĩnh đạc, trầm ấm. Chuẩn phát thanh viên, không ngọng/méo.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_thai_son/ref.wav",
     "ref_text": "",
     "type": "preset",
     "created_at": "2026-06-16T00:00:00Z",
@@ -364,7 +364,7 @@
   "vieneu_my_duyen": {
     "name": "Mỹ Duyên (Nữ miền Nam - Dễ thương)",
     "desc": "Giọng nữ miền Nam trong trẻo, dễ thương. Thích hợp đọc tin tức/review.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_my_duyen/ref.wav",
     "ref_text": "",
     "type": "preset",
     "created_at": "2026-06-16T00:00:00Z",
@@ -374,7 +374,7 @@
   "vieneu_truc_ly": {
     "name": "Trúc Ly (Nữ miền Nam - Ấm áp)",
     "desc": "Giọng nữ miền Nam ấm áp, nhẹ nhàng, truyền cảm.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_truc_ly/ref.wav",
     "ref_text": "",
     "type": "preset",
     "created_at": "2026-06-16T00:00:00Z",
@@ -384,7 +384,7 @@
   "vieneu_gia_bao": {
     "name": "Gia Bảo (Nam miền Nam - Trẻ trung)",
     "desc": "Giọng nam miền Nam trẻ trung, năng động, chuẩn tự nhiên.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_gia_bao/ref.wav",
     "ref_text": "",
     "type": "preset",
     "created_at": "2026-06-16T00:00:00Z",
@@ -394,7 +394,7 @@
   "vieneu_binh_an": {
     "name": "Bình An (Nam miền Trung - Studio)",
     "desc": "Giọng nam miền Trung (Huế/Đà Nẵng) trầm ấm, tự nhiên.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_binh_an/ref.wav",
     "ref_text": "",
     "type": "preset",
     "created_at": "2026-06-16T00:00:00Z",
@@ -404,7 +404,7 @@
   "vieneu_ngoc_linh": {
     "name": "Ngọc Linh (Nữ miền Trung - Studio)",
     "desc": "Giọng nữ miền Trung nhẹ nhàng, trong trẻo, truyền cảm.",
-    "ref_audio": "",
+    "ref_audio": "voices/vieneu_ngoc_linh/ref.wav",
     "ref_text": "",
     "type": "preset",
     "created_at": "2026-06-16T00:00:00Z",
@@ -417,7 +417,7 @@
     "ref_audio": "voices/voice_1781574846_f027df/ref.wav",
     "ref_text": "Trong mình hỏi nhanh nhé, nếu muốn nói tôi không hiểu thì trong tính thái sẽ là A chánh mấy khau trầy, hai B chánh khâu trầy mây, nếu bạn chọn A thì chính xác rồi.",
     "type": "cloned",
-    "model": "fish-speech-1.5",
+    "model": "xtts-vi",
     "created_at": "2026-06-16T01:54:06.370018+00:00"
   },
   "voice_1781580119_24b70e": {
@@ -426,7 +426,130 @@
     "ref_audio": "voices/voice_1781580119_24b70e/ref.wav",
     "ref_text": "Có ai giống mình không? Mỗi lần bố mẹ chuẩn bị đi nước ngoài là mình lại lo nhiều hơn cả bố mẹ.  Không phải lo chuyện về mấy bay hay khách sạch, mà lo vì bố mẹ không biết ngoại ngữ.  Vì dụ như lúc cần hỏi đường, gọi tắc xí, gọi món ăn hay hỏi nhân viên sân bay thì phải làm sao.  Đặc biệt, người lớn tùy thường không quan dùng Google Zick.  Mốn dịch một câu cũng phải mở điện thoại, chọn ngôn ngữ, bấm mikro rồi đưa qua đưa lại rất bất tiện.  Thế nên trước chuyến đi gần đây, mình mua cho bố mẹ trước mấy phiên dịch AI mở 16 này.  Điều mình thích nhất là mấy rất dễ dùng.  Chỉ cần bấm nó rồi nói tiếng việt, ví dụ như, cho tôi hỏi nhà vị dịch ở đâu.  Mấy sẽ tự động dịch sang ngôn ngữ của người đối diện, sau đó người nước ngoài trả lời lại, mấy cũng dịch ngược về tiếng việt để bố mẹ hiểu ngay.  Không cần biết ngoại ngữ, không cần thao tác phức tạp.  Ngoài dịch giọc nói, mấy còn có thể dịch hình ảnh rất tiện, ví dụ như menu đổ ăn, biển báo dáo thông, bằng hướng dẫn trong sân bay hay trung tâm thương mại.  Chỉ cần đưa camera lên là mấy sẽ dịch ngay.  Mấy hỗ trợ tới 148 ngôn ngữ online và 19 ngôn ngữ online nên đi nhiều nước khác nhau cũng rất iên tâm.  Thật ra, điều mình thích nhất không phải là mấy dịch được bao nhiêu ngôn ngữ.  Mà là cảm giác iên tâm hơn khi bố mẹ đi nước ngoài.  Iên nhất khi cần hỏi đường, cần giao tiếp hoặc cần nhiều dúc đỡ, bố mẹ vẫn có thể tự sử lý được.  Nếu bố mẹ hoặc người thân của bạn sắp đi dù lịch, tham con cháo hoặc công tác ở nước ngoài thì mình nghĩ đây là một món đổ rất đáng để chuẩn bị.  Hiện mấy phiên dịch AI 16 đang được ưu đãi giảm để 40%  mình để linh tham khảo ở bên dưới cho mọi người nhé.",
     "type": "cloned",
-    "model": "fish-speech-1.5",
+    "model": "xtts-vi",
     "created_at": "2026-06-16T03:22:23.812581+00:00"
+  },
+  "minimax_qn_jingying": {
+    "name": "[MiniMax] Nam Tinh Anh",
+    "desc": "Giọng nam thông minh, tự tin, chuyên nghiệp của MiniMax.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "male-qn-jingying",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "minimax_shaonv": {
+    "name": "[MiniMax] Nữ Thiếu Nữ",
+    "desc": "Giọng nữ trẻ trung, dễ thương, sinh động của MiniMax.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "female-shaonv",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "minimax_changsheng": {
+    "name": "[MiniMax] Nam Truyền Cảm",
+    "desc": "Giọng nam trung niên trầm ấm, thuyết phục của MiniMax.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "male-qd-changsheng",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "minimax_chaoniang": {
+    "name": "[MiniMax] Nữ Ngọt Ngào",
+    "desc": "Giọng nữ ngọt ngào, truyền cảm, thích hợp đọc truyện.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "female-qy-chaoniang",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "minimax_presenter_female": {
+    "name": "[MiniMax] Nữ Phát Thanh Viên",
+    "desc": "Giọng nữ phát thanh viên tin tức chuyên nghiệp của MiniMax.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "presenter-female",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "minimax_presenter_male": {
+    "name": "[MiniMax] Nam Phát Thanh Viên",
+    "desc": "Giọng nam phát thanh viên đĩnh đạc, rõ ràng của MiniMax.",
+    "ref_audio": "",
+    "ref_text": "",
+    "type": "preset",
+    "model": "minimax",
+    "voice_id": "presenter-male",
+    "created_at": "2026-06-11T00:00:00Z"
+  },
+  "vieneu_trong_huu": {
+    "name": "[VieNeu] Trong Huu",
+    "desc": "Giọng Trong Huu của VieNeu-TTS v3 Turbo.",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Trong Huu",
+    "created_at": "2026-06-16T00:00:00Z",
+    "ref_audio": "voices/vieneu_trong_huu/ref.wav"
+  },
+  "vieneu_xuan_vinh": {
+    "name": "[VieNeu] Xuan Vinh",
+    "desc": "Giọng Xuan Vinh của VieNeu-TTS v3 Turbo.",
+    "type": "preset",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "voice_name": "Xuan Vinh",
+    "created_at": "2026-06-16T00:00:00Z",
+    "ref_audio": "voices/vieneu_xuan_vinh/ref.wav"
+  },
+  "vieneu_clone_ngoc_huyen": {
+    "name": "Ngọc Huyền (VieNeu - Nữ miền Bắc)",
+    "desc": "Giọng nữ miền Bắc phát thanh viên (clone bằng VieNeu-TTS v3 Turbo).",
+    "ref_audio": "voices/vi_ngoc_huyen/ref.wav",
+    "ref_text": "Tính mua về học chơi ai ngờ lại dính luôn. Cộng một em sách tiếng thái đầy đủ chọn bộ từ tự học căn bản chứ cái đến từ vận. Ngữ pháp rồi thích nốt.",
+    "type": "preset",
+    "created_at": "2026-06-17T00:00:00Z",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo"
+  },
+  "vieneu_clone_nhung": {
+    "name": "Nữ Nhung (VieNeu - Nữ miền Bắc ngọt ngào)",
+    "desc": "Giọng nữ miền Bắc ngọt ngào truyền cảm (clone bằng VieNeu-TTS v3 Turbo).",
+    "ref_audio": "voices/vi_nhung/ref.wav",
+    "ref_text": "Ngày nào cũng học từ vận như chị được mô thời đang rồi quên, đừng vội chán nán của thích này có thể giúp bạn kìa nhớ cả chăm từ vận một ngày và thân.",
+    "type": "preset",
+    "created_at": "2026-06-17T00:00:00Z",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo"
+  },
+  "vieneu_clone_tre_con2": {
+    "name": "Em Bé Nga (VieNeu - Trẻ em dễ thương)",
+    "desc": "Giọng trẻ em dễ thương, ngây thơ (clone bằng VieNeu-TTS v3 Turbo).",
+    "ref_audio": "voices/vi_tre_con2/ref.wav",
+    "ref_text": "Đây là thành quả của con sau hơn 3 tháng học chiếc múc ngãi ngứa này Con từ tiên hơn mới chân độc diễn anh của mình Con biết thêm tiếng chung",
+    "type": "preset",
+    "created_at": "2026-06-17T00:00:00Z",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo"
+  },
+  "vieneu_clone_nam1": {
+    "name": "Nam 1 (VieNeu - Nam miền Bắc)",
+    "desc": "Giọng nam miền Bắc đĩnh đạc (clone bằng VieNeu-TTS v3 Turbo).",
+    "ref_audio": "voices/vi_nam1/ref.wav",
+    "ref_text": "Công thức quay rình như lùa giá dụng đẹp chuẩn như các tên tốt cơ Vìa của bạn chỉ cần áp dụng công thức và hồi Trong xuất năng năng làm việc với các KOL và các suy nghĩa Mình đế lúc",
+    "type": "preset",
+    "created_at": "2026-06-17T00:00:00Z",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo"
+  },
+  "voice_1781664416_79221b": {
+    "name": "thái 1",
+    "desc": "",
+    "ref_audio": "voices/voice_1781664416_79221b/ref.wav",
+    "ref_text": "Nếu muốn nói, tôi thích ăn cơm trong tiếng thái thì sẽ là gì?  Đáp án A, chẳng chóp kỳnh cao, hay đáp án B, chẳng chóp cao kỳnh.  Nếu bạn chọn đáp án A thì chính xác rồi.  Trong tiếng thái, động từ chính luôn đứng trước hành động phía sau.  Chóp, nghĩa là thích, ginh, nghĩa là ăn, cao, nghĩa là cơm.  Vì vậy phải nói là, chẳng chóp kỳnh cao, còn câu B thì sắp xếp từ xây ngữ pháp nên người thái sẽ không nói như vậy.  Đây là lỗi cực kỳ phổ biến với những người mới học tiếng thái.  Bởi chúng ta thường dịch từ từ tiếng việt sang tiếng thái.  Thực tế, tiếng thái có rất nhiều cấu chúc đơn giản, nhưng nếu không học đúng từ đầu thì rất dễ nói sai,  viết sai và nghe cũng không hiểu người bạn sửa đang nói gì.  Đó là lý do mình luôn khuyên những bạn tự học nên có một cuốn ngữ pháp bài bản.  Cuốn ngữ pháp tiếng thái thông dụng này, tổng hợp đầy đủ các cấu chúc từ cơ bản đến nâng cao, gồm tất cả là bị chương,  giải thích dễ hiểu, có ví dụ thực tế và cách dùng như người thái thường sử dụng hàng ngày.  Thay vì học thuộc lòng từng cầu một cách mấy móc, bạn sẽ hiểu được quy tắc để tự tạo ra hàng chăm cầu mới.  Nếu bạn đang muốn học tiếng thái để dù lịch, làm việc, kinh doanh, hoặc dào tiếp với người bạn sử,  thì đây là quân sách rất đáng để bắt đầu để nhé.  Chỉ bằng 2 câu trà sữa thôi, toàn bộ ngữ pháp tiếng thái được gói gọn ở đây rồi nhé.",
+    "type": "cloned",
+    "model": "pnnbao-ump/VieNeu-TTS-v3-Turbo",
+    "created_at": "2026-06-17T02:47:19.100310+00:00"
   }
 }
